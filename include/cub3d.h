@@ -13,20 +13,20 @@ HEADER
 HEADER
 */
 
-# ifndef CUB3D_H
+#ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <math.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdbool.h>
-#include "../libft/libft.h"
-#include "../mlx/mlx.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <string.h>
+# include <math.h>
+# include <errno.h>
+# include <limits.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 
 typedef struct s_player
 {
@@ -39,14 +39,14 @@ typedef struct s_player
 	int	plan_y;
 }	t_player;
 
-typedef struct	s_rgb 
+typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
 }	t_rgb;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**map_array;
 	int		width;
@@ -60,7 +60,7 @@ typedef struct	s_map
 	int		fd;
 }	t_map;
 
-typedef struct	s_raycast
+typedef struct s_raycast
 {
 	bool	touch_wall;
 	double	dist_x;
@@ -69,10 +69,10 @@ typedef struct	s_raycast
 	double	side_dist_x;
 	double	side_dist_y;
 	int		step_x;
-	int		step_y; 
+	int		step_y;
 }	t_raycast;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	t_player	*player;
 	t_map		*map;
@@ -81,8 +81,12 @@ typedef struct	s_data
 	void		*text; // Pointeur pour les texture du jeux 
 }	t_data;
 
+// src/error_gestion.c
 int		free_all(t_data *data, char *str);
 void	ft_free_array(char **array);
 
 
-# endif
+// src/start_parsing.c
+int		start_parsing(t_data *data);
+
+#endif
