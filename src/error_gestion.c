@@ -20,20 +20,16 @@ static void	free_struct_player(t_player *player)
 
 }
 
-static void	free_struct_textures(t_textures *text)
+static void	free_struct_textures(t_map *map)
 {
-	if (text->ce)
-		free (text->ce);
-	if (text->ce)
-		free (text->ea);
-	if (text->fl)
-		free (text->fl);
-	if (text->no)
-		free (text->no);
-	if (text->so)
-		free (text->so);
-	if (text->we)
-		free (text->we);
+	if (map->no)
+		free (map->no);
+	if (map->ea)
+		free (map->ea);
+	if (map->so)
+		free (map->so);
+	if (map->we)
+		free (map->we);
 }
 
 void	ft_free_array(char **array)
@@ -53,7 +49,8 @@ int	free_all(t_data *data, char *str)
 {
 	if (data)
 	{
-		ft_free_array(data->map);
+		if (data->map->map_array)
+			ft_free_array(data->map->map_array);
 		free_struct_player(data->player);
 		free_struct_textures(data->text);
 	}
