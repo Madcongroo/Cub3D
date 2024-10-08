@@ -22,16 +22,8 @@
 #include <math.h>
 #include <errno.h>
 #include <limits.h>
+#include <stdbool.h>
 
-
-typedef struct	s_game
-{
-	t_player	*player;
-	t_map		*map;
-	t_raycast	*raycast;
-	void		*win; // Pointeur sur la fenetre mlx
-	void		*text; // Pointeur pour les texture du jeux 
-}	t_game;
 
 typedef struct s_player
 {
@@ -77,4 +69,12 @@ typedef struct	s_raycast
 	int		step_y; 
 }	t_raycast;
 
+typedef struct	s_game
+{
+	t_player	*player;
+	t_map		*map;
+	t_raycast	*raycast;
+	void		*win; // Pointeur sur la fenetre mlx
+	void		*text; // Pointeur pour les texture du jeux 
+}	t_game;
 # endif
