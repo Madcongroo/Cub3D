@@ -1,15 +1,17 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/*
+HEADER
+
+
+
+
+
+
+
+
+
+
+HEADER
+*/
 
 # ifndef CUB3D_H
 # define CUB3D_H
@@ -23,7 +25,8 @@
 #include <errno.h>
 #include <limits.h>
 #include <stdbool.h>
-
+#include "../libft/libft.h"
+#include "../mlx/mlx.h"
 
 typedef struct s_player
 {
@@ -48,10 +51,10 @@ typedef struct	s_map
 	char	**map_array;
 	int		width;
 	int		height;
-	char	*n_texture;
-	char	*s_texture;
-	char	*w_texture;
-	char	*e_texture;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 	t_rgb	floor_color;
 	t_rgb	ceilling_color;
 	int		fd;
@@ -69,12 +72,15 @@ typedef struct	s_raycast
 	int		step_y; 
 }	t_raycast;
 
-typedef struct	s_game
+typedef struct	s_data
 {
 	t_player	*player;
 	t_map		*map;
 	t_raycast	*raycast;
 	void		*win; // Pointeur sur la fenetre mlx
 	void		*text; // Pointeur pour les texture du jeux 
-}	t_game;
+}	t_data;
+
+int		free_all(t_data *data, char *str);
+
 # endif

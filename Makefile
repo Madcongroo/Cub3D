@@ -1,4 +1,5 @@
 #
+# HEADER
 #
 #
 #
@@ -10,32 +11,56 @@
 #
 #
 #
-#
-#
+# HEADER
 #
 
-NAME = cub3d
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-SRC = ./src/Cub3d.c
-OBJ = $(SRC:.c=.o)
+NAME 							=	cub3d
+CC 								=	gcc
+CFLAGS							=	-Wall -Wextra -Werror
+SRC_DIR							=	src
+INCLUDE_DIR						=	include
+LIBFT_DIR						=	libft
+OBJ_DIR							=	obj
+MLX_DIR							=	mlx
+MLX_ICLUDES						=	/usr/include
+PARSIG_DIR						=	$(SRC_DIR)/parsing
 
-%.o: $.c
-	@echo "\033[32mcompiling $<...\033[0m"
-	@$(CC) $(CFLAGS) -c $< -o $@
+SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  \
 
-$(NAME): $(OBJ)
-	@$(CC) $(OBJ) -o $(NAME)
-	@echo "\033[34mFiles compiled successfully!\033[0m"
+OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+LIBFT							=	$(LIBFT_DIR)/libft.a
+LDFLAGS							=	-L$(LIBFT_DIR)
+INCLUDES						=	-I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
+									-I$(MLX_ICLUDES)
 
+# Default target
 all: $(NAME)
 
+# Link the final executable
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) -lmlx_Linux -L/usr/lib \
+	-I$(MLX_DIR) -lXext -lX11 -lm -lz $(LDFLAGS) -o $(NAME)
+
+# Compile object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -O3 -c $< -o $@
+
+# Compile the libft library
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+# Clean object files
 clean:
-	@echo "\033[32mCleaning up object files...\033[0m"
-	@rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
+	make clean -C $(LIBFT_DIR)
 
+# Clean object files and the executable
 fclean: clean
-	@echo "\033[32mCleaning up object files and executable...\033[0m"
-	@rm -rf $(NAME)
+	rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
 
-re: clean fclean all
+# Recompile everything
+re: fclean all
+
+.PHONY: all clean fclean re
