@@ -48,9 +48,9 @@ void color_floor(t_data *data, char **map)
 			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
 				return ;
-			data->map->floor_color.r = ft_atoi(rgb_value[0]);
-			data->map->floor_color.g = ft_atoi(rgb_value[1]);
-			data->map->floor_color.b = ft_atoi(rgb_value[2]);
+			data->map->floor_color->r = ft_atoi(rgb_value[0]);
+			data->map->floor_color->g = ft_atoi(rgb_value[1]);
+			data->map->floor_color->b = ft_atoi(rgb_value[2]);
 			ft_free_array(rgb_value);
 		}
 		i++;
@@ -70,9 +70,9 @@ void color_ceiling(t_data *data, char **map)
 			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
 				return ;
-			data->map->ceilling_color.r = ft_atoi(rgb_value[0]);
-			data->map->ceilling_color.g = ft_atoi(rgb_value[1]);
-			data->map->ceilling_color.b = ft_atoi(rgb_value[2]);
+			data->map->ceilling_color->r = ft_atoi(rgb_value[0]);
+			data->map->ceilling_color->g = ft_atoi(rgb_value[1]);
+			data->map->ceilling_color->b = ft_atoi(rgb_value[2]);
 			ft_free_array(rgb_value);
 		}
 		i++;
@@ -131,9 +131,9 @@ void	print_map_info(t_map *map)
 
 	// Affichage des couleurs du sol
 	printf("Floor Color: R=%d, G=%d, B=%d\n", 
-		map->floor_color.r, 
-		map->floor_color.g, 
-		map->floor_color.b);
+		map->floor_color->r, 
+		map->floor_color->g, 
+		map->floor_color->b);
 
 	// Affichage de la carte (map_array)
 	if (map->map_array)

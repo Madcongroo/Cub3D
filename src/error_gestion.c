@@ -32,6 +32,10 @@ static void	free_struct_map(t_map *map)
 		free (map->we);
 	if (map->map_array)
 		ft_free_array(map->map_array);
+	if (map->map_array)
+		ft_free_array(map->map_array);
+	if (map->ceilling_color)
+		free(map->ceilling_color);
 }
 
 void	ft_free_array(char **array)

@@ -25,7 +25,7 @@ MLX_DIR							=	mlx
 MLX_ICLUDES						=	/usr/include
 PARSIG_DIR						=	$(SRC_DIR)/parsing
 
-SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  \
+SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/test_utils.c \
 									$(PARSIG_DIR)/start_parsing.c \
 									$(PARSIG_DIR)/textures_map.c

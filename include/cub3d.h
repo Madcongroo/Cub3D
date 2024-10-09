@@ -28,6 +28,14 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+typedef enum s_player_pos
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_player_pos;
+
 typedef struct s_player
 {
 	int	x;
@@ -55,8 +63,8 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_rgb	floor_color;
-	t_rgb	ceilling_color;
+	t_rgb	*floor_color;
+	t_rgb	*ceilling_color;
 	int		fd;
 }	t_map;
 
@@ -98,6 +106,9 @@ void 	color_ceiling(t_data *data, char **map);
 void	fill_map_array(t_data *dat, char **map);
 void	print_map_info(t_map *map);
 
+
+/*init les structs*/
+void	init_struct(t_data *data);
 
 
 #endif
