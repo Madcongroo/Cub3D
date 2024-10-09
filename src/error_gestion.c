@@ -15,11 +15,6 @@ HEADER
 
 #include "../include/cub3d.h"
 
-static void	free_struct_player(t_player *player)
-{
-	(void)player;
-}
-
 static void	free_struct_map(t_map *map)
 {
 	if (map->no)
@@ -33,9 +28,11 @@ static void	free_struct_map(t_map *map)
 	if (map->map_array)
 		ft_free_array(map->map_array);
 	if (map->ceilling_color)
-	{
-		
-	}
+		free (map->ceilling_color);
+	if (map->floor_color)
+		free (map->floor_color);
+	if (map)
+		free (map);
 }
 
 void	ft_free_array(char **array)
@@ -55,10 +52,16 @@ int	free_all(t_data *data, char *str)
 {
 	if (data)
 	{
+		if (data->player)
+			free (data->player);
 		if (data->map)
 			free_struct_map(data->map);
-		if (data->player)
-			free_struct_player(data->player);
+		if (data->raycast)
+			free (data->raycast);
+		if (data->text)
+			free (data->text);
+		if (data->win)
+			free (data->win);
 	}
 	ft_putstr_fd(str, 2);
 	return (1);
