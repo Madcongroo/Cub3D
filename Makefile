@@ -28,8 +28,8 @@ PARSIG_DIR						=	$(SRC_DIR)/parsing
 SRCS							=	Cub3d.c \
 									$(SRC_DIR)/error_gestion.c \
 									$(SRC_DIR)/test_utils.c \
+									$(SRC_DIR)/init_struct.c \
 									$(PARSIG_DIR)/start_parsing.c \
-									$(PARSING_DIR)/textures_map.c \
 									
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
