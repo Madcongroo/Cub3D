@@ -83,8 +83,21 @@ typedef struct s_data
 
 // src/error_gestion.c
 int		free_all(t_data *data, char *str);
+void	ft_free_array(char **array);
 
 // src/start_parsing.c
-int		start_parsing(t_data *data);
+int		start_parsing(t_data *data, char *file);
+
+/*temporaire pour les tests comme afficher la map etc*/
+void	display_array(char **map);
+
+// src/parsing/texturs_map
+void	texturs_paths(t_data *data, char **map);
+void	color_floor(t_data *data, char **map);
+void 	color_ceiling(t_data *data, char **map);
+void	fill_map_array(t_data *dat, char **map);
+void	print_map_info(t_map *map);
+
+
 
 #endif
