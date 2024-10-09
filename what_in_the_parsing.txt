@@ -6,3 +6,4 @@ La map est automatiquement en dernier dans le ficher. Les autres elements peuven
 Sauf pour la map, les informations peuvent etre separes par des espaces aleatoires.
 Les espaces sont une partie valable de la map, ils doivent juste etre entoures de murs.
 Chaque element a un ID qui est le premier-deuxieme caractere de la ligne.
+Les textures doivent suivre l ordre donne dans le sujet.

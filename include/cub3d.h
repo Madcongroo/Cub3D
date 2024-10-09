@@ -85,8 +85,8 @@ typedef struct s_data
 int		free_all(t_data *data, char *str);
 void	ft_free_array(char **array);
 
-
 // src/start_parsing.c
-int		start_parsing(t_data *data);
+int		start_parsing(t_data *data, char *file);
+
 
 #endif

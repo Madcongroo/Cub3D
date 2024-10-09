@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	if (argc != 2 && argv[2])
 		return (free_all(&data, "Error\nNumber of arguments\n"));
 	init_struct(&data);
-	if (start_parsing(&data) == -1)
+	if (start_parsing(&data, argv[1]) == -1)
 		return (free_all(&data, "Error\nMap error\n"));
 	
 }
