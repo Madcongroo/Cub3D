@@ -98,6 +98,10 @@ int	start_parsing(t_data *data, char *file)
 		ft_free_array(map);
 		return (-1);
 	}
+	texturs_paths(data, map);
+	color_floor(data, map);
+	color_ceiling(data, map);
+	fill_map_array(data, map);
 	// if (fill_struct(data, map) == -1)
 	// {
 	// 	ft_free_array(map);

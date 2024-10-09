@@ -91,5 +91,13 @@ int		start_parsing(t_data *data, char *file);
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
 
+// src/parsing/texturs_map
+void	texturs_paths(t_data *data, char **map);
+void	color_floor(t_data *data, char **map);
+void 	color_ceiling(t_data *data, char **map);
+void	fill_map_array(t_data *dat, char **map);
+void	print_map_info(t_map *map);
+
+
 
 #endif
