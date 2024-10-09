@@ -22,17 +22,17 @@ INCLUDE_DIR						=	include
 LIBFT_DIR						=	libft
 OBJ_DIR							=	obj
 MLX_DIR							=	mlx
-MLX_ICLUDES						=	/usr/include
-PARSIG_DIR						=	$(SRC_DIR)/parsing
+MLX_INCLUDES					=	/usr/include
+PARSING_DIR						=	$(SRC_DIR)/parsing
 
-SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  $(PARSIG_DIR)/start_parsing.c \
-									$(SRC_DIR)/test_utils.c \
+SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  $(PARSING_DIR)/start_parsing.c \
+									$(SRC_DIR)/test_utils.c $(SRC_DIR)/init_struct.c
 
-OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS							=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 LIBFT							=	$(LIBFT_DIR)/libft.a
 LDFLAGS							=	-L$(LIBFT_DIR)
 INCLUDES						=	-I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
-									-I$(MLX_ICLUDES)
+									-I$(MLX_INCLUDES)
 
 # Default target
 all: $(NAME)
@@ -43,7 +43,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	-I$(MLX_DIR) -lXext -lX11 -lm -lz $(LDFLAGS) -o $(NAME)
 
 # Compile object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -O3 -c $< -o $@
 
@@ -65,3 +65,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
