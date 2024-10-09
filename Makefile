@@ -25,7 +25,8 @@ MLX_DIR							=	mlx
 MLX_ICLUDES						=	/usr/include
 PARSIG_DIR						=	$(SRC_DIR)/parsing
 
-SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  \
+SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c  $(PARSIG_DIR)/start_parsing.c \
+									$(SRC_DIR)/test_utils.c \
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 LIBFT							=	$(LIBFT_DIR)/libft.a

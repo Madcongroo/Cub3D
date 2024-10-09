@@ -17,7 +17,7 @@ HEADER
 
 static void	free_struct_player(t_player *player)
 {
-
+	(void)player;
 }
 
 static void	free_struct_textures(t_map *map)

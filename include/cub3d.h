@@ -88,5 +88,8 @@ void	ft_free_array(char **array);
 // src/start_parsing.c
 int		start_parsing(t_data *data, char *file);
 
+/*temporaire pour les tests comme afficher la map etc*/
+void	display_array(char **map);
+
 
 #endif
