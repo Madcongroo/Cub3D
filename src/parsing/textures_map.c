@@ -45,7 +45,7 @@ void color_floor(t_data *data, char **map)
 	{
 		if (ft_strncmp(map[i], "F ", 2) == 0)
 		{
-			rgb_value = ft_split(map[i] + 2, ",");
+			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
 				return ;
 			data->map->floor_color.r = ft_atoi(rgb_value[0]);
@@ -67,7 +67,7 @@ void color_ceiling(t_data *data, char **map)
 	{
 		if (ft_strncmp(map[i], "C ", 2) == 0)
 		{
-			rgb_value = ft_split(map[i] + 2, ",");
+			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
 				return ;
 			data->map->ceilling_color.r = ft_atoi(rgb_value[0]);
@@ -98,7 +98,7 @@ void fill_map_array(t_data *data, char **map)
 	}
 	if (map_start == -1)
 	{
-		free_all(&data, "Error\nreading map\n");
+		free_all(data, "Error\nreading map\n");
 		return ;
 	}
 	map_height = 0;
