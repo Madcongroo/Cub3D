@@ -15,13 +15,6 @@ HEADER
 
 #include "./include/cub3d.h"
 
-void	init_struct(t_data *data)
-{
-	data->map = NULL;
-	data->player = NULL;
-	data->raycast = NULL;
-}
-
 int main(int argc, char **argv)
 {
 	t_data data;

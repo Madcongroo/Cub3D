@@ -40,10 +40,10 @@ static char	**read_map(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	buf = (char *)malloc(sizeof(char) * 5000);
+	buf = (char *)malloc(sizeof(char) * 10000);
 	if (!buf)
 		return (NULL);
-	check = read(fd, buf, 5000);
+	check = read(fd, buf, 10000);
 	if (check == 0)
 		buf[check] = '\0';
 	else if (check < 0)

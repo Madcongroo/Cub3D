@@ -28,6 +28,14 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+typedef enum s_player_pos
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_player_pos;
+
 typedef struct s_player
 {
 	int	x;
@@ -55,8 +63,8 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_rgb	floor_color;
-	t_rgb	ceilling_color;
+	t_rgb	*floor_color;
+	t_rgb	*ceilling_color;
 	int		fd;
 }	t_map;
 
@@ -90,6 +98,9 @@ int		start_parsing(t_data *data, char *file);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
+
+/*init les structs*/
+void	init_struct(t_data *data);
 
 
 #endif
