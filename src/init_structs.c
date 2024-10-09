@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/10/09 14:30:34 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:37:19 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	init_map_struct(t_map *map)
 	
 	c_rgb = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!c_rgb)
-		return (NULL);
+		return ;
 	f_rgb = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!f_rgb)
-		return (NULL);
+		return ;
 	map->map_array = NULL;
 	map->ea = NULL;
 	map->no = NULL;
@@ -63,10 +63,15 @@ void	init_struct(t_data *data)
 	init_player_struct(data->player);
 	init_raycast_struct(data->raycast);
 	init_map_struct(data->map);
-	data->map->ceilling_color->r = -1;
-	data->map->ceilling_color->g = -1;
-	data->map->ceilling_color->b = -1;
-	data->map->ceilling_color->r = -1;
-	data->map->ceilling_color->g = -1;
-	data->map->ceilling_color->b = -1;
+	if (!data->map->ceilling_color || !data->map->floor_color)
+		return ;
+	else
+	{
+		data->map->ceilling_color->r = -1;
+		data->map->ceilling_color->g = -1;
+		data->map->ceilling_color->b = -1;
+		data->map->ceilling_color->r = -1;
+		data->map->ceilling_color->g = -1;
+		data->map->ceilling_color->b = -1;
+	}
 }

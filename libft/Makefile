@@ -6,7 +6,7 @@
 #    By: proton <proton@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 12:13:34 by bproton           #+#    #+#              #
-#    Updated: 2024/10/09 02:41:56 by proton           ###   ########.fr        #
+#    Updated: 2024/10/09 15:26:03 by proton           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS =	ft_strlen.c \
 		ft_strchr.c \
 	    ft_strrchr.c \
 	    ft_strncmp.c \
-		ft_strcmp.c \
 	    ft_memchr.c \
 	    ft_memcmp.c \
 	    ft_strnstr.c \
