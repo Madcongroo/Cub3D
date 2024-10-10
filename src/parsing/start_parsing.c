@@ -40,10 +40,10 @@ static char	**read_map(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	buf = (char *)malloc(sizeof(char) * 10000);
+	buf = (char *)malloc(sizeof(char) * 5000);
 	if (!buf)
 		return (NULL);
-	check = read(fd, buf, 10000);
+	check = read(fd, buf, 5000);
 	if (check == 0)
 		buf[check] = '\0';
 	else if (check < 0)
@@ -69,7 +69,12 @@ int	start_parsing(t_data *data, char *file)
 		ft_free_array(map);
 		return (-1);
 	}
-	display_array(map);
+	texturs_paths(data, map);
+	color_floor(data, map);
+	color_ceiling(data, map);
+	fill_map_array(data, map);
+	print_map_info(data->map);
+	//display_array(map);
 	return (0);
 	
 }
