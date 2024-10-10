@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:56 by bproton           #+#    #+#             */
-/*   Updated: 2024/10/04 11:04:37 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/10 14:35:01 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,17 @@ static	char	*ft_printwords(const char *s, char c, size_t word)
 	char	*str;
 
 	j = 0;
-	str = (char *)malloc(sizeof(char) * word + 1);
+	str = (char *)malloc(sizeof(char) * (word + 1));
 	if (!str)
 		return (NULL);
-	while (*s != '\0')
+	if (word == 0)
+		return (NULL);
+	while (*s != c && *s)
 	{
-		while (*s != c && *s)
-		{
-			str[j] = *s;
-			j++;
-			s++;
-		}
-		if (*s - 1 != c && (*s == c || *s == '\0'))
-		{
-			str[j] = '\0';
-			return (str);
-		}
+		if (j >= word)
+			break ;
+		str[j] = *s;
+		j++;
 		s++;
 	}
 	str[j] = '\0';
@@ -119,7 +114,7 @@ char	**ft_split(char const *s, char c)
 	s2 = ft_split(s, ' ');
 	if (s2) 
 	{
-		while (s2[i] != NULL) 
+		while (s2[i] != NULL)
 		{
 			printf("%s\n", s2[i]);
 			free(s2[i]);

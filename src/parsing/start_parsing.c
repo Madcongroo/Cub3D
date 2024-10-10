@@ -71,7 +71,7 @@ int	first_map_check(char **array)
 	i = -1;
 	while (array[++i])
 	{
-		if ((map_mark == 1 && textures_mark != 6) || textures_mark > 6)
+		if (map_mark == 1 && textures_mark != 5)
 			return (-1);
 		if ((array[i][0] == 'N' || array[i][0] == 'S' || array[i][0] == 'E'
 			|| array[i][0] == 'W' || array[i][0] == 'C' || array[i][0] == 'F')
@@ -80,7 +80,7 @@ int	first_map_check(char **array)
 		if (array[i][0] == '0' || array[i][0] == '1')
 			map_mark = 1;
 	}
-	if (textures_mark < 6 || !map_mark)
+	if (textures_mark != 5 || !map_mark)
 		return (-1);
 	return (0);
 }
