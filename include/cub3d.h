@@ -98,17 +98,21 @@ int		start_parsing(t_data *data, char *file);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
+void	print_map_info(t_map *map);
 
 // src/parsing/texturs_map
 void	texturs_paths(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
 void 	color_ceiling(t_data *data, char **map);
-void	fill_map_array(t_data *dat, char **map);
-void	print_map_info(t_map *map);
 
+// src/parsing/fill_map_array.c
+void	fill_map_array(t_data *dat, char **map);
+void	copy_map_array(t_data *data, char **map, int map_start, int map_height);
+int		get_map_start(char **map);
+int		get_map_height(char **map, int map_start);
 
 /*init les structs*/
-int	init_struct(t_data *data);
+int		init_struct(t_data *data);
 
 
 #endif
