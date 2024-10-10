@@ -41,6 +41,7 @@ void	color_floor(t_data *data, char **map)
 {
 	int		i;
 	char	**rgb_value;
+	int		check_colors;
 
 	i = 0;
 	while (map[i])
@@ -57,6 +58,8 @@ void	color_floor(t_data *data, char **map)
 		}
 		i++;
 	}
+	if ((check_colors = check_color_number(data)) != 0)
+		return ;
 }
 
 // Fonction pour mettre les valeur rgb du sol a ceiling_floor
@@ -64,6 +67,7 @@ void	color_ceiling(t_data *data, char **map)
 {
 	int		i;
 	char	**rgb_value;
+	int		check_colors;
 
 	i = 0;
 	while (map[i])
@@ -80,4 +84,21 @@ void	color_ceiling(t_data *data, char **map)
 		}
 		i++;
 	}
+	if ((check_colors = check_color_number(data)) != 0)
+		return ;
+
 }
+int check_color_number(t_data *data)
+{
+	if (data->map->floor_color->r < 0 || data->map->floor_color->r > 255 ||
+		data->map->floor_color->g < 0 || data->map->floor_color->g > 255 ||
+		data->map->floor_color->b < 0 || data->map->floor_color->b > 255)
+		return (-1);
+	if ((data->map->ceilling_color->r < 0 || data->map->ceilling_color->r > 255) ||
+		(data->map->ceilling_color->g < 0 || data->map->ceilling_color->g > 255) ||
+		(data->map->ceilling_color->b < 0 || data->map->ceilling_color->b > 255))
+		return (-1);
+	return (0);
+		
+}
+

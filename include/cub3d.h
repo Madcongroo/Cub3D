@@ -104,6 +104,8 @@ void	print_map_info(t_map *map);
 void	texturs_paths(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
 void 	color_ceiling(t_data *data, char **map);
+int		check_color_number(t_data *data);
+
 
 // src/parsing/fill_map_array.c
 void	fill_map_array(t_data *dat, char **map);
