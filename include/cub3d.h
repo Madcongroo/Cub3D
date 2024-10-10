@@ -108,7 +108,7 @@ void	print_map_info(t_map *map);
 
 
 /*init les structs*/
-void	init_struct(t_data *data);
+int	init_struct(t_data *data);
 
 
 #endif
