@@ -89,6 +89,16 @@ typedef struct s_data
 	void		*text; // Pointeur pour les texture du jeux 
 }	t_data;
 
+typedef struct	s_check
+{
+	int	N;
+	int	S;
+	int	E;
+	int	W;
+	int	F;
+	int	C;
+}	t_check;
+
 // src/error_gestion.c
 int		free_all(t_data *data, char *str);
 void	ft_free_array(char **array);

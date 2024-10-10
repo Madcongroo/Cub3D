@@ -54,36 +54,7 @@ static char	**read_map(char *file)
 	return (split_buff(buf));
 }
 
-// int	fill_struct(t_data *data, char **map)
-// {
-// }
 
-/*checks if all the textures are on the map.
-	If the map is at the bottom of the file / is on the file*/
-int	first_map_check(char **array)
-{
-	int	i;
-	int	textures_mark;
-	int	map_mark;
-
-	textures_mark = 0;
-	map_mark = 0;
-	i = -1;
-	while (array[++i])
-	{
-		if (map_mark == 1 && textures_mark != 5)
-			return (-1);
-		if ((array[i][0] == 'N' || array[i][0] == 'S' || array[i][0] == 'E'
-			|| array[i][0] == 'W' || array[i][0] == 'C' || array[i][0] == 'F')
-				&& map_mark == 0)
-			textures_mark++;
-		if (array[i][0] == '0' || array[i][0] == '1')
-			map_mark = 1;
-	}
-	if (textures_mark != 5 || !map_mark)
-		return (-1);
-	return (0);
-}
 
 int	start_parsing(t_data *data, char *file)
 {
@@ -98,11 +69,6 @@ int	start_parsing(t_data *data, char *file)
 		ft_free_array(map);
 		return (-1);
 	}
-	// if (fill_struct(data, map) == -1)
-	// {
-	// 	ft_free_array(map);
-	// 	return (-1);
-	// }
 	display_array(map);
 	return (0);
 	
