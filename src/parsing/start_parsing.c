@@ -15,67 +15,68 @@ HEADER
 
 #include "../../include/cub3d.h"
 
-static char	*add_0(char *buf, char *new_buf)
+static int	check_line(char *buf)
 {
 	int	i;
-	int	j;
 
 	i = -1;
-	j = 0;
-	while (buf[++i])
+	while (buf[++i] != '\n' || buf[i])
 	{
-		if (i != 0  && (buf[i] == '\n' && buf[i - 1] == '\n'))
-			new_buf[j++] = '0';
-		new_buf[j++] = buf[i];
+		if (buf[i] == '0' || buf[i] == '1')
+			return (2);
+		else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'E'
+			|| buf[i] == 'W' || buf[i] == 'C' || buf[i] == 'F')
+			return (1);
 	}
-	new_buf[j] = '\0';
-	return (new_buf);
+	return (0);
 }
 
-/*count how many eccess '\n' there is. Retruns a function that
-	adds a 0 before every eccess '\n'*/
-static char	*new_buf(char *buf)
+static int	check_buffer(char *buf)
 {
-	int		i;
-	int		only_n;
-	char	*new_buf;
+	int	i;
+	int	textures_mark;
+	int	map_mark;
+	int	new_line;
 
+	textures_mark = 0;
+	map_mark = 0;
+	new_line = 1;
 	i = -1;
-	only_n = 0;
 	while (buf[++i])
 	{
-		while (buf[i] == '\n' && buf[i + 1] == '\n')
+		if (buf[i] == '\n')
+			new_line = 1;
+		if (new_line == 1)
 		{
-			i++;
-			only_n++;
+			if (check_line(buf + i) == 1)
+				textures_mark++;
+			else if (check_line(buf + i) == 2)
+				map_mark++;
+			new_line = 0;
 		}
+		if (textures_mark < 6 && map_mark == 1)
+			return (-1);
 	}
-	new_buf = (char *)ft_calloc((i + only_n) + 1, sizeof(char));
-	if (!new_buf)
-		return (NULL);
-	return (add_0(buf, new_buf));
+	return (0);
 }
 
 /*just for the norme*/
 static char	**split_buff(char *buf)
 {
 	char	**map_array;
-	char	*modified_buf;
 
-	modified_buf = new_buf(buf);
-	if (!modified_buf)
+	if (check_buffer(buf) == -1)
+	{
+		free (buf);
+		return (NULL);
+	}
+	map_array = ft_split(buf, '\n');
+	if (!map_array)
 	{
 		free (buf);
 		return (NULL);
 	}
 	free (buf);
-	map_array = ft_split(modified_buf, '\n');
-	if (!map_array)
-	{
-		free (modified_buf);
-		return (NULL);
-	}
-	free (modified_buf);
 	return (map_array);
 }
 
@@ -114,6 +115,8 @@ int	start_parsing(t_data *data, char *file)
 		return (-1);
 	if (check_basics(map) == -1)
 		return (ft_free_array(map));
+	// if (check_map(map) == -1)
+	// 	return (ft_free_array(map));
 	// texturs_paths(data, map);
 	// color_floor(data, map);
 	// color_ceiling(data, map);

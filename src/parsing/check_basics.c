@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/11 15:07:45 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/11 19:18:50 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_line_valid(char *str, t_check *check, char c)
 		i = 2;
 		while (str[i] != '.' && str[i])
 		{
-			if (str[i] != ' ' && str[i] != '\t')
+			if (str[i] != ' ' && str[i] != '0')
 				return (0);
 			i++;
 		}
@@ -49,7 +49,8 @@ static int	is_line_valid(char *str, t_check *check, char c)
 		i = 1;
 		while (str[++i])
 		{
-			if (str[i] != ' ' && str[i] != '\t' && (str[i] < '0' && str[i] > '9'))
+			if (str[i] != ' ' && str[i] != '\t' && str[i] != ','
+				&& (str[i] < '0' || str[i] > '9'))
 				return (0);
 		}
 		return (check_switch(check, c));
@@ -61,18 +62,18 @@ static int check_char(char *str, t_check *check)
 {
 	if (str[0] == 'N' && str[1] == 'O')
 		return (is_line_valid(str, check, 'n'));
-	if (str[0] == 'S' && str[1] == 'O')
+	else if (str[0] == 'S' && str[1] == 'O')
 		return (is_line_valid(str, check, 's'));
-	if (str[0] == 'E' && str[1] == 'A')
+	else if (str[0] == 'E' && str[1] == 'A')
 		return (is_line_valid(str, check, 'e'));
-	if (str[0] == 'W' && str[1] == 'E')
+	else if (str[0] == 'W' && str[1] == 'E')
 		return (is_line_valid(str, check, 'w'));
-	if (str[0] == 'F')
+	else if (str[0] == 'F')
 		return (is_line_valid(str, check, 'f'));
-	if (str[0] == 'C')
+	else if (str[0] == 'C')
 		return (is_line_valid(str, check, 'c'));
-	if ((str[0] != 'N' || str[0] != 'S' || str[0] != 'E' || str[0] != 'W'
-		|| str[0] != 'F' || str[0] != 'C' || str[0] != '0' || str[0] != '1'))
+	else if ((str[0] != 'N' && str[0] != 'S' && str[0] != 'E' && str[0] != 'W'
+		&& str[0] != 'F' && str[0] != 'C' && str[0] != '0' && str[0] != '1'))
 			return (-1);
 	return (0);
 }
@@ -91,7 +92,8 @@ int	check_basics(char **array)
 		array[i] = ft_strtrim(array[i], " 	");
 		if (!array[i])
 			return (ft_free_array(array));
-		check_char(array[i], &check);
+		if (check_char(array[i], &check) == -1)
+			return (-1);
 	}
 	if (check.N != 1 || check.S != 1 || check.E != 1
 		|| check.W != 1 || check.F != 1 || check.C != 1)
