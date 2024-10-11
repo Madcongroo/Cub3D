@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/11 11:32:54 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/11 15:07:45 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static int	check_switch(t_check *check, char c)
 {
 	if (c == 'n')
-	{
-		puts("1");
 		return (check->N++, 1);
-	}
 	else if (c == 's')
 		return (check->S++, 1);
 	else if (c == 'e')
@@ -52,8 +49,7 @@ static int	is_line_valid(char *str, t_check *check, char c)
 		i = 1;
 		while (str[++i])
 		{
-			if (str[i] != ' ' && str[i] != '\t' && str[i] != ','
-				&& (str[i] < '0' && str[i] > '9'))
+			if (str[i] != ' ' && str[i] != '\t' && (str[i] < '0' && str[i] > '9'))
 				return (0);
 		}
 		return (check_switch(check, c));
@@ -75,6 +71,9 @@ static int check_char(char *str, t_check *check)
 		return (is_line_valid(str, check, 'f'));
 	if (str[0] == 'C')
 		return (is_line_valid(str, check, 'c'));
+	if ((str[0] != 'N' || str[0] != 'S' || str[0] != 'E' || str[0] != 'W'
+		|| str[0] != 'F' || str[0] != 'C' || str[0] != '0' || str[0] != '1'))
+			return (-1);
 	return (0);
 }
 
@@ -94,12 +93,6 @@ int	check_basics(char **array)
 			return (ft_free_array(array));
 		check_char(array[i], &check);
 	}
-// 	printf("%d\n", check.N);
-// printf("%d\n", check.S);
-// printf("%d\n", check.E);
-// printf("%d\n", check.W);
-// printf("%d\n", check.F);
-// printf("%d\n", check.C);
 	if (check.N != 1 || check.S != 1 || check.E != 1
 		|| check.W != 1 || check.F != 1 || check.C != 1)
 			return (-1);
