@@ -27,8 +27,6 @@ static void	free_struct_map(t_map *map)
 		free (map->we);
 	if (map->map_array)
 		ft_free_array(map->map_array);
-	if (map->map_array)
-		ft_free_array(map->map_array);
 	if (map->ceilling_color)
 		free (map->ceilling_color);
 	if (map->floor_color)
@@ -37,7 +35,7 @@ static void	free_struct_map(t_map *map)
 		free (map);
 }
 
-void	ft_free_array(char **array)
+int	ft_free_array(char **array)
 {
 	int	i;
 
@@ -48,6 +46,7 @@ void	ft_free_array(char **array)
 			free(array[i]);
 		free(array);
 	}
+	return (-1);
 }
 
 int	free_all(t_data *data, char *str)

@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:56 by bproton           #+#    #+#             */
-/*   Updated: 2024/10/10 14:35:01 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/10 21:01:50 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	char	*ft_printwords(const char *s, char c, size_t word)
 	char	*str;
 
 	j = 0;
-	str = (char *)malloc(sizeof(char) * (word + 1));
+	str = (char *)ft_calloc((word + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	if (word == 0)
@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	j = ft_wordcount(s, c);
-	str = (char **)malloc(sizeof(char *) * (j + 1));
+	str = (char **)ft_calloc((j + 1), sizeof(char *));
 	if (!str)
 		return (NULL);
 	str = ft_wordlength(str, s, c, j);

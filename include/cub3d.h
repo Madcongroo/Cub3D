@@ -101,9 +101,10 @@ typedef struct	s_check
 
 // src/error_gestion.c
 int		free_all(t_data *data, char *str);
-void	ft_free_array(char **array);
+int		ft_free_array(char **array);
 
 // src/start_parsing.c
+int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
 
 /*temporaire pour les tests comme afficher la map etc*/

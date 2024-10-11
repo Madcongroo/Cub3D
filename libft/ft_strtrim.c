@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:17:50 by bproton           #+#    #+#             */
-/*   Updated: 2023/11/06 11:02:24 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/11 11:24:13 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static	char	*ft_print(size_t len, const char *s1, char *str, size_t start)
 			i++;
 		}
 		str[len] = '\0';
+		printf("%s\n", str);
 	}
 	return (str);
 }
@@ -90,10 +91,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (str);
 	}
 	len = ft_strlen(s1) - start - end;
-	str = (char *)malloc(sizeof(char) * (len + 1));
+	str = (char *)ft_calloc((len + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	str = ft_print(len, s1, str, start);
+	free ((char *)s1);
 	return (str);
 }
 
