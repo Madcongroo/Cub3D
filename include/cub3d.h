@@ -112,14 +112,16 @@ void	display_array(char **map);
 void	print_map_info(t_map *map);
 
 // src/parsing/texturs_map
-void	texturs_paths(t_data *data, char **map);
+int		pase_all(t_data *data, char **map);
+int		texturs_paths_no_so(t_data *data, char **map);
+int		texturs_paths_we_ea(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
 void 	color_ceiling(t_data *data, char **map);
 int		check_color_number(t_data *data);
 
 
 // src/parsing/fill_map_array.c
-void	fill_map_array(t_data *dat, char **map);
+int		fill_map_array(t_data *data, char **map);
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height);
 int		get_map_start(char **map);
 int		get_map_height(char **map, int map_start);
@@ -127,5 +129,9 @@ int		get_map_height(char **map, int map_start);
 /*init les structs*/
 int		init_struct(t_data *data);
 
+// src/parsing/utils.c
+int		ft_is_whitespace(char c);
+char	*remove_sup_space(char *str);
+char	*skip_space(char *str);
 
 #endif

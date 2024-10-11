@@ -66,17 +66,15 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 }
 
 // Fonction principale pour remplir map_array
-void	fill_map_array(t_data *data, char **map)
+int	fill_map_array(t_data *data, char **map)
 {
 	int	map_start;
 	int	map_height;
 
 	map_start = get_map_start(map);
 	if (map_start == -1)
-	{
-		free_all(data, "Error\nreading map\n");
-		return ;
-	}
+		return (-1);
 	map_height = get_map_height(map, map_start);
 	copy_map_array(data, map, map_start, map_height);
+	return (0);
 }
