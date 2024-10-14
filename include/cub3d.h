@@ -126,6 +126,9 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height);
 int		get_map_start(char **map);
 int		get_map_height(char **map, int map_start);
 
+/*tous les checks entries de la map*/
+int		check_map(t_data *data, char **map);
+
 /*init les structs*/
 int		init_struct(t_data *data);
 

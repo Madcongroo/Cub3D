@@ -134,8 +134,9 @@ int	start_parsing(t_data *data, char *file)
 		return (ft_free_array(map));
 	if (pase_all(data, map) == -1)
 		return (ft_free_array(map));
-	display_array(map);
 	ft_free_array(map);
+	if (check_map(data, data->map->map_array) == -1)
+		return (-1);
 	return (0);
 	
 }
