@@ -27,10 +27,10 @@ void	display_array(char **map)
 void	print_map_info(t_map *map)
 {
 	// Affichage des textures
-	printf("North Texture Path: %s\n", map->no ? map->no : "Not set");
-	printf("South Texture Path: %s\n", map->so ? map->so : "Not set");
-	printf("West Texture Path: %s\n", map->we ? map->we : "Not set");
-	printf("East Texture Path: %s\n", map->ea ? map->ea : "Not set");
+	printf("North Texture Path:%s\n", map->no ? map->no : "Not set");
+	printf("South Texture Path:%s\n", map->so ? map->so : "Not set");
+	printf("West Texture Path:%s\n", map->we ? map->we : "Not set");
+	printf("East Texture Path:%s\n", map->ea ? map->ea : "Not set");
 
 	// Affichage des couleurs du sol
 	printf("Floor Color: R=%d, G=%d, B=%d\n", 

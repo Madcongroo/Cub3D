@@ -15,27 +15,68 @@
 */
 #include "../../include/cub3d.h"
 
+int pase_all(t_data *data, char **map)
+{
+	if (texturs_paths_no_so(data, map) != 0)
+		return (-1);
+	if (texturs_paths_we_ea(data, map) != 0)
+		return (-1);
+	color_floor(data, map);
+	color_ceiling(data, map);
+	if (fill_map_array(data, map) != 0)
+		return (-1);
+	print_map_info(data->map);
+	return (0);
+}
 // Fonction pour trouver le chemin des textures et 
 // les mettre dans la structure t_map
-void	texturs_paths(t_data *data, char **map)
+int	texturs_paths_no_so(t_data *data, char **map)
 {
 	int	i;
 
 	i = 0;
 	while (map[i])
 	{
-		if (ft_strncmp(map[i], "NO ", 3) == 0)
-			data->map->no = ft_strdup(map[i] + 3);
-		if (ft_strncmp(map[i], "LO ", 3) == 0)
-			data->map->so = ft_strdup(map[i] + 3);
-		if (ft_strncmp(map[i], "WE ", 3) == 0)
-			data->map->we = ft_strdup(map[i] + 3);
-		if (ft_strncmp(map[i], "EA ", 3) == 0)
-			data->map->ea = ft_strdup(map[i] + 3);
+		if (ft_strncmp(map[i], "NO", 2) == 0)
+		{	
+			data->map->no = remove_sup_space(skip_space(map[i] + 3));
+			if (!data->map->no)
+				return (-1);
+		}
+		if (ft_strncmp(map[i], "SO", 2) == 0)
+		{
+			data->map->so = remove_sup_space(skip_space(map[i] + 3));
+			if (!data->map->so)
+				return (-1);
+		}
 		i++;
 	}
+	return (0);
 }
 
+int	texturs_paths_we_ea(t_data *data, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strncmp(map[i], "WE", 2) == 0)
+		{	
+			data->map->we = remove_sup_space(skip_space(map[i] + 3));
+			if (!data->map->we)
+				return (-1);
+		}
+		if (ft_strncmp(map[i], "EA", 2) == 0)
+		{
+			data->map->ea = remove_sup_space(skip_space(map[i] + 3));
+			if (!data->map->ea)
+				return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
 // Fonction pour mettre les valeur rgb du sol a color_floor
 void	color_floor(t_data *data, char **map)
 {
