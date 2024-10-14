@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/11 19:18:50 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/14 14:39:46 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,53 @@ static int check_char(char *str, t_check *check)
 		return (is_line_valid(str, check, 'f'));
 	else if (str[0] == 'C')
 		return (is_line_valid(str, check, 'c'));
-	else if ((str[0] != 'N' && str[0] != 'S' && str[0] != 'E' && str[0] != 'W'
-		&& str[0] != 'F' && str[0] != 'C' && str[0] != '0' && str[0] != '1'))
-			return (-1);
+	else if ((str[0] != '0' && str[0] != '1') && (!ft_is_whitespace(str[0])))
+		return (-1);
 	return (0);
 }
 
-/*checks if all the textures are on the map.
-	If the map is at the bottom of the file / is on the file*/
+int	search_stop_trim(char **array)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (array[++i])
+	{
+		j = 0;
+		while (ft_is_whitespace(array[i][j]) && array[i][j])
+			j++;
+		if (array[i][j] == '0' || array[i][j] == '1')
+			return (i);
+		else
+			continue ;
+	}
+	return (0);
+}
+
+/*set the check struct, trims each lines, checks if eache elements are there*/
+/*rempli la structure check, enleve les espaces au debut et a la fin,
+	regarde si tous les elements sont presents*/
 int	check_basics(char **array)
 {
 	int		i;
+	int		stop_trim;
 	t_check	check;
 	
 	i = -1;
 	ft_memset(&check, 0, sizeof(t_check));
+	stop_trim = search_stop_trim(array);
 	while (array[++i])
 	{
-		array[i] = ft_strtrim(array[i], " 	");
-		if (!array[i])
-			return (ft_free_array(array));
+		if (stop_trim > 0)
+		{
+			array[i] = ft_strtrim(array[i], " 	");
+			if (!array[i])
+				return (ft_free_array(array));
+		}
 		if (check_char(array[i], &check) == -1)
 			return (-1);
+		stop_trim--;
 	}
 	if (check.N != 1 || check.S != 1 || check.E != 1
 		|| check.W != 1 || check.F != 1 || check.C != 1)

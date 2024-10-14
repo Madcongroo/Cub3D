@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:05:14 by bproton           #+#    #+#             */
-/*   Updated: 2023/11/02 11:12:54 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/14 14:23:36 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	ft_is_whitespace(char c)
+int	ft_is_whitespace(char c)
 {
 	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
