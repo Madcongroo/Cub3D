@@ -15,52 +15,70 @@ HEADER
 
 #include "../../include/cub3d.h"
 
+/*checks each line to differentiate which line 
+	is for the entries or the map*/
+/*check toutes les lignes une par une pour differencier les entree
+	de la map*/
 static int	check_line(char *buf)
 {
 	int	i;
 
 	i = -1;
-	while (buf[++i] != '\n' || buf[i])
+	while (buf[++i] != '\n' && buf[i])
 	{
-		if (buf[i] == '0' || buf[i] == '1')
-			return (2);
-		else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'E'
+		if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'E'
 			|| buf[i] == 'W' || buf[i] == 'C' || buf[i] == 'F')
 			return (1);
+		else if (buf[i] == '0' || buf[i] == '1')
+			return (2);
 	}
 	return (0);
 }
 
+int	control_line(char *buf, int *map_mark, int *text_mark)
+{
+	int			ret;
+
+	ret = check_line(buf);
+	if (ret == 1)
+		*text_mark += 1;
+	else if (ret == 2)
+		*map_mark += 1;
+	return (ret);
+}
+
+/*reads the buffer and checks if the map is at the end of the file*/
+/*lis le buffer et regarde si la map est a la fin du fichier*/
 static int	check_buffer(char *buf)
 {
 	int	i;
-	int	textures_mark;
-	int	map_mark;
 	int	new_line;
+	int	map_mark;
+	int	text_mark;
 
-	textures_mark = 0;
 	map_mark = 0;
-	new_line = 1;
+	text_mark = 0;
 	i = -1;
+	new_line = 1;
 	while (buf[++i])
 	{
-		if (buf[i] == '\n')
-			new_line = 1;
 		if (new_line == 1)
 		{
-			if (check_line(buf + i) == 1)
-				textures_mark++;
-			else if (check_line(buf + i) == 2)
-				map_mark++;
+			control_line(buf + i, &map_mark, &text_mark);
 			new_line = 0;
 		}
-		if (textures_mark < 6 && map_mark == 1)
+		if (buf[i] == '\n')
+			new_line = 1;
+		if (map_mark > 0 && text_mark < 6)
 			return (-1);
 	}
+	if (map_mark < 1 || text_mark != 6)
+		return (-1);
 	return (0);
 }
 
 /*just for the norme*/
+/*juste pour la norme*/
 static char	**split_buff(char *buf)
 {
 	char	**map_array;
@@ -81,6 +99,7 @@ static char	**split_buff(char *buf)
 }
 
 /*reads from the given file and returns a splited array*/
+/*lis du fichier et retourne un tableau*/
 static char	**read_map(char *file)
 {
 	int		fd;
@@ -90,17 +109,17 @@ static char	**read_map(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	buf = (char *)ft_calloc(5000, sizeof(char));
+	buf = (char *)ft_calloc(2000, sizeof(char));
 	if (!buf)
 		return (NULL);
-	check = read(fd, buf, 5000);
-	if (check == 0)
-		buf[check] = '\0';
-	else if (check < 0)
+	check = read(fd, buf, 2000);
+	if (check < 0)
 	{
 		free (buf);
 		return (NULL);
 	}
+	else if (check == 0)
+		buf[check] = '\0';
 	return (split_buff(buf));
 }
 
@@ -122,7 +141,7 @@ int	start_parsing(t_data *data, char *file)
 	// color_ceiling(data, map);
 	// fill_map_array(data, map);
 	// print_map_info(data->map);
-	// display_array(map);
+	display_array(map);
 	ft_free_array(map);
 	return (0);
 }
