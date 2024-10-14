@@ -49,7 +49,7 @@ int	control_line(char *buf, int *map_mark, int *text_mark)
 
 /*reads the buffer and checks if the map is at the end of the file*/
 /*lis le buffer et regarde si la map est a la fin du fichier*/
-static int	check_buffer(char *buf)
+/*static int	check_buffer(char *buf)
 {
 	int	i;
 	int	new_line;
@@ -75,7 +75,7 @@ static int	check_buffer(char *buf)
 	if (map_mark < 1 || text_mark != 6)
 		return (-1);
 	return (0);
-}
+}*/
 
 /*just for the norme*/
 /*juste pour la norme*/

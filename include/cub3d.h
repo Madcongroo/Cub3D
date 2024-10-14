@@ -130,8 +130,8 @@ int		get_map_height(char **map, int map_start);
 int		init_struct(t_data *data);
 
 // src/parsing/utils.c
-int		ft_is_whitespace(char c);
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
+char	*jump_space(char *str);
 
 #endif
