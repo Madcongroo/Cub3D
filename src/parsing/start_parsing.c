@@ -15,67 +15,18 @@ HEADER
 
 #include "../../include/cub3d.h"
 
-static char	*add_0(char *buf, char *new_buf)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (buf[++i])
-	{
-		if (i != 0  && (buf[i] == '\n' && buf[i - 1] == '\n'))
-			new_buf[j++] = '0';
-		new_buf[j++] = buf[i];
-	}
-	new_buf[j] = '\0';
-	return (new_buf);
-}
-
-/*count how many eccess '\n' there is. Retruns a function that
-	adds a 0 before every eccess '\n'*/
-static char	*new_buf(char *buf)
-{
-	int		i;
-	int		only_n;
-	char	*new_buf;
-
-	i = -1;
-	only_n = 0;
-	while (buf[++i])
-	{
-		while (buf[i] == '\n' && buf[i + 1] == '\n')
-		{
-			i++;
-			only_n++;
-		}
-	}
-	new_buf = (char *)ft_calloc((i + only_n) + 1, sizeof(char));
-	if (!new_buf)
-		return (NULL);
-	return (add_0(buf, new_buf));
-}
-
 /*just for the norme*/
 static char	**split_buff(char *buf)
 {
 	char	**map_array;
-	char	*modified_buf;
 
-	modified_buf = new_buf(buf);
-	if (!modified_buf)
+	map_array = ft_split(buf, '\n');
+	if (!map_array)
 	{
 		free (buf);
 		return (NULL);
 	}
 	free (buf);
-	map_array = ft_split(modified_buf, '\n');
-	if (!map_array)
-	{
-		free (modified_buf);
-		return (NULL);
-	}
-	free (modified_buf);
 	return (map_array);
 }
 
@@ -89,7 +40,7 @@ static char	**read_map(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	buf = (char *)ft_calloc(5000, sizeof(char));
+	buf = (char *)malloc(sizeof(char) * 5000);
 	if (!buf)
 		return (NULL);
 	check = read(fd, buf, 5000);
@@ -103,12 +54,41 @@ static char	**read_map(char *file)
 	return (split_buff(buf));
 }
 
+// int	fill_struct(t_data *data, char **map)
+// {
+// }
+
+/*checks if all the textures are on the map.
+	If the map is at the bottom of the file / is on the file*/
+int	first_map_check(char **array)
+{
+	int	i;
+	int	textures_mark;
+	int	map_mark;
+
+	textures_mark = 0;
+	map_mark = 0;
+	i = -1;
+	while (array[++i])
+	{
+		if ((map_mark == 1 && textures_mark != 6) || textures_mark > 6)
+			return (-1);
+		if ((array[i][0] == 'N' || array[i][0] == 'S' || array[i][0] == 'E'
+			|| array[i][0] == 'W' || array[i][0] == 'C' || array[i][0] == 'F')
+				&& map_mark == 0)
+			textures_mark++;
+		if (array[i][0] == '0' || array[i][0] == '1')
+			map_mark = 1;
+	}
+	if (textures_mark < 6 || !map_mark)
+		return (-1);
+	return (0);
+}
+
 int	start_parsing(t_data *data, char *file)
 {
 	char	**map;
-	(void)data;
 
-	map = NULL;
 	map = read_map(file);
 	if (!map)
 		return (-1);
@@ -119,4 +99,5 @@ int	start_parsing(t_data *data, char *file)
 	// display_array(map);
 	ft_free_array(map);
 	return (0);
+	
 }
