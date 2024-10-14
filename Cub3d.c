@@ -25,6 +25,8 @@ int main(int argc, char **argv)
 		return (free_all(&data, "Error\nInitializing structs\n"));
 	if (start_parsing(&data, argv[1]) == -1)
 		return (free_all(&data, "Error\nMap error\n"));
+	if (start_map_2d(&data) == -1)
+		return (free_all(&data, "Error\nMap 2d\n"));
 	free_all(&data, "END OF PROGRAMM\n");
 	
 }

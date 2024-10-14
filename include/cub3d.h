@@ -87,6 +87,9 @@ typedef struct s_data
 	t_raycast	*raycast;
 	void		*win; // Pointeur sur la fenetre mlx
 	void		*text; // Pointeur pour les texture du jeux 
+	void		*mlx;
+	int			win_width; // Largeur fenetre
+	int			win_height; // Hauteur fenetre
 }	t_data;
 
 typedef struct	s_check
@@ -133,5 +136,14 @@ int		init_struct(t_data *data);
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
 char	*jump_space(char *str);
+
+// src/map_2d/start_map_2d
+int start_map_2d(t_data *data);
+
+// src/map_2d/games_loop.c
+void games_loop(t_data *data);
+int close_window(t_data *data);
+
+
 
 #endif
