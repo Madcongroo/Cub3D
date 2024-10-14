@@ -132,13 +132,8 @@ int	start_parsing(t_data *data, char *file)
 		return (-1);
 	if (check_basics(map) == -1)
 		return (ft_free_array(map));
-	// if (check_map(map) == -1)
-	// 	return (ft_free_array(map));
-	// texturs_paths(data, map);
-	// color_floor(data, map);
-	// color_ceiling(data, map);
-	// fill_map_array(data, map);
-	// print_map_info(data->map);
+	if (pase_all(data, map) == -1)
+		return (ft_free_array(map));
 	display_array(map);
 	ft_free_array(map);
 	return (0);

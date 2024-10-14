@@ -15,7 +15,9 @@
 */
 #include "../../include/cub3d.h"
 
-int pase_all(t_data *data, char **map)
+/* fonction principal pour appeler les fonctions
+qui remplisse la structure map */
+int	pase_all(t_data *data, char **map)
 {
 	if (texturs_paths_no_so(data, map) != 0)
 		return (-1);
@@ -28,6 +30,7 @@ int pase_all(t_data *data, char **map)
 	print_map_info(data->map);
 	return (0);
 }
+
 // Fonction pour trouver le chemin des textures et 
 // les mettre dans la structure t_map
 int	texturs_paths_no_so(t_data *data, char **map)
@@ -38,7 +41,7 @@ int	texturs_paths_no_so(t_data *data, char **map)
 	while (map[i])
 	{
 		if (ft_strncmp(map[i], "NO", 2) == 0)
-		{	
+		{
 			data->map->no = remove_sup_space(skip_space(map[i] + 3));
 			if (!data->map->no)
 				return (-1);
@@ -62,7 +65,7 @@ int	texturs_paths_we_ea(t_data *data, char **map)
 	while (map[i])
 	{
 		if (ft_strncmp(map[i], "WE", 2) == 0)
-		{	
+		{
 			data->map->we = remove_sup_space(skip_space(map[i] + 3));
 			if (!data->map->we)
 				return (-1);
@@ -77,6 +80,7 @@ int	texturs_paths_we_ea(t_data *data, char **map)
 	}
 	return (0);
 }
+
 // Fonction pour mettre les valeur rgb du sol a color_floor
 void	color_floor(t_data *data, char **map)
 {
@@ -129,17 +133,17 @@ void	color_ceiling(t_data *data, char **map)
 		return ;
 
 }
-int check_color_number(t_data *data)
+/* Fonction qui check les chiffre recu depuis le fichier*/
+int	check_color_number(t_data *data)
 {
-	if (data->map->floor_color->r < 0 || data->map->floor_color->r > 255 ||
-		data->map->floor_color->g < 0 || data->map->floor_color->g > 255 ||
-		data->map->floor_color->b < 0 || data->map->floor_color->b > 255)
+	if (data->map->floor_color->r < 0 || data->map->floor_color->r > 255
+		|| data->map->floor_color->g < 0 || data->map->floor_color->g > 255
+		|| data->map->floor_color->b < 0 || data->map->floor_color->b > 255)
 		return (-1);
-	if ((data->map->ceilling_color->r < 0 || data->map->ceilling_color->r > 255) ||
-		(data->map->ceilling_color->g < 0 || data->map->ceilling_color->g > 255) ||
-		(data->map->ceilling_color->b < 0 || data->map->ceilling_color->b > 255))
+	if (data->map->ceilling_color->r < 0 || data->map->ceilling_color->r > 255
+		|| data->map->ceilling_color->g < 0 || data->map->ceilling_color->g > 255
+		|| data->map->ceilling_color->b < 0 || data->map->ceilling_color->b > 255)
 		return (-1);
 	return (0);
-		
 }
 
