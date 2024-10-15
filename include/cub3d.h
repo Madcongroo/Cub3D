@@ -28,6 +28,8 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+# define TILE_SIZE 64
+
 typedef enum s_player_pos
 {
 	NORTH,
@@ -87,6 +89,9 @@ typedef struct s_data
 	t_raycast	*raycast;
 	void		*win; // Pointeur sur la fenetre mlx
 	void		*text; // Pointeur pour les texture du jeux 
+	void		*mlx;
+	int			win_width; // Largeur fenetre
+	int			win_height; // Hauteur fenetre
 }	t_data;
 
 typedef struct	s_check
@@ -133,8 +138,19 @@ int		check_map(t_data *data, char **map);
 int		init_struct(t_data *data);
 
 // src/parsing/utils.c
-int		ft_is_whitespace(char c);
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
+char	*jump_space(char *str);
+
+// src/map_2d/start_map_2d
+int start_map_2d(t_data *data);
+
+// src/map_2d/games_loop.c
+void games_loop(t_data *data);
+int close_window(t_data *data);
+void draw_grid(t_data *data);
+
+
+
 
 #endif
