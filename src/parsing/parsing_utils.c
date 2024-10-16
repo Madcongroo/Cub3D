@@ -16,15 +16,6 @@
 
 #include "../../include/cub3d.h"
 
-int	ft_is_whitespace(char c)
-{
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	else if (c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
-
 // Fonction pour supprimer tout les espace dans le chemin
 char	*remove_sup_space(char *str)
 {
