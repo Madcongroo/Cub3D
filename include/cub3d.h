@@ -32,6 +32,8 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+# define TILE_SIZE 64
+
 typedef enum s_player_pos
 {
 	NORTH,
@@ -151,8 +153,10 @@ int		error_msg(char *error_msg);
 int		start_map_2d(t_data *data);
 
 // src/map_2d/games_loop.c
-void	games_loop(t_data *data);
-int		close_window(t_data *data);
+void games_loop(t_data *data);
+int close_window(t_data *data);
+void draw_grid(t_data *data);
+
 
 
 
