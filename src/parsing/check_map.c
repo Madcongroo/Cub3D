@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 11:03:12 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/16 14:25:56 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
 	if (y == 0 || y == data->map->height || x == 0
 		|| x == data->map->width)
-		return (1);
+			return (1);
 	else if (!map[y + 1] || !map[y][x - 1] || !map[y - 1]
 		|| !map[y][x + 1])
 		return (1);
@@ -132,29 +132,28 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 
 int	should_it_be_checked(t_data *data, char **map, int y, int x)
 {
-		if (check_edge_cases(data, map, y, x) == 1)
+	if (check_edge_cases(data, map, y, x) == 1)
+		return (1);
+	if (map[y][x + 1])
+	{
+		if (ft_is_whitespace(map[y][x + 1]))
 			return (1);
-		else if (map[y][x + 1])
-		{
-			if (ft_is_whitespace(map[y][x + 1]))
-				return (1);
-		}
-		else if (map[y][x -1])
-		{
-			if (ft_is_whitespace(map[y][x - 1]))
-				return (1);
-		}
-		else if (map[y + 1])
-		{
-			if (ft_is_whitespace(map[y + 1][x]))
-				return (1);
-		}
-		else if (map[y - 1])
-		{
-			puts("in y - 1");
-			if (ft_is_whitespace(map[y - 1][x]))
-				return (1);
-		}
+	}
+	if (map[y][x - 1])
+	{
+		if (ft_is_whitespace(map[y][x - 1]))
+			return (1);
+	}
+	if (map[y + 1])
+	{
+		if (ft_is_whitespace(map[y + 1][x]))
+			return (1);
+	}
+	if (map[y - 1])
+	{
+		if (ft_is_whitespace(map[y - 1][x]))
+			return (1);
+	}
 	return (0);
 }
 
@@ -169,14 +168,13 @@ int	is_map_wall_surrounded(t_data *data, char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (should_it_be_checked(data, map, i, j))
+			if (map[i][j] == '0')
 			{
-				if (map[i][j] == '0')
+				if (should_it_be_checked(data, map, i, j))
 					return (-1);
 			}
-			if (j > data->map->width)
-				data->map->width = j;
 		}
+		data->map->width = j;
 	}
 	return (0);
 }
