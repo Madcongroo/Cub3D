@@ -42,7 +42,6 @@ void calculate_map_dimensions(t_map *map)
             max_width = current_width;
         height++;
     }
-
     map->height = height;
     map->width = max_width;
 }
@@ -55,7 +54,7 @@ void draw_vertical_line(t_data *data, int x, int y_start, int length)
 	y = 0;
 	while (y < length)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, y_start + y, NOIR);
+		mlx_pixel_put(data->mlx, data->win, x, y_start + y, BLACK);
 		y++;
 	}
 }
@@ -68,7 +67,7 @@ void draw_horizontal_line(t_data *data, int x_start, int y, int length)
 	x = 0;
 	while (x < length)
 	{
-		mlx_pixel_put(data->mlx, data->win, x_start + x, y, NOIR);
+		mlx_pixel_put(data->mlx, data->win, x_start + x, y, BLACK);
 		x++;
 	}
 }

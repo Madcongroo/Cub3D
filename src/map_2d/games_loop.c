@@ -18,8 +18,8 @@
 int	close_window(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+    free_all(data);
 	exit(0);
-	return (0);
 }
 
 // Fonction pour afficher la fenetre et gestion des evenement dans une boucle
@@ -47,9 +47,9 @@ void draw_grid(t_data*data, t_map *map)
             y = i * SQUARE_SIZE;
 
             if (map->map_array[i][j] == '1' || map->map_array[i][j] == '0')
-                draw_square(data, x, y, BLANC);
+                draw_square(data, x, y, WHITE);
 			else if (map->map_array[i][j] == ' ')
-                draw_square(data, x, y, NOIR);
+                draw_square(data, x, y, BLACK);
 			draw_vertical_line(data, x + SQUARE_SIZE - 1, y, SQUARE_SIZE);
 			draw_horizontal_line(data, x, y + SQUARE_SIZE - 1, SQUARE_SIZE);
 			j++;

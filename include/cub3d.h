@@ -32,8 +32,8 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
-# define BLANC 0xFFFFFF
-# define NOIR 0x000000
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
 # define SQUARE_SIZE 64
 
 typedef enum s_player_pos
