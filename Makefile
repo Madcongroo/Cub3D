@@ -34,7 +34,8 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(PARSIG_DIR)/utils.c \
 									$(PARSIG_DIR)/check_map.c \
 									$(SRC_DIR)/map_2d/start_map_2d.c \
-									$(SRC_DIR)/map_2d/games_loop.c
+									$(SRC_DIR)/map_2d/games_loop.c \
+									$(SRC_DIR)/map_2d/utils_2d.c
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 LIBFT							=	$(LIBFT_DIR)/libft.a

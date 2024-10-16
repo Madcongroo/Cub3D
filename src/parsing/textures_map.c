@@ -27,7 +27,7 @@ int	pase_all(t_data *data, char **map)
 	color_ceiling(data, map);
 	if (fill_map_array(data, map) != 0)
 		return (-1);
-	print_map_info(data->map);
+	// print_map_info(data->map);
 	return (0);
 }
 

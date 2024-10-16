@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/14 18:09:31 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/16 14:29:58 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,64 @@ static int	good_char(char c)
 	return (0);
 }
 
-static int	is_map_closed(char **map, int y, int x)
+static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
-	if (map[y + 1][x])
-	{
-		if (ft_is_whitespace(map[y][x]) && map[y + 1][x] == '0')
-			return (-1);
-	}
-	if (map[y - 1][x])
-	{
-		if (ft_is_whitespace(map[y][x]) && map[y - 1][x] == '0')
-			return (-1);
-	}
+	if (y == 0 || y == data->map->height || x == 0
+		|| x == data->map->width)
+			return (1);
+	else if (!map[y + 1] || !map[y][x - 1] || !map[y - 1]
+		|| !map[y][x + 1])
+		return (1);
+	return (0);
+}
+
+int	should_it_be_checked(t_data *data, char **map, int y, int x)
+{
+	if (check_edge_cases(data, map, y, x) == 1)
+		return (1);
 	if (map[y][x + 1])
 	{
-		if (ft_is_whitespace(map[y][x]) && map[y][x + 1] == '0')
-			return (-1);
+		if (ft_is_whitespace(map[y][x + 1]))
+			return (1);
 	}
 	if (map[y][x - 1])
 	{
-		if (ft_is_whitespace(map[y][x]) && map[y][x - 1] == '0')
-			return (-1);
+		if (ft_is_whitespace(map[y][x - 1]))
+			return (1);
+	}
+	if (map[y + 1])
+	{
+		if (ft_is_whitespace(map[y + 1][x]))
+			return (1);
+	}
+	if (map[y - 1])
+	{
+		if (ft_is_whitespace(map[y - 1][x]))
+			return (1);
 	}
 	return (0);
 }
 
-static int recursive_search(char **map, int y, int x)
+int	is_map_wall_surrounded(t_data *data, char **map)
 {
-	if (map[y][x])
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map[++i])
 	{
-		if (is_map_closed(map, y, x) == -1)
-			return (-1);
-		if (map[y][x] == '0' || map[y][x] == '1')
+		j = -1;
+		while (map[i][++j])
 		{
-			if (recursive_search(map, y + 1, x) == -1)
-				return (-1);
-			if (recursive_search(map, y + 1, x) == -1)
-				return (-1);
-			if (recursive_search(map, y, x + 1) == -1)
-				return (-1);
-			if (recursive_search(map, y, x - 1) == -1)
-				return (-1);
+			if (map[i][j] == '0')
+			{
+				if (should_it_be_checked(data, map, i, j))
+					return (-1);
+			}
 		}
-		return (0);
+		data->map->width = j;
 	}
-	return (-1);
+	return (0);
 }
 
 int	check_map(t_data *data, char **map)
@@ -88,9 +101,9 @@ int	check_map(t_data *data, char **map)
 			}
 		}
 	}
-	if (!data->player->y || !data->player->x)
+	if (!data->player->y && !data->player->x)
 		return (-1);
-	if (recursive_search(map, data->player->y, data->player->x) == -1)
+	if (is_map_wall_surrounded(data, map) == -1)
 		return (-1);
 	return (0);
 }

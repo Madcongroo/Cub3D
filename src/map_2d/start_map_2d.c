@@ -26,7 +26,8 @@ int start_map_2d(t_data *data)
     data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "cub3D");
     if (!data->win)
         return (-1);
-    draw_grid(data);
+    calculate_map_dimensions(data->map);
+    draw_grid(data, data->map);
     games_loop(data);
     return (0);
 }

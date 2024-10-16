@@ -62,6 +62,7 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 	data->map->map_array = malloc(sizeof(char *) * (map_height + 1));
 	if (!data->map->map_array)
 		return ;
+	data->map->height = map_height;
 	i = map_start;
 	j = 0;
 	while (map[i])

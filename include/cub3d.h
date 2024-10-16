@@ -25,10 +25,16 @@ HEADER
 # include <errno.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <ctype.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
-# define TILE_SIZE 64
+# define BLANC 0xFFFFFF
+# define NOIR 0x000000
+# define SQUARE_SIZE 50
 
 typedef enum s_player_pos
 {
@@ -42,6 +48,8 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	old_x;
+	int	old_y;
 	int	x_cam;
 	int	y_cam;
 	int	speed;
@@ -124,7 +132,6 @@ void	color_floor(t_data *data, char **map);
 void 	color_ceiling(t_data *data, char **map);
 int		check_color_number(t_data *data);
 
-
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height);
@@ -146,9 +153,17 @@ char	*jump_space(char *str);
 int start_map_2d(t_data *data);
 
 // src/map_2d/games_loop.c
-void games_loop(t_data *data);
-int close_window(t_data *data);
-void draw_grid(t_data *data);
+void	games_loop(t_data *data);
+int		close_window(t_data *data);
+void draw_grid(t_data*data, t_map *map);
+void draw_square(t_data *data, int x, int y, int color);
+
+// src/map_2d/utils_2d.c
+int get_real_line(char *line);
+void calculate_map_dimensions(t_map *map);
+void draw_vertical_line(t_data *data, int x, int y_start, int length);
+void draw_horizontal_line(t_data *data, int x_start, int y, int length);
+
 
 
 
