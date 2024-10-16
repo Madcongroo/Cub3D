@@ -18,7 +18,6 @@
 
 // Fonction principale de la gestion graphique 2D
 int	start_map_2d(t_data *data)
-int	start_map_2d(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
