@@ -73,8 +73,7 @@ static int	check_buffer(char *buf)
 			return (error_msg("Error\nMap not at the end\n"));
 	}
 	if (map_mark < 1 || text_mark != 6)
-		return (error_msg("Error\nMap not found or \
-			too much arguments\n"));
+		return (error_msg("Error\nMap not found or too much arguments\n"));
 	return (0);
 }
 
@@ -145,5 +144,4 @@ int	start_parsing(t_data *data, char *file)
 		return (ft_free_array(map));
 	ft_free_array(map);
 	return (0);
-	
 }

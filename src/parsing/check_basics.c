@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_basics.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 16:22:42 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/16 22:06:26 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int	check_switch(t_check *check, char c)
 {
 	if (c == 'n')
-		return (check->N++, 1);
+		return (check->n++, 1);
 	else if (c == 's')
-		return (check->S++, 1);
+		return (check->s++, 1);
 	else if (c == 'e')
-		return (check->E++, 1);
+		return (check->e++, 1);
 	else if (c == 'w')
-		return (check->W++, 1);
+		return (check->w++, 1);
 	else if (c == 'f')
-		return (check->F++, 1);
+		return (check->f++, 1);
 	else
-		return (check->C++, 1);
+		return (check->c++, 1);
 }
 
 static int	is_line_valid(char *str, t_check *check, char c)
@@ -37,9 +37,8 @@ static int	is_line_valid(char *str, t_check *check, char c)
 		i = 2;
 		while (str[i] != '.' && str[i])
 		{
-			if (str[i] != ' ' && str[i] != '0')
+			if (!ft_is_whitespace(str[i++]))
 				return (0);
-			i++;
 		}
 		if (str[i] || (str[i] == '.' && str[i + 1] == '/'))
 			return (check_switch(check, c));
@@ -49,7 +48,7 @@ static int	is_line_valid(char *str, t_check *check, char c)
 		i = 1;
 		while (str[++i])
 		{
-			if (str[i] != ' ' && str[i] != '\t' && str[i] != ','
+			if (!ft_is_whitespace(str[i]) && str[i] != ','
 				&& (str[i] < '0' || str[i] > '9'))
 				return (0);
 		}
@@ -104,7 +103,7 @@ int	check_basics(char **array)
 	int		i;
 	int		stop_trim;
 	t_check	check;
-	
+
 	i = -1;
 	ft_memset(&check, 0, sizeof(t_check));
 	stop_trim = search_stop_trim(array);
@@ -120,8 +119,8 @@ int	check_basics(char **array)
 			return (error_msg("Error\nUnknown caracter\n"));
 		stop_trim--;
 	}
-	if (check.N != 1 || check.S != 1 || check.E != 1
-		|| check.W != 1 || check.F != 1 || check.C != 1)
-			return (error_msg("Error\nA texture is missing\n"));
+	if (check.n != 1 || check.s != 1 || check.e != 1
+		|| check.w != 1 || check.f != 1 || check.c != 1)
+		return (error_msg("Error\nA texture is missing\n"));
 	return (0);
 }

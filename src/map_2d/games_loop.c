@@ -28,8 +28,6 @@ void	games_loop(t_data *data)
 {
 	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_loop(data->mlx);
-	mlx_hook(data->win, 17, 0, close_window, data);
-	mlx_loop(data->mlx);
 }
 
 // Fonction pour dessiner la grille dans la map

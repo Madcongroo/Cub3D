@@ -15,6 +15,20 @@ HEADER
 
 #include "../include/cub3d.h"
 
+int	ft_free_array(char **array)
+{
+	int	i;
+
+	i = -1;
+	if (array)
+	{
+		while (array[++i])
+			free(array[i]);
+		free(array);
+	}
+	return (-1);
+}
+
 static void	free_struct_map(t_map *map)
 {
 	if (map->no)
@@ -35,20 +49,6 @@ static void	free_struct_map(t_map *map)
 		free (map);
 }
 
-int	ft_free_array(char **array)
-{
-	int	i;
-
-	i = -1;
-	if (array)
-	{
-		while (array[++i])
-			free(array[i]);
-		free(array);
-	}
-	return (-1);
-}
-
 int	free_all(t_data *data)
 {
 	if (data)
@@ -61,8 +61,6 @@ int	free_all(t_data *data)
 			free (data->raycast);
 		if (data->text)
 			free (data->text);
-		if (data->win)
-			free (data->win);
 	}
 	return (1);
 }

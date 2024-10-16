@@ -16,6 +16,14 @@
 
 #include "../../include/cub3d.h"
 
+int	good_char(char c)
+{
+	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0'
+		&& c != '1' && !ft_is_whitespace(c))
+		return (1);
+	return (0);
+}
+
 // Fonction pour supprimer tout les espace dans le chemin
 char	*remove_sup_space(char *str)
 {
@@ -38,7 +46,7 @@ char	*remove_sup_space(char *str)
 		i++;
 	}
 	new_str[j] = '\0';
-	return (new_str); 
+	return (new_str);
 }
 
 // Fonction pour supprimer les espace entre le nom de la texture et sont chemin

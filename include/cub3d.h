@@ -104,12 +104,12 @@ typedef struct s_data
 
 typedef struct s_check
 {
-	int	N;
-	int	S;
-	int	E;
-	int	W;
-	int	F;
-	int	C;
+	int	n;
+	int	s;
+	int	e;
+	int	w;
+	int	f;
+	int	c;
 }	t_check;
 
 // src/error_gestion.c
@@ -149,6 +149,7 @@ char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
 char	*jump_space(char *str);
 int		error_msg(char *error_msg);
+int		good_char(char c);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
