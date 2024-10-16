@@ -29,64 +29,50 @@ void	games_loop(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-void draw_grid(t_data *data)
+// Fonction pour dessiner la grille dans la map
+void draw_grid(t_data*data, t_map *map)
 {
     int x;
-    int y;
-    int num_lines;
-    int num_columes;
-    int colors;
-    int i = 0;
+	int y;
+	int i;
+	int j;
 
-    num_columes = 0;
-    num_lines = 0;
-    colors = 0;
-    while (data->map->map_array[num_lines])
-        num_lines++;
-    y = 0;
-    while (y < num_lines)
+	i = 0;
+	while (i < map->height)
     {
-        num_columes = ft_strlen(data->map->map_array[y]);
-        x = 0;
-        while (x < num_columes)
+		j = 0;
+        while (j < map->width)
         {
-            if (data->map->map_array[y][x] == '1' || data->map->map_array[y][x] == '0')
-                colors = 0xFFFFFF; // Blanc
-            else if (data->map->map_array[y][x] == ' ')
-                colors = 0x000000; // Rouge
-            i = 0;
-            if (x < num_columes - 1)
-            {
-                if (data->map->map_array[y][x + 1] == ' ')
-                    colors = 0x000000;
-                else
-                    colors = 0xFFFFFF;
-            }
-            else if (data->map->map_array[y][x] == ' ')
-                colors = 0xFFFFFF;
-            i = 0;
-            while (i < TILE_SIZE)
-            {
-                mlx_pixel_put(data->mlx, data->win, x * TILE_SIZE + i, y * TILE_SIZE, colors);
-                i++;
-            }
-            if (y < num_lines - 1)
-            {
-                if (data->map->map_array[y + 1][x] == ' ')
-                    colors = 0x000000;
-                else
-                    colors = 0xFFFFFF;
-            }
-            else if (data->map->map_array[y][x] == ' ')
-                colors = 0xFFFFFF;
-            i = 0;
-            while (i < TILE_SIZE)
-            {
-                mlx_pixel_put(data->mlx, data->win, x * TILE_SIZE, y * TILE_SIZE + i, colors);
-                i++;
-            }
-            x++;
-        }
-        y++;
-    }
+            x = j * SQUARE_SIZE;
+            y = i * SQUARE_SIZE;
+
+            if (map->map_array[i][j] == '1' || map->map_array[i][j] == '0')
+                draw_square(data, x, y, BLANC);
+			else if (map->map_array[i][j] == ' ')
+                draw_square(data, x, y, NOIR);
+			draw_vertical_line(data, x + SQUARE_SIZE - 1, y, SQUARE_SIZE);
+			draw_horizontal_line(data, x, y + SQUARE_SIZE - 1, SQUARE_SIZE);
+			j++;
+		}
+		i++;
+	}
+}
+
+// Fonction qui recois les differente taille de draw_grid pour dessiner chaque pixel
+void draw_square(t_data *data, int x, int y, int color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < SQUARE_SIZE)
+    {
+		j = 0;
+        while (j < SQUARE_SIZE)
+		{
+            mlx_pixel_put(data->mlx, data->win, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
 }

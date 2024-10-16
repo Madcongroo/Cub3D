@@ -32,7 +32,9 @@ HEADER
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
-# define TILE_SIZE 64
+# define BLANC 0xFFFFFF
+# define NOIR 0x000000
+# define SQUARE_SIZE 64
 
 typedef enum s_player_pos
 {
@@ -146,16 +148,23 @@ int		init_struct(t_data *data);
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
 char	*jump_space(char *str);
-int		ft_is_whitespace(char c);
 int		error_msg(char *error_msg);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
 
 // src/map_2d/games_loop.c
-void games_loop(t_data *data);
-int close_window(t_data *data);
-void draw_grid(t_data *data);
+void	games_loop(t_data *data);
+int		close_window(t_data *data);
+void draw_grid(t_data*data, t_map *map);
+void draw_square(t_data *data, int x, int y, int color);
+
+// src/map_2d/utils_2d.c
+int get_real_line(char *line);
+void calculate_map_dimensions(t_map *map);
+void draw_vertical_line(t_data *data, int x, int y_start, int length);
+void draw_horizontal_line(t_data *data, int x_start, int y, int length);
+
 
 
 
