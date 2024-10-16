@@ -25,6 +25,10 @@ HEADER
 # include <errno.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <ctype.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
@@ -40,6 +44,8 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	old_x;
+	int	old_y;
 	int	x_cam;
 	int	y_cam;
 	int	speed;
@@ -87,6 +93,9 @@ typedef struct s_data
 	t_raycast	*raycast;
 	void		*win; // Pointeur sur la fenetre mlx
 	void		*text; // Pointeur pour les texture du jeux 
+	void		*mlx;
+	int			win_width; // Largeur fenetre
+	int			win_height; // Hauteur fenetre
 }	t_data;
 
 typedef struct	s_check
@@ -119,7 +128,6 @@ void	color_floor(t_data *data, char **map);
 void 	color_ceiling(t_data *data, char **map);
 int		check_color_number(t_data *data);
 
-
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height);
@@ -133,8 +141,18 @@ int		check_map(t_data *data, char **map);
 int		init_struct(t_data *data);
 
 // src/parsing/utils.c
-int		ft_is_whitespace(char c);
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
+char	*jump_space(char *str);
+int		ft_is_whitespace(char c);
+
+// src/map_2d/start_map_2d
+int start_map_2d(t_data *data);
+
+// src/map_2d/games_loop.c
+void	games_loop(t_data *data);
+int		close_window(t_data *data);
+
+
 
 #endif
