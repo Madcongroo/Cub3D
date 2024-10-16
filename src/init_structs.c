@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/10/15 23:35:52 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/16 15:23:59 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static t_player	*init_player_struct()
+static t_player	*init_player_struct(void)
 {
 	t_player	*new_player;
 
@@ -22,7 +22,7 @@ static t_player	*init_player_struct()
 	return (new_player);
 }
 
-static t_raycast	*init_raycast_struct()
+static t_raycast	*init_raycast_struct(void)
 {
 	t_raycast	*raycast;
 	
@@ -33,7 +33,7 @@ static t_raycast	*init_raycast_struct()
 
 }
 
-static t_rgb	*get_rgb_struct()
+static t_rgb	*get_rgb_struct(void)
 {
 	t_rgb	*new_rgb;
 
@@ -43,7 +43,7 @@ static t_rgb	*get_rgb_struct()
 	return (new_rgb);
 }
 
-static t_map	*init_map_struct()
+static t_map	*init_map_struct(void)
 {
 	t_map	*map;
 	
@@ -67,7 +67,7 @@ int	init_struct(t_data *data)
 	data->raycast = init_raycast_struct();
 	if (!data->raycast)
 		return (-1);
-	data->map = init_map_struct(data->map);
+	data->map = init_map_struct();
 	if (!data->map->ceilling_color || !data->map->floor_color || !data->map)
 		return (-1);
 	data->text = NULL;

@@ -49,7 +49,7 @@ int	ft_free_array(char **array)
 	return (-1);
 }
 
-int	free_all(t_data *data, char *str)
+int	free_all(t_data *data)
 {
 	if (data)
 	{
@@ -64,7 +64,6 @@ int	free_all(t_data *data, char *str)
 		if (data->win)
 			free (data->win);
 	}
-	ft_putstr_fd(str, 2);
 	return (1);
 }
 

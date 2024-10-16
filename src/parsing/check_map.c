@@ -6,7 +6,7 @@
 /*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 14:29:58 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:26:22 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	good_char(char c)
 {
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0'
 		&& c != '1' && !ft_is_whitespace(c))
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -24,7 +24,7 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
 	if (y == 0 || y == data->map->height || x == 0
 		|| x == data->map->width)
-			return (1);
+		return (1);
 	else if (!map[y + 1] || !map[y][x - 1] || !map[y - 1]
 		|| !map[y][x + 1])
 		return (1);
@@ -92,7 +92,7 @@ int	check_map(t_data *data, char **map)
 		while (map[i][++j])
 		{
 			if (good_char(map[i][j]))
-				return (-1);
+				return (error_msg("Error\nUnknown caracter\n"));
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
 				|| map[i][j] == 'W')
 			{
@@ -104,6 +104,6 @@ int	check_map(t_data *data, char **map)
 	if (!data->player->y && !data->player->x)
 		return (-1);
 	if (is_map_wall_surrounded(data, map) == -1)
-		return (-1);
+		return (error_msg("Error\nMap unclosed\n"));
 	return (0);
 }

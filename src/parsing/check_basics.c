@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_basics.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/14 14:39:46 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:22:42 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	is_line_valid(char *str, t_check *check, char c)
 	return (0);
 }
 
-static int check_char(char *str, t_check *check)
+static int	check_char(char *str, t_check *check)
 {
 	if (str[0] == 'N' && str[1] == 'O')
 		return (is_line_valid(str, check, 'n'));
@@ -117,11 +117,11 @@ int	check_basics(char **array)
 				return (ft_free_array(array));
 		}
 		if (check_char(array[i], &check) == -1)
-			return (-1);
+			return (error_msg("Error\nUnknown caracter\n"));
 		stop_trim--;
 	}
 	if (check.N != 1 || check.S != 1 || check.E != 1
 		|| check.W != 1 || check.F != 1 || check.C != 1)
-			return (-1);
+			return (error_msg("Error\nA texture is missing\n"));
 	return (0);
 }

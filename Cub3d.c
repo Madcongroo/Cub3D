@@ -20,13 +20,13 @@ int main(int argc, char **argv)
 	t_data data;
 
 	if (argc != 2 && argv[2])
-		return (free_all(&data, "Error\nNumber of arguments\n"));
+		return (free_all(&data));
 	if (init_struct(&data) == -1)
-		return (free_all(&data, "Error\nInitializing structs\n"));
+		return (free_all(&data));
 	if (start_parsing(&data, argv[1]) == -1)
-		return (free_all(&data, "Error\nMap error\n"));
+		return (free_all(&data));
 	if (start_map_2d(&data) == -1)
-		return (free_all(&data, "Error\nMap 2d\n"));
-	free_all(&data, "END OF PROGRAMM\n");
+		return (free_all(&data));
+	free_all(&data);
 	
 }

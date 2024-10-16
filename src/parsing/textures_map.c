@@ -17,7 +17,7 @@
 
 /* fonction principal pour appeler les fonctions
 qui remplisse la structure map */
-int	pase_all(t_data *data, char **map)
+int	parse_all(t_data *data, char **map)
 {
 	if (texturs_paths_no_so(data, map) != 0)
 		return (-1);

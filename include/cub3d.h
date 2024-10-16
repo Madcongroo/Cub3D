@@ -109,7 +109,7 @@ typedef struct	s_check
 }	t_check;
 
 // src/error_gestion.c
-int		free_all(t_data *data, char *str);
+int		free_all(t_data *data);
 int		ft_free_array(char **array);
 
 // src/start_parsing.c
@@ -121,7 +121,7 @@ void	display_array(char **map);
 void	print_map_info(t_map *map);
 
 // src/parsing/texturs_map
-int		pase_all(t_data *data, char **map);
+int		parse_all(t_data *data, char **map);
 int		texturs_paths_no_so(t_data *data, char **map);
 int		texturs_paths_we_ea(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
@@ -145,9 +145,10 @@ char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
 char	*jump_space(char *str);
 int		ft_is_whitespace(char c);
+int		error_msg(char *error_msg);
 
 // src/map_2d/start_map_2d
-int start_map_2d(t_data *data);
+int		start_map_2d(t_data *data);
 
 // src/map_2d/games_loop.c
 void	games_loop(t_data *data);

@@ -70,10 +70,11 @@ static int	check_buffer(char *buf)
 		if (buf[i] == '\n')
 			new_line = 1;
 		if (map_mark > 0 && text_mark < 6)
-			return (-1);
+			return (error_msg("Error\nMap not at the end\n"));
 	}
 	if (map_mark < 1 || text_mark != 6)
-		return (-1);
+		return (error_msg("Error\nMap not found or \
+			too much arguments\n"));
 	return (0);
 }
 
@@ -92,6 +93,7 @@ static char	**split_buff(char *buf)
 	if (!map_array)
 	{
 		free (buf);
+		error_msg("Error\nSplit error\n");
 		return (NULL);
 	}
 	free (buf);
@@ -108,7 +110,10 @@ static char	**read_map(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
+	{
+		error_msg("Error\nOpen error\n");
 		return (NULL);
+	}
 	buf = (char *)ft_calloc(2000, sizeof(char));
 	if (!buf)
 		return (NULL);
@@ -116,6 +121,7 @@ static char	**read_map(char *file)
 	if (check < 0)
 	{
 		free (buf);
+		error_msg("Error\nRead error\n");
 		return (NULL);
 	}
 	else if (check == 0)
@@ -132,7 +138,7 @@ int	start_parsing(t_data *data, char *file)
 		return (-1);
 	if (check_basics(map) == -1)
 		return (ft_free_array(map));
-	if (pase_all(data, map) == -1)
+	if (parse_all(data, map) == -1)
 		return (ft_free_array(map));
 	display_array(data->map->map_array);
 	if (check_map(data, data->map->map_array) == -1)
