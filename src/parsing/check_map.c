@@ -6,7 +6,7 @@
 /*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 14:25:56 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/16 14:29:58 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,105 +20,6 @@ static int	good_char(char c)
 	return (0);
 }
 
-// static int	is_map_closed(char **map, int y, int x)
-// {
-// 	if (map[y + 1][x])
-// 	{
-// 		if (ft_is_whitespace(map[y][x]) && map[y + 1][x] == '0')
-// 			return (-1);
-// 	}
-// 	else if (map[y - 1][x])
-// 	{
-// 		if (ft_is_whitespace(map[y][x]) && map[y - 1][x] == '0')
-// 			return (-1);
-// 	}
-// 	else if (map[y][x + 1])
-// 	{
-// 		if (ft_is_whitespace(map[y][x]) && map[y][x + 1] == '0')
-// 			return (-1);
-// 	}
-// 	else if (map[y][x - 1])
-// 	{
-// 		if (ft_is_whitespace(map[y][x]) && map[y][x - 1] == '0')
-// 			return (-1);
-// 	}
-// 	return (0);
-// }
-
-// int	check_cond(t_data *data, int y, int x)
-// {
-// 	if (y < 0 || x < 0 || y >= data->map->height || x >= data->map->width
-// 		|| !data->map->map_array[y] || !data->map->map_array[y][x])
-// 			return (1);
-// 	return (0);
-// }
-
-// /*searches if the pos y +/-, x +/- is outside of the map or a whitespace*/
-// /*cherche si les positions y +/-, x +/- est en dehors de la map ou un caracetere blanc*/
-// static int search_if_outside(char **map, int y, int x)
-// {
-// 	if (map[y] && map[y][x])
-// 	{
-// 		if (!map[y + 1] || !map[y][x - 1] || !map[y - 1] || !map[y][x + 1])
-// 			return (1);
-// 		else if (ft_is_whitespace(map[y][x + 1]) || ft_is_whitespace(map[y][x - 1])
-// 			|| ft_is_whitespace(map[y + 1][x]) || ft_is_whitespace(map[y -1][x]))
-// 				return (1);
-// 	}
-// 	return (0);
-// }
-
-
-// static int recursive_search(char **map, int y, int x, t_data *data)
-// {
-// 	printf("Checking (%d, %d)\n", y, x);
-// 	if (search_if_outside(map, y, x))
-// 	{
-// 		if (map[y][x] == '0' || !map[y][x])
-// 		{
-// 			puts("is in return");
-// 			return (-1);
-// 		}
-// 	}
-// 	else if (!check_cond(data, y, x) && map[y][x] != '1')
-// 	{
-// 		map[y][x] = '1';
-// 		if (recursive_search(map, y + 1, x, data) == -1)
-// 			return (-1);
-// 		if (recursive_search(map, y, x - 1, data) == -1)
-// 			return (-1);
-// 		if (recursive_search(map, y - 1, x, data) == -1)
-// 			return (-1);
-// 		if (recursive_search(map, y, x + 1, data) == -1)
-// 			return (-1);
-// 	}
-// 	return (0);
-// }
-
-// char **copy_the_map(char **map)
-// {
-// 	int i;
-// 	char **map_cpy;
-
-// 	i = 0;
-// 	while (map[i])
-// 		i++;
-// 	map_cpy = (char **)malloc(sizeof(char *) * (i + 1));
-// 	if (!map_cpy)
-// 		return (NULL);
-// 	i = -1;
-// 	while (map[++i])
-// 	{
-// 		map_cpy[i] = ft_strdup(map[i]);
-// 		if (!map_cpy[i])
-// 		{
-// 			ft_free_array(map_cpy);
-// 			return (NULL);
-// 		}
-// 	}
-// 	map_cpy[i] = NULL;
-// 	return (map_cpy);
-// }
 static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
 	if (y == 0 || y == data->map->height || x == 0
