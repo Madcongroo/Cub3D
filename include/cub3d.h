@@ -95,14 +95,14 @@ typedef struct s_data
 	t_player	*player;
 	t_map		*map;
 	t_raycast	*raycast;
-	void		*win; // Pointeur sur la fenetre mlx
-	void		*text; // Pointeur pour les texture du jeux 
+	void		*win;
+	void		*text;
 	void		*mlx;
-	int			win_width; // Largeur fenetre
-	int			win_height; // Hauteur fenetre
+	int			win_width;
+	int			win_height;
 }	t_data;
 
-typedef struct	s_check
+typedef struct s_check
 {
 	int	N;
 	int	S;
@@ -129,7 +129,7 @@ int		pase_all(t_data *data, char **map);
 int		texturs_paths_no_so(t_data *data, char **map);
 int		texturs_paths_we_ea(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
-void 	color_ceiling(t_data *data, char **map);
+void	color_ceiling(t_data *data, char **map);
 int		check_color_number(t_data *data);
 
 // src/parsing/fill_map_array.c
@@ -150,22 +150,18 @@ char	*skip_space(char *str);
 char	*jump_space(char *str);
 
 // src/map_2d/start_map_2d
-int start_map_2d(t_data *data);
+int		start_map_2d(t_data *data);
 
 // src/map_2d/games_loop.c
 void	games_loop(t_data *data);
 int		close_window(t_data *data);
-void draw_grid(t_data*data, t_map *map);
-void draw_square(t_data *data, int x, int y, int color);
+void	draw_grid(t_data*data, t_map *map);
+void	draw_square(t_data *data, int x, int y, int color);
 
 // src/map_2d/utils_2d.c
-int get_real_line(char *line);
-void calculate_map_dimensions(t_map *map);
-void draw_vertical_line(t_data *data, int x, int y_start, int length);
-void draw_horizontal_line(t_data *data, int x_start, int y, int length);
-
-
-
-
+int		get_real_line(char *line);
+void	calculate_map_dimensions(t_map *map);
+void	draw_vertical_line(t_data *data, int x, int y_start, int length);
+void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
 
 #endif
