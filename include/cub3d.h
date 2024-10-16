@@ -34,7 +34,7 @@ HEADER
 
 # define BLANC 0xFFFFFF
 # define NOIR 0x000000
-# define SQUARE_SIZE 50
+# define SQUARE_SIZE 64
 
 typedef enum s_player_pos
 {
