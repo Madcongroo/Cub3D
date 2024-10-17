@@ -36,13 +36,14 @@ HEADER
 # define BLACK 0x000000
 # define SQUARE_SIZE 64
 
-typedef enum s_player_pos
+typedef enum s_key_pressed
 {
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-}	t_player_pos;
+	W = 119,
+	A = 97,
+	S = 115,
+	D = 100,
+	ESQ = 65307
+}	t_key_pressed;
 
 typedef struct s_player
 {
@@ -98,6 +99,11 @@ typedef struct s_data
 	void		*win;
 	void		*text;
 	void		*mlx;
+	void		*img;
+	char		*add;
+	int			bits_p_pixels;
+	int			line_length;
+	int			endian;
 	int			win_width;
 	int			win_height;
 }	t_data;
