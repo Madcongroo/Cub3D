@@ -33,6 +33,7 @@ HEADER
 # include "../mlx/mlx.h"
 
 # define WHITE 0xFFFFFF
+# define ORANGE 0xF99a0B
 # define BLACK 0x000000
 # define SQUARE_SIZE 64
 
@@ -171,5 +172,6 @@ int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 void	draw_vertical_line(t_data *data, int x, int y_start, int length);
 void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
+int		is_player(char c);
 
 #endif

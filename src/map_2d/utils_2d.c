@@ -16,6 +16,13 @@
 
 #include "../../include/cub3d.h"
 
+int	is_player(char c)
+{
+	if (c == 'W' || c == 'N' || c == 'E' || c == 'S')
+		return (1);
+	return (0);
+}
+
 int	get_real_line(char *line)
 {
 	int	len;

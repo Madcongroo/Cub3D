@@ -74,8 +74,10 @@ void	draw_grid(t_data*data, t_map *map)
 			x = j * SQUARE_SIZE;
 			y = i * SQUARE_SIZE;
 
-			if (map->map_array[i][j] == '1' || map->map_array[i][j] == '0')
+			if (map->map_array[i][j] == '0' || is_player(map->map_array[i][j]))
 				draw_square(data, x, y, WHITE);
+			else if (map->map_array[i][j] == '1')
+				draw_square(data, x, y, ORANGE);
 			else if (map->map_array[i][j] == ' ')
 				draw_square(data, x, y, BLACK);
 			draw_vertical_line(data, x + SQUARE_SIZE - 1, y, SQUARE_SIZE);
