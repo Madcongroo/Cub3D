@@ -1,0 +1,14 @@
+EA img/east.xpm
+
+SO img/south.xpm
+
+WE img/west.xpm
+F 220,100,0
+C 225,30,0
+NO img/north.xpm
+
+11111
+10001
+10N01
+10001
+11111
