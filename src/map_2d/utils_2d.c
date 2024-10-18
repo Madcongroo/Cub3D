@@ -62,9 +62,10 @@ void	draw_vertical_line(t_data *data, int x, int y_start, int length)
 	y = 0;
 	while (y < length)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, y_start + y, BLACK);
+		test_pixel(data, x, y_start + y, BLACK);
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }
 
 // Fonction qui dessine les tres horizontal de la grille 
@@ -75,7 +76,8 @@ void	draw_horizontal_line(t_data *data, int x_start, int y, int length)
 	x = 0;
 	while (x < length)
 	{
-		mlx_pixel_put(data->mlx, data->win, x_start + x, y, BLACK);
+		test_pixel(data, x_start + x, y, BLACK);
 		x++;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }

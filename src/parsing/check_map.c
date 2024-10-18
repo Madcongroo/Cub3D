@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 21:44:08 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/18 12:58:21 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 	return (0);
 }
 
-static int	should_it_be_checked(t_data *data, char **map, int y, int x)
+int	should_it_be_checked(t_data *data, char **map, int y, int x)
 {
 	if (check_edge_cases(data, map, y, x) == 1)
 		return (1);
@@ -63,6 +63,7 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 	i = -1;
 	while (map[++i])
 	{
+		// data->map->height = i;
 		j = -1;
 		while (map[i][++j])
 		{
@@ -73,6 +74,7 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 			}
 		}
 		data->map->width = j;
+
 	}
 	return (0);
 }

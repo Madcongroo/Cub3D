@@ -48,15 +48,17 @@ typedef enum s_key_pressed
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	old_x;
-	int	old_y;
-	int	x_cam;
-	int	y_cam;
-	int	speed;
-	int	plan_x;
-	int	plan_y;
+	int		x;
+	int		y;
+	float	m_x;
+	float	m_y;
+	int		old_x;
+	int		old_y;
+	int		x_cam;
+	int		y_cam;
+	int		speed;
+	int		plan_x;
+	int		plan_y;
 }	t_player;
 
 typedef struct s_rgb
@@ -157,6 +159,7 @@ char	*skip_space(char *str);
 char	*jump_space(char *str);
 int		error_msg(char *error_msg);
 int		good_char(char c);
+int		should_it_be_checked(t_data *data, char **map, int y, int x);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
@@ -173,5 +176,6 @@ void	calculate_map_dimensions(t_map *map);
 void	draw_vertical_line(t_data *data, int x, int y_start, int length);
 void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
 int		is_player(char c);
+void	test_pixel(t_data *data, int x, int y, int color);
 
 #endif
