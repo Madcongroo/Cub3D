@@ -20,31 +20,25 @@ void	test_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->add + (y * data->line_length + x * (data->bits_p_pixels / 8));
+	dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
 	*(unsigned int *)dst = color;
 }
 
 void	loop_tilesize(t_data *data, int x, int y, int color)
 {
-	int	i;
-	int	saved_x;
-	int	saved_y;
+	int j;
+	int i;
 
-	i = 0;
-	while (i < SQUARE_SIZE)
+	j = 0;
+	while (j < SQUARE_SIZE)
 	{
-		test_pixel(data, x * SQUARE_SIZE + i, y * SQUARE_SIZE, color);
-		test_pixel(data, x * SQUARE_SIZE, y * SQUARE_SIZE + i, color);
-		i++;
-	}
-	saved_x = x * SQUARE_SIZE + i;
-	saved_y = y * SQUARE_SIZE + i;
-	while (i > 0)
-	{
-		test_pixel(data, saved_x - i, saved_y, color);
-		test_pixel(data, saved_x, saved_y - i, color);
-		test_pixel(data, saved_x - i, saved_y - i, color);
-		i--;
+		i = 0;
+		while (i < SQUARE_SIZE)
+		{
+			test_pixel(data, x * SQUARE_SIZE + j, y * SQUARE_SIZE + i, color);
+			i++;
+		}
+		j++;
 	}
 }
 
@@ -68,7 +62,7 @@ void	test_img_output(t_data *data, char **map, int turn)
 			else
 			{
 				if (map[y][x] == '1')
-						loop_tilesize(data, x, y, ORANGE);
+					loop_tilesize(data, x, y, ORANGE);
 			}
 		}
 	}
@@ -89,7 +83,7 @@ int	start_map_2d(t_data *data)
 	data->img = mlx_new_image(data->mlx, data->win_width, data->win_height);
 	data->player->m_y = data->player->y;
 	data->player->m_x = data->player->x;
-	data->add = mlx_get_data_addr(data->img, &data->bits_p_pixels, &data->line_length,
+	data->address = mlx_get_data_addr(data->img, &data->bits_p_pix, &data->line_len,
 		&data->endian);
 	if (!data->win)
 		return (error_msg("Error\nMlx win crashed\n"));

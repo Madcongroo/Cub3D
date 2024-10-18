@@ -103,9 +103,9 @@ typedef struct s_data
 	void		*text;
 	void		*mlx;
 	void		*img;
-	char		*add;
-	int			bits_p_pixels;
-	int			line_length;
+	char		*address;
+	int			bits_p_pix;
+	int			line_len;
 	int			endian;
 	int			win_width;
 	int			win_height;
