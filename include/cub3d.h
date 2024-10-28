@@ -35,27 +35,28 @@ HEADER
 # define WHITE 0xFFFFFF
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
+# define RED 0xFF0000
 # define SQUARE_SIZE 32
+# define PLAYER_SIZE 14
 
-typedef enum s_key_pressed
+typedef enum e_keys
 {
-	W = 119,
-	A = 97,
-	S = 115,
-	D = 100,
-	ESQ = 65307
-}	t_key_pressed;
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_ESC = 65307
+}	t_keys;
+
 
 typedef struct s_player
 {
 	int		x;
 	int		y;
-	float	m_x;
-	float	m_y;
 	int		old_x;
 	int		old_y;
-	int		x_cam;
-	int		y_cam;
+	float	x_cam;
+	float	y_cam;
 	int		speed;
 	int		plan_x;
 	int		plan_y;
@@ -163,19 +164,29 @@ int		should_it_be_checked(t_data *data, char **map, int y, int x);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
+void	loop_square_size(t_data *data, int x, int y, int color);
+void	my_pixel_put(t_data *data, int x, int y, int color);
+void	map_img_output(t_data *data, char **map, int turn);
+
 
 // src/map_2d/games_loop.c
 void	games_loop(t_data *data);
 int		close_window(t_data *data);
-void	draw_grid(t_data*data, t_map *map);
 void	draw_square(t_data *data, int x, int y, int color);
+
+// src/map_2d/draw_grid.c
+void	draw_grid(t_data *data);
+void	draw_vertical_line(t_data *data, int x, int y, int length);
+void	draw_horizontal_line(t_data *data, int x, int y, int length);
+
+// src/map_2d/games_loop.c
+int		render_game(t_data *data);
+void	draw_player(t_data *data);
+int handle_keypress(int keycode, t_data *data);
 
 // src/map_2d/utils_2d.c
 int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
-void	draw_vertical_line(t_data *data, int x, int y_start, int length);
-void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
 int		is_player(char c);
-void	my_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

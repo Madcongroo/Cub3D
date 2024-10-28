@@ -137,6 +137,8 @@ int	check_map(t_data *data, char **map)
 					return (error_msg("Error\nMore than 1 player\n"));
 				data->player->y = i;
 				data->player->x = j;
+				data->player->x_cam = (float)data->player->x;
+				data->player->y_cam = (float)data->player->y;
 			}
 		}
 	}

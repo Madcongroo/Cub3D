@@ -53,29 +53,3 @@ void	calculate_map_dimensions(t_map *map)
 	map->height = height;
 	map->width = max_width;
 }
-
-// Fonction qui dessine les tres vertical de la grille 
-void	draw_vertical_line(t_data *data, int x, int y_start, int length)
-{
-	int	y;
-
-	y = 0;
-	while (y < length)
-	{
-		mlx_pixel_put(data->mlx, data->win, x, y_start + y, BLACK);
-		y++;
-	}
-}
-
-// Fonction qui dessine les tres horizontal de la grille 
-void	draw_horizontal_line(t_data *data, int x_start, int y, int length)
-{
-	int	x;
-
-	x = 0;
-	while (x < length)
-	{
-		mlx_pixel_put(data->mlx, data->win, x_start + x, y, BLACK);
-		x++;
-	}
-}
