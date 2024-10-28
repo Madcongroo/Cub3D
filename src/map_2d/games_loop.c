@@ -16,45 +16,18 @@
 
 #include "../../include/cub3d.h"
 
-// Fonction pour fermer la fenetre
 int	close_window(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	free_all(data);
 	exit(0);
+	return (0);
 }
-
-// int	key_pressed(int keycode, t_data *data)
-// {
-//     (void)data;
-//     if (keycode == W)
-//     {
-
-//     }
-//     else if (keycode == A)
-//     {
-
-//     }
-//     else if (keycode == S)
-//     {
-
-//     }
-//     else if (keycode = D)
-//     {
-
-//     }
-//     else if (keycode = ESQ)
-//     {
-
-//     }
-//     return (0);
-// }
 
 // Fonction pour afficher la fenetre et gestion des evenement dans une boucle
 void	games_loop(t_data *data)
 {
-	// mlx_hook(data->win, 02, 0, key_pressed, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
+	mlx_loop(data->mlx);
 }
 
 // Fonction pour dessiner la grille dans la map
@@ -73,15 +46,12 @@ void	draw_grid(t_data*data, t_map *map)
 		{
 			x = j * SQUARE_SIZE;
 			y = i * SQUARE_SIZE;
-
-			if (map->map_array[i][j] == '0' || is_player(map->map_array[i][j]))
+			if (map->map_array[i][j] == '1' || map->map_array[i][j] == '0')
 				draw_square(data, x, y, WHITE);
-			else if (map->map_array[i][j] == '1')
-				draw_square(data, x, y, ORANGE);
 			else if (map->map_array[i][j] == ' ')
 				draw_square(data, x, y, BLACK);
-			// draw_vertical_line(data, x + SQUARE_SIZE - 1, y, SQUARE_SIZE);
-			// draw_horizontal_line(data, x, y + SQUARE_SIZE - 1, SQUARE_SIZE);
+			draw_vertical_line(data, x + SQUARE_SIZE - 1, y, SQUARE_SIZE);
+			draw_horizontal_line(data, x, y + SQUARE_SIZE - 1, SQUARE_SIZE);
 			j++;
 		}
 		i++;
@@ -101,10 +71,9 @@ void	draw_square(t_data *data, int x, int y, int color)
 		j = 0;
 		while (j < SQUARE_SIZE)
 		{
-			test_pixel(data, j, i, color);
+			mlx_pixel_put(data->mlx, data->win, x + j, y + i, color);
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }

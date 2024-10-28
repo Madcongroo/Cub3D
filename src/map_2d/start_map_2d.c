@@ -16,15 +16,15 @@
 
 #include "../../include/cub3d.h"
 
-void	test_pixel(t_data *data, int x, int y, int color)
+void	my_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
+	int		offset;
 
-	dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
-	*(unsigned int *)dst = color;
+	offset = (y * data->line_len + x * (data->bits_p_pix / 8));
+	*(unsigned int *)(data->address + offset) = color;
 }
 
-void	loop_tilesize(t_data *data, int x, int y, int color)
+void	loop_square_size(t_data *data, int x, int y, int color)
 {
 	int j;
 	int i;
@@ -35,14 +35,14 @@ void	loop_tilesize(t_data *data, int x, int y, int color)
 		i = 0;
 		while (i < SQUARE_SIZE)
 		{
-			test_pixel(data, x * SQUARE_SIZE + j, y * SQUARE_SIZE + i, color);
+			my_pixel_put(data, x * SQUARE_SIZE + j, y * SQUARE_SIZE + i, color);
 			i++;
 		}
 		j++;
 	}
 }
 
-void	test_img_output(t_data *data, char **map, int turn)
+void	map_img_output(t_data *data, char **map, int turn)
 {
 	int	y;
 	int	x;
@@ -56,13 +56,13 @@ void	test_img_output(t_data *data, char **map, int turn)
 		{
 			if (turn == 1)
 			{
-				if (map[y][x] == '0')
-					loop_tilesize(data, x, y, WHITE);
+				if (map[y][x] == '0' || is_player(map[y][x]))
+					loop_square_size(data, x, y, WHITE);
 			}
 			else
 			{
 				if (map[y][x] == '1')
-					loop_tilesize(data, x, y, ORANGE);
+					loop_square_size(data, x, y, ORANGE);
 			}
 		}
 	}
@@ -76,8 +76,8 @@ int	start_map_2d(t_data *data)
 	if (!data->mlx)
 		return (error_msg("Error\nMlx init crashed\n"));
     calculate_map_dimensions(data->map);
-	data->win_width = (data->map->width * SQUARE_SIZE);
-	data->win_height = (data->map->height * SQUARE_SIZE);
+	data->win_width = (data->map->width * SQUARE_SIZE + SQUARE_SIZE);
+	data->win_height = (data->map->height * SQUARE_SIZE + SQUARE_SIZE);
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height,
 			"cub3D");
 	data->img = mlx_new_image(data->mlx, data->win_width, data->win_height);
@@ -89,8 +89,8 @@ int	start_map_2d(t_data *data)
 		return (error_msg("Error\nMlx win crashed\n"));
 	// draw_grid(data, data->map);
 	// games_loop(data);
-	test_img_output(data, data->map->map_array, 1);
-	test_img_output(data, data->map->map_array, 0);
+	map_img_output(data, data->map->map_array, 1);
+	map_img_output(data, data->map->map_array, 0);
 	mlx_loop(data->mlx);
 	return (0);
 }

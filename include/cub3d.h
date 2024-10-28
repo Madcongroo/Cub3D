@@ -35,7 +35,7 @@ HEADER
 # define WHITE 0xFFFFFF
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
-# define SQUARE_SIZE 64
+# define SQUARE_SIZE 32
 
 typedef enum s_key_pressed
 {
@@ -176,6 +176,6 @@ void	calculate_map_dimensions(t_map *map);
 void	draw_vertical_line(t_data *data, int x, int y_start, int length);
 void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
 int		is_player(char c);
-void	test_pixel(t_data *data, int x, int y, int color);
+void	my_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

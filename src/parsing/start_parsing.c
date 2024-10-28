@@ -37,14 +37,14 @@ static int	check_line(char *buf)
 
 int	control_line(char *buf, int *map_mark, int *text_mark)
 {
-	int			ret;
+	int			ret_value;
 
-	ret = check_line(buf);
-	if (ret == 1)
+	ret_value = check_line(buf);
+	if (ret_value == 1)
 		*text_mark += 1;
-	else if (ret == 2)
+	else if (ret_value == 2)
 		*map_mark += 1;
-	return (ret);
+	return (ret_value);
 }
 
 /*reads the buffer and checks if the map is at the end of the file*/
@@ -77,25 +77,84 @@ static int	check_buffer(char *buf)
 	return (0);
 }
 
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t		i;
+	char	*str;
+
+	i = 0;
+	if (!s || !n)
+		return (NULL);
+	str = malloc(sizeof(char) * (n + 1));
+	if (!str)
+		return (NULL);
+	while (n)
+	{
+		str[i] = s[i];
+		i++;
+		n--;
+	}
+	str[i] = '\n';
+	return (str);
+}
+
+/*cuts the buffer if the map is separated by only \n*/
+/*decoupe le buffer si la map est separees par des \n*/
+static char	*cut_map_if_needed(char *buf)
+{
+	int		i;
+	char	*n_buf;
+	int		map_mark;
+
+	i = -1;
+	map_mark = 0;
+	while (buf[++i])
+	{
+		if (buf[i] == '0' || buf[i] == '1')
+			map_mark = 1;
+		if (buf[i] == 'C' || buf[i] == 'F')
+		{
+			while (buf[i] != '\n')
+				i++;
+			continue ;
+		}
+		if (map_mark == 1 && (buf[i] == '\n' && buf[i - 1] == '\n'))
+			break ;
+	}
+	n_buf = ft_strndup(buf, (size_t)i);
+	if (!n_buf)
+		return (NULL);
+	free (buf);
+	return (n_buf);
+}
+
 /*just for the norme*/
 /*juste pour la norme*/
 static char	**split_buff(char *buf)
 {
 	char	**map_array;
+	char	*new_buf;
 
 	if (check_buffer(buf) == -1)
 	{
 		free (buf);
 		return (NULL);
 	}
-	map_array = ft_split(buf, '\n');
+	new_buf = cut_map_if_needed(buf);
+	if (!new_buf)
+	{
+		free (buf);
+		error_msg("Error\nNew buffer error\n");
+		return (NULL);
+	}
+	map_array = ft_split(new_buf, '\n');
 	if (!map_array)
 	{
 		free (buf);
 		error_msg("Error\nSplit error\n");
 		return (NULL);
 	}
-	free (buf);
+	free (new_buf);
 	return (map_array);
 }
 
@@ -141,6 +200,7 @@ int	start_parsing(t_data *data, char *file)
 		return (ft_free_array(map));
 	if (check_map(data, data->map->map_array) == -1)
 		return (ft_free_array(map));
+	// display_array(data->map->map_array);
 	ft_free_array(map);
 	return (0);
 }
