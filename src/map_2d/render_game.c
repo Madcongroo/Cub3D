@@ -23,8 +23,8 @@ void draw_player(t_data *data)
 	int	i;
 	int	j;
 
-	x = (data->player->x_cam * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
-	y = (data->player->y_cam * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
+	x = (data->player->x * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
+	y = (data->player->y * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
 	i = 0;
 	while (i < PLAYER_SIZE)
 	{
@@ -37,16 +37,33 @@ void draw_player(t_data *data)
 		i++;
 	}
 }
+void rotate_player(t_player *player, float angle)
+{
+	player->angle += angle;
+
+	player->x_cam = cos(player->angle);
+	player->y_cam = sin(player->angle);
+}
 int handle_keypress(int keycode, t_data *data)
 {
-	if (keycode == KEY_S)
-		data->player->y_cam += 0.2;
-	else if (keycode == KEY_W)
-		data->player->y_cam -= 0.2;
+	if (keycode == KEY_W)
+	{
+		data->player->x += cos(data->player->angle) * 0.2;
+		data->player->y += sin(data->player->angle) * 0.2;
+	}
+	else if (keycode == KEY_S)
+	{
+		data->player->x -= cos(data->player->angle) * 0.2;
+		data->player->y -= sin(data->player->angle) * 0.2;
+	}
 	else if (keycode == KEY_A)
-		data->player->x_cam -= 0.2;
+		data->player->x -= 0.2;
 	else if (keycode == KEY_D)
-		data->player->x_cam += 0.2;
+		data->player->x += 0.2;
+	else if (keycode == KEY_LEFT)
+		rotate_player(data->player, -ROT_SPEED);
+	else if (keycode == KEY_RIGHT)
+		rotate_player(data->player, ROT_SPEED);
 	return (0);
 }
 int	render_game(t_data *data)

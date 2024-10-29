@@ -38,6 +38,7 @@ HEADER
 # define RED 0xFF0000
 # define SQUARE_SIZE 32
 # define PLAYER_SIZE 14
+# define ROT_SPEED 0.1f // environ 5.7 degres
 
 typedef enum e_keys
 {
@@ -45,14 +46,16 @@ typedef enum e_keys
 	KEY_A = 97,
 	KEY_S = 115,
 	KEY_D = 100,
-	KEY_ESC = 65307
+	KEY_ESC = 65307,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363
 }	t_keys;
 
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float		x;
+	float		y;
 	int		old_x;
 	int		old_y;
 	float	x_cam;
@@ -60,6 +63,7 @@ typedef struct s_player
 	int		speed;
 	int		plan_x;
 	int		plan_y;
+	float	angle;
 }	t_player;
 
 typedef struct s_rgb
@@ -110,6 +114,7 @@ typedef struct s_data
 	int			endian;
 	int			win_width;
 	int			win_height;
+	int			keys[65536];
 }	t_data;
 
 typedef struct s_check
@@ -179,14 +184,19 @@ void	draw_grid(t_data *data);
 void	draw_vertical_line(t_data *data, int x, int y, int length);
 void	draw_horizontal_line(t_data *data, int x, int y, int length);
 
-// src/map_2d/games_loop.c
+// src/map_2d/render_games.c
 int		render_game(t_data *data);
 void	draw_player(t_data *data);
 int handle_keypress(int keycode, t_data *data);
+void rotate_player(t_player *player, float angle);
 
 // src/map_2d/utils_2d.c
 int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
+int handle_keypress_on(int keycode, t_data *data);
+int handle_keypress_off(int keycode, t_data *data);
+
+
 
 #endif

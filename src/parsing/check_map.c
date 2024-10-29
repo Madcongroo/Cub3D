@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/28 11:12:50 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/29 14:32:30 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,11 @@ int	check_map(t_data *data, char **map)
 					return (error_msg("Error\nMore than 1 player\n"));
 				data->player->y = i;
 				data->player->x = j;
-				data->player->x_cam = (float)data->player->x;
-				data->player->y_cam = (float)data->player->y;
 			}
 		}
 	}
+	data->player->x_cam = 0.0;
+	data->player->y_cam = 0.0;
+	data->player->angle = -190.07;
 	return (return_for_norm(data, map));
 }

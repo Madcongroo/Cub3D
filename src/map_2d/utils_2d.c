@@ -53,3 +53,16 @@ void	calculate_map_dimensions(t_map *map)
 	map->height = height;
 	map->width = max_width;
 }
+// touche presser
+int handle_keypress_on(int keycode, t_data *data)
+{
+	data->keys[keycode] = 1;
+	return (0);
+}
+
+// touche relacher
+int handle_keypress_off(int keycode, t_data *data)
+{
+	data->keys[keycode] = 0;
+	return (0);
+}
