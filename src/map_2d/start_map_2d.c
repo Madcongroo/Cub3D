@@ -26,8 +26,8 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 
 void	loop_square_size(t_data *data, int x, int y, int color)
 {
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = 0;
 	while (j < SQUARE_SIZE)
@@ -66,6 +66,7 @@ void	map_img_output(t_data *data, char **map, int turn)
 			}
 		}
 	}
+	draw_grid(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }
 
@@ -81,16 +82,14 @@ int	start_map_2d(t_data *data)
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height,
 			"cub3D");
 	data->img = mlx_new_image(data->mlx, data->win_width, data->win_height);
-	data->player->m_y = data->player->y;
-	data->player->m_x = data->player->x;
-	data->address = mlx_get_data_addr(data->img, &data->bits_p_pix, &data->line_len,
-		&data->endian);
+	data->player->y_cam = data->player->y;
+	data->player->x_cam = data->player->x;
+	data->address = mlx_get_data_addr(data->img, &data->bits_p_pix,
+			&data->line_len, &data->endian);
 	if (!data->win)
 		return (error_msg("Error\nMlx win crashed\n"));
-	// draw_grid(data, data->map);
-	// games_loop(data);
 	map_img_output(data, data->map->map_array, 1);
 	map_img_output(data, data->map->map_array, 0);
-	mlx_loop(data->mlx);
+	games_loop(data);
 	return (0);
 }

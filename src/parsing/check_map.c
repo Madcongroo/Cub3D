@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/31 15:40:17 by proton           ###   ########.fr       */
+/*   Updated: 2024/10/31 15:42:38 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ int	check_map(t_data *data, char **map)
 			}
 		}
 	}
+	data->player->x_cam = 0.0;
+	data->player->y_cam = 0.0;
+	data->player->angle = -190.07;
 	return (return_for_norm(data, map));
 }

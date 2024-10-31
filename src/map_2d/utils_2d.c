@@ -53,29 +53,16 @@ void	calculate_map_dimensions(t_map *map)
 	map->height = height;
 	map->width = max_width + 1;
 }
-
-// Fonction qui dessine les tres vertical de la grille 
-void	draw_vertical_line(t_data *data, int x, int y_start, int length)
+// touche presser
+int handle_keypress_on(int keycode, t_data *data)
 {
-	int	y;
-
-	y = 0;
-	while (y < length)
-	{
-		mlx_pixel_put(data->mlx, data->win, x, y_start + y, BLACK);
-		y++;
-	}
+	data->keys[keycode] = 1;
+	return (0);
 }
 
-// Fonction qui dessine les tres horizontal de la grille 
-void	draw_horizontal_line(t_data *data, int x_start, int y, int length)
+// touche relacher
+int handle_keypress_off(int keycode, t_data *data)
 {
-	int	x;
-
-	x = 0;
-	while (x < length)
-	{
-		mlx_pixel_put(data->mlx, data->win, x_start + x, y, BLACK);
-		x++;
-	}
+	data->keys[keycode] = 0;
+	return (0);
 }
