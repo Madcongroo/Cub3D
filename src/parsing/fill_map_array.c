@@ -36,19 +36,54 @@ int	get_map_height(char **map, int map_start)
 {
 	int	map_height;
 	int	i;
-	char *trimmed_line;
 
 	map_height = 0;
 	i = map_start;
 	while (map[i])
 	{
-		trimmed_line = jump_space(map[i]);
-		if (!ft_isdigit(trimmed_line[0]))
-			break;
 		map_height++;
 		i++;
 	}
 	return (map_height);
+}
+
+int	get_max_width(char **map, int map_start)
+{
+	int	i;
+	int	j;
+	int	width;
+
+	i = map_start;
+	width = 0;
+	j = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		if (width < j)
+			width = j;
+		i++;
+	}
+	return (width);
+}
+
+char	*ft_strncpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dst || !src)
+		return (NULL);
+	if (size < 2)
+		return (NULL);
+	while (src[i] && i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
 
 
@@ -57,20 +92,23 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 {
 	int	i;
 	int	j;
-	char *trimmed_line;
+	int	width;
 
-	data->map->map_array = malloc(sizeof(char *) * (map_height + 1));
+	width = get_max_width(map, map_start);
+	data->map->map_array = ft_calloc((map_height + 1), sizeof(char *));
 	if (!data->map->map_array)
 		return ;
 	data->map->height = map_height;
 	i = map_start;
 	j = 0;
-	while (map[i])
+	while (j < map_height)
 	{
-		trimmed_line = jump_space(map[i]);
-		if (!ft_isdigit(trimmed_line[0]))
-			break;
-		data->map->map_array[j] = ft_strdup(map[i]);
+		data->map->map_array[j] = ft_calloc(width + 2, sizeof(char));
+		if (!data->map->map_array[j])
+			return ;
+		data->map->map_array[j] = ft_strncpy(data->map->map_array[j], map[i], width + 2);
+			if (!data->map->map_array[j])
+				return ;
 		i++;
 		j++;
 	}

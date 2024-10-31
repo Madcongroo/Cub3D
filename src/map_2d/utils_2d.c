@@ -51,7 +51,7 @@ void	calculate_map_dimensions(t_map *map)
 		height++;
 	}
 	map->height = height;
-	map->width = max_width;
+	map->width = max_width + 1;
 }
 
 // Fonction qui dessine les tres vertical de la grille 

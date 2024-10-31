@@ -200,7 +200,6 @@ int	start_parsing(t_data *data, char *file)
 		return (ft_free_array(map));
 	if (check_map(data, data->map->map_array) == -1)
 		return (ft_free_array(map));
-	// display_array(data->map->map_array);
 	ft_free_array(map);
 	return (0);
 }

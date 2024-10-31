@@ -129,6 +129,9 @@ int		ft_free_array(char **array);
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
 
+/*re alloc map*/
+int		re_alloc_map(t_data *data);
+
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
 void	print_map_info(t_map *map);

@@ -75,8 +75,8 @@ int	start_map_2d(t_data *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (error_msg("Error\nMlx init crashed\n"));
-    calculate_map_dimensions(data->map);
-	data->win_width = (data->map->width * SQUARE_SIZE + SQUARE_SIZE);
+	calculate_map_dimensions(data->map);
+	data->win_width = (data->map->width * SQUARE_SIZE);
 	data->win_height = (data->map->height * SQUARE_SIZE + SQUARE_SIZE);
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height,
 			"cub3D");

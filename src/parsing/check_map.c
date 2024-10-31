@@ -3,40 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/28 16:03:44 by bproton          ###   ########.fr       */
+/*   Updated: 2024/10/31 15:40:17 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-/*get the height of the map for each collumns*/
-/*avoir la hauteur de la map pour toutes les colonnes */
-int	get_effective_map_height(t_data *data, char **map, int y, int x)
-{
-	int	keep_y_value;
-
-	keep_y_value = y;
-	if (data->player->old_x != 0)
-	{
-		if (data->player->old_x < x)
-			return (1);
-		while (map[y] && map[y][x])
-			y++;
-		if (y == keep_y_value)
-			return (1);
-	}
-	return (0);
-}
-
 static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
-	if (y == 0 || get_effective_map_height(data, map, y, x) || x == 0
+	if (y == 0 || y == data->map->height || x == 0
 		|| x == data->map->width)
 		return (1);
-	else if (!map[y + 1] || !map[y][x - 1] || !map[y - 1]
+	else if (!map[y + 1][x] || !map[y][x - 1] || !map[y - 1][x]
 		|| !map[y][x + 1])
 		return (1);
 	return (0);
@@ -83,7 +64,6 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 	while (map[++i])
 	{
 		j = -1;
-		data->player->old_y = i;
 		while (map[i][++j])
 		{
 			if (map[i][j] == '0')
@@ -91,9 +71,8 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 				if (should_it_be_checked(data, map, i, j))
 					return (-1);
 			}
+			
 		}
-		data->player->old_x = j;
-		data->map->width = j;
 	}
 	return (0);
 }
