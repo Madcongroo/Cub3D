@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/31 15:42:38 by proton           ###   ########.fr       */
+/*   Updated: 2024/11/01 09:16:56 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 	return (0);
 }
 
+void	set_direction(t_data *data, char c)
+{
+	if (c == 'N')
+		data->player->angle = 0.07;
+	else if (c == 'S')
+		data->player->angle = -190.07;
+	else if (c == 'E')
+		data->player->angle = -100.07;
+	else
+		data->player->angle = -280.07;
+}
+
 /*fonction to check if the map is surrounded by walls
 	each time the pos is '0', checks all pos + 1/ -1.
 		if the pos +/- is a whitespace or nothing returns -1*/
@@ -71,9 +83,12 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 				if (should_it_be_checked(data, map, i, j))
 					return (-1);
 			}
-			
+			if (is_player(map[i][j]))
+				set_direction(data, map[i][j]);
 		}
 	}
+	data->player->x_cam = 0.0;
+	data->player->y_cam = 0.0;
 	return (0);
 }
 
@@ -113,8 +128,5 @@ int	check_map(t_data *data, char **map)
 			}
 		}
 	}
-	data->player->x_cam = 0.0;
-	data->player->y_cam = 0.0;
-	data->player->angle = -190.07;
 	return (return_for_norm(data, map));
 }

@@ -27,11 +27,8 @@ int	close_window(t_data *data)
 void	games_loop(t_data *data)
 {
 	mlx_hook(data->win, 17, 0, close_window, data);
-<<<<<<< HEAD
-=======
 	//mlx_hook(data->win, 2, 0, handle_keypress_on, data);
 	//mlx_hook(data->win, 3, 0, handle_keypress_off, data);
->>>>>>> 73ccb45 (tom teste)
 	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
 	mlx_loop_hook(data->mlx, render_game, data);
 	mlx_loop(data->mlx);

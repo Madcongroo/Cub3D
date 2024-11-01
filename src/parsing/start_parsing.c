@@ -94,7 +94,7 @@ char	*ft_strndup(const char *s, size_t n)
 		i++;
 		n--;
 	}
-	str[i] = '\n';
+	str[i] = '\0';
 	return (str);
 }
 
@@ -187,10 +187,33 @@ static char	**read_map(char *file)
 	return (split_buff(buf));
 }
 
+int	check_file_name(char *file)
+{
+	int	i;
+
+	i = -1;
+	if (file[0] == '.')
+		return (-1);
+	while (file[++i])
+	{
+		if (file[i] == '.')
+			break ;
+	}
+	if (file[i] == '.')
+	{
+		if (ft_strcmp(file + i, ".cub") == 0)
+			return (0);
+	}
+	return (-1);
+}
+
 int	start_parsing(t_data *data, char *file)
 {
 	char	**map;
 
+	map = NULL;
+	if (check_file_name(file) == -1)
+		return (error_msg("Error\nWrong file format\n"));
 	map = read_map(file);
 	if (!map)
 		return (-1);

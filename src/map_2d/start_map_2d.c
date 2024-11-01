@@ -18,10 +18,10 @@
 
 void	my_pixel_put(t_data *data, int x, int y, int color)
 {
-	int		offset;
+	char	*dst;
 
-	offset = (y * data->line_len + x * (data->bits_p_pix / 8));
-	*(unsigned int *)(data->address + offset) = color;
+	dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
+	*(unsigned int *)(dst) = color;
 }
 
 void	loop_square_size(t_data *data, int x, int y, int color)
@@ -77,7 +77,7 @@ int	start_map_2d(t_data *data)
 	if (!data->mlx)
 		return (error_msg("Error\nMlx init crashed\n"));
 	calculate_map_dimensions(data->map);
-	data->win_width = (data->map->width * SQUARE_SIZE);
+	data->win_width = (data->map->width * SQUARE_SIZE + SQUARE_SIZE);
 	data->win_height = (data->map->height * SQUARE_SIZE + SQUARE_SIZE);
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height,
 			"cub3D");
