@@ -191,7 +191,7 @@ void	draw_horizontal_line(t_data *data, int x, int y, int length);
 // src/map_2d/render_games.c
 int		render_game(t_data *data);
 void	draw_player(t_data *data);
-int handle_keypress(int keycode, t_data *data);
+void process_movement(t_data *data);
 void rotate_player(t_player *player, float angle);
 
 // src/map_2d/utils_2d.c
