@@ -16,7 +16,7 @@
 
 #include "../../include/cub3d.h"
 
-void draw_player(t_data *data)
+void	draw_player(t_data *data)
 {
 	int	x;
 	int	y;
@@ -37,13 +37,14 @@ void draw_player(t_data *data)
 		i++;
 	}
 }
+
 void rotate_player(t_player *player, float angle)
 {
 	player->angle += angle;
-
 	player->x_cam = cos(player->angle);
 	player->y_cam = sin(player->angle);
 }
+
 int handle_keypress(int keycode, t_data *data)
 {
 	if (keycode == KEY_W)
@@ -51,18 +52,24 @@ int handle_keypress(int keycode, t_data *data)
 		data->player->x += cos(data->player->angle) * 0.2;
 		data->player->y += sin(data->player->angle) * 0.2;
 	}
-	else if (keycode == KEY_S)
+	if (keycode == KEY_S)
 	{
 		data->player->x -= cos(data->player->angle) * 0.2;
 		data->player->y -= sin(data->player->angle) * 0.2;
 	}
-	else if (keycode == KEY_A)
-		data->player->x -= 0.2;
-	else if (keycode == KEY_D)
-		data->player->x += 0.2;
-	else if (keycode == KEY_LEFT)
+	if (keycode == KEY_A)
+	{
+		data->player->x -= cos(data->player->angle) * 0.2;
+		data->player->y += sin(data->player->angle) * 0.2;
+	}
+	if (keycode == KEY_D)
+	{
+		data->player->x += cos(data->player->angle) * 0.2;
+		data->player->y -= sin(data->player->angle) * 0.2;
+	}
+	if (keycode == KEY_LEFT)
 		rotate_player(data->player, -ROT_SPEED);
-	else if (keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT)
 		rotate_player(data->player, ROT_SPEED);
 	return (0);
 }

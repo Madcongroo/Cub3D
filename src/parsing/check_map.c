@@ -142,6 +142,6 @@ int	check_map(t_data *data, char **map)
 	}
 	data->player->x_cam = 0.0;
 	data->player->y_cam = 0.0;
-	data->player->angle = -190.07;
+	data->player->angle = -190.07; // angle nord
 	return (return_for_norm(data, map));
 }

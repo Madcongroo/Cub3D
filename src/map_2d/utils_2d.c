@@ -56,13 +56,15 @@ void	calculate_map_dimensions(t_map *map)
 // touche presser
 int handle_keypress_on(int keycode, t_data *data)
 {
-	data->keys[keycode] = 1;
-	return (0);
+    if (keycode >= 0 && keycode < 65536)
+        data->keys[keycode] = 1; // Enregistrer l'état de la touche pressée
+    return (0);
 }
 
 // touche relacher
 int handle_keypress_off(int keycode, t_data *data)
 {
-	data->keys[keycode] = 0;
-	return (0);
+    if (keycode >= 0 && keycode < 65536)
+        data->keys[keycode] = 0; // Enregistrer l'état de la touche relâchée
+    return (0);
 }

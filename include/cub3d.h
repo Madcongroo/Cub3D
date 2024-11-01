@@ -64,6 +64,7 @@ typedef struct s_player
 	int		plan_x;
 	int		plan_y;
 	float	angle;
+	int key_pressed[4];
 }	t_player;
 
 typedef struct s_rgb
@@ -114,7 +115,6 @@ typedef struct s_data
 	int			endian;
 	int			win_width;
 	int			win_height;
-	int			keys[65536];
 }	t_data;
 
 typedef struct s_check
