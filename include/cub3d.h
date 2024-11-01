@@ -37,8 +37,8 @@ HEADER
 # define BLACK 0x000000
 # define RED 0xFF0000
 # define SQUARE_SIZE 32
-# define PLAYER_SIZE 14
-# define ROT_SPEED 0.1f // environ 5.7 degres
+# define PLAYER_SIZE 16
+# define ROT_SPEED 5 * M_PI / 180 // environ 5.7 degres
 
 typedef enum e_keys
 {
