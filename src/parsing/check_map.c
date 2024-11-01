@@ -3,47 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/10/29 14:32:30 by tom              ###   ########.fr       */
+/*   Updated: 2024/11/01 09:16:56 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-/*get the height of the map for each collumns*/
-/*avoir la hauteur de la map pour toutes les colonnes */
-int	get_effective_map_height(t_data *data, char **map, int y, int x)
-{
-	// int	keep_y_value;
-
-	// keep_y_value = y;
-	(void)map;
-	printf("y value is %d, x value is %d\n", y, x);
-	if (data->player->old_x != 0)
-	{
-		if (data->player->old_x < x)
-			return (1);
-		puts("before while");
-		// while (map[y][x])
-		// {
-		// 	printf("y value is %d\n", y);
-		// 	y++;
-		// }
-		puts("after while");
-		// if (y == keep_y_value)
-		// 	return (1);
-	}
-	return (0);
-}
-
 static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
-	if (y == 0 || get_effective_map_height(data, map, y, x) || x == 0
+	if (y == 0 || y == data->map->height || x == 0
 		|| x == data->map->width)
 		return (1);
-	else if (!map[y + 1] || !map[y][x - 1] || !map[y - 1]
+	else if (!map[y + 1][x] || !map[y][x - 1] || !map[y - 1][x]
 		|| !map[y][x + 1])
 		return (1);
 	return (0);
@@ -76,6 +50,18 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 	return (0);
 }
 
+void	set_direction(t_data *data, char c)
+{
+	if (c == 'N')
+		data->player->angle = 0.07;
+	else if (c == 'S')
+		data->player->angle = -190.07;
+	else if (c == 'E')
+		data->player->angle = -100.07;
+	else
+		data->player->angle = -280.07;
+}
+
 /*fonction to check if the map is surrounded by walls
 	each time the pos is '0', checks all pos + 1/ -1.
 		if the pos +/- is a whitespace or nothing returns -1*/
@@ -97,10 +83,12 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 				if (should_it_be_checked(data, map, i, j))
 					return (-1);
 			}
+			if (is_player(map[i][j]))
+				set_direction(data, map[i][j]);
 		}
-		data->player->old_x = j;
-		data->map->width = j;
 	}
+	data->player->x_cam = 0.0;
+	data->player->y_cam = 0.0;
 	return (0);
 }
 
@@ -140,8 +128,5 @@ int	check_map(t_data *data, char **map)
 			}
 		}
 	}
-	data->player->x_cam = 0.0;
-	data->player->y_cam = 0.0;
-	data->player->angle = -190.07; // angle nord
 	return (return_for_norm(data, map));
 }

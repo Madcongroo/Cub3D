@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 22:06:26 by proton           ###   ########.fr       */
+/*   Updated: 2024/11/01 09:33:02 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ static int	check_switch(t_check *check, char c)
 		return (check->c++, 1);
 }
 
-static int	is_line_valid(char *str, t_check *check, char c)
+static int	is_line_valid(char *str, t_check *check, char c, int fd)
 {
 	int	i;
 
 	if (c == 'n' || c == 's' || c == 'e' || c == 'w')
 	{
 		i = 2;
-		while (str[i] != '.' && str[i])
-		{
-			if (!ft_is_whitespace(str[i++]))
-				return (0);
-		}
-		if (str[i] || (str[i] == '.' && str[i + 1] == '/'))
+		while (ft_is_whitespace(str[i]) && str[i])
+			i++;
+		fd = open(str + i, O_RDONLY);
+		if (fd > 0)
 			return (check_switch(check, c));
+		else
+			return (-1);
 	}
 	else
 	{
@@ -60,17 +60,17 @@ static int	is_line_valid(char *str, t_check *check, char c)
 static int	check_char(char *str, t_check *check)
 {
 	if (str[0] == 'N' && str[1] == 'O')
-		return (is_line_valid(str, check, 'n'));
+		return (is_line_valid(str, check, 'n', 0));
 	else if (str[0] == 'S' && str[1] == 'O')
-		return (is_line_valid(str, check, 's'));
+		return (is_line_valid(str, check, 's', 0));
 	else if (str[0] == 'E' && str[1] == 'A')
-		return (is_line_valid(str, check, 'e'));
+		return (is_line_valid(str, check, 'e', 0));
 	else if (str[0] == 'W' && str[1] == 'E')
-		return (is_line_valid(str, check, 'w'));
+		return (is_line_valid(str, check, 'w', 0));
 	else if (str[0] == 'F')
-		return (is_line_valid(str, check, 'f'));
+		return (is_line_valid(str, check, 'f', 0));
 	else if (str[0] == 'C')
-		return (is_line_valid(str, check, 'c'));
+		return (is_line_valid(str, check, 'c', 0));
 	else if ((str[0] != '0' && str[0] != '1') && (!ft_is_whitespace(str[0])))
 		return (-1);
 	return (0);
@@ -116,7 +116,7 @@ int	check_basics(char **array)
 				return (ft_free_array(array));
 		}
 		if (check_char(array[i], &check) == -1)
-			return (error_msg("Error\nUnknown caracter\n"));
+			return (error_msg("Error\nUnknown caracter or wrong texture path\n"));
 		stop_trim--;
 	}
 	if (check.n != 1 || check.s != 1 || check.e != 1

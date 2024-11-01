@@ -114,6 +114,7 @@ typedef struct s_data
 	int			line_len;
 	int			endian;
 	int			win_width;
+	int			keys[65536];
 	int			win_height;
 }	t_data;
 
@@ -134,6 +135,9 @@ int		ft_free_array(char **array);
 // src/start_parsing.c
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
+
+/*re alloc map*/
+int		re_alloc_map(t_data *data);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);

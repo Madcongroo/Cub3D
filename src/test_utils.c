@@ -20,6 +20,11 @@ void	display_array(char **map)
 	int	i;
 
 	i = -1;
+	if (!map)
+	{
+		printf("no map\n");
+		return ;
+	}
 	while (map[++i])
 		printf("%s\n", map[i]);
 }

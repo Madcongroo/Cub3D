@@ -20,7 +20,10 @@ int	good_char(char c)
 {
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0'
 		&& c != '1' && !ft_is_whitespace(c))
+		{
+			printf("%c\n", c);
 		return (1);
+		}
 	return (0);
 }
 

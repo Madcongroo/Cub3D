@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   re_alloc_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 02:33:27 by proton            #+#    #+#             */
-/*   Updated: 2024/10/31 17:07:48 by proton           ###   ########.fr       */
+/*   Created: 2024/10/28 17:37:50 by proton            #+#    #+#             */
+/*   Updated: 2024/10/28 18:04:50 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/cub3d.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
+// int	re_alloc_map(t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	char	**new_map;
 
-	i = 0;
-	while ((unsigned char)s1[i] || (unsigned char)s2[i])
-	{
-		printf("s1 if %s\n, s2 is %s\n", s1, s2);
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
+// 	calculate_map_dimensions(data->map);
+// 	new_map = malloc(sizeof())
+// 	i = -1;
+// 	while (data->map[++i])
+	
+// 	return (0);
+// }
