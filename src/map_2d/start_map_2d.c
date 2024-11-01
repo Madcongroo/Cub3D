@@ -70,8 +70,7 @@ void	map_img_output(t_data *data, char **map, int turn)
 	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }
 
-// Fonction principale de la gestion graphique 2D
-int	start_map_2d(t_data *data)
+int	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -90,6 +89,14 @@ int	start_map_2d(t_data *data)
 		return (error_msg("Error\nMlx win crashed\n"));
 	map_img_output(data, data->map->map_array, 1);
 	map_img_output(data, data->map->map_array, 0);
+	return (0);
+}
+
+// Fonction principale de la gestion graphique 2D
+int	start_map_2d(t_data *data)
+{
+	if (init_mlx(data) == -1)
+		return (-1);
 	games_loop(data);
 	return (0);
 }
