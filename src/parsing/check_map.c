@@ -6,7 +6,7 @@
 /*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/01 14:55:06 by bproton          ###   ########.fr       */
+/*   Updated: 2024/11/01 15:16:10 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 void	set_direction(t_data *data, char c)
 {
 	if (c == 'N')
-		data->player->angle = 0.0 * M_PI / 180;
+		data->player->angle = 6.28318530718;
 	else if (c == 'S')
-		data->player->angle = -180 * M_PI / 180;
+		data->player->angle = 180 * M_PI / 180;
 	else if (c == 'E')
-		data->player->angle = -90 * M_PI / 180;
+		data->player->angle = -90;
 	else
-		data->player->angle = 90 * M_PI / 180;
+		data->player->angle = 90;
 }
 
 /*fonction to check if the map is surrounded by walls

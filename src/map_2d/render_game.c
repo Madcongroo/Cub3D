@@ -49,12 +49,12 @@ int handle_keypress(int keycode, t_data *data)
 {
 	if (keycode == KEY_W)
 	{
-		data->player->x += cos(data->player->angle) * 0.2;
+		data->player->x -= cos(data->player->angle) * 0.2;
 		data->player->y += sin(data->player->angle) * 0.2;
 	}
 	if (keycode == KEY_S)
 	{
-		data->player->x -= cos(data->player->angle) * 0.2;
+		data->player->x += cos(data->player->angle) * 0.2;
 		data->player->y -= sin(data->player->angle) * 0.2;
 	}
 	if (keycode == KEY_A)
