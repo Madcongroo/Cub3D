@@ -38,7 +38,12 @@ void	draw_player(t_data *data)
 	}
 }
 
-void rotate_player(t_player *player, float angle)
+// void	shoot_lines(t_data *data)
+// {
+
+// }
+
+void	rotate_player(t_player *player, float angle)
 {
 	player->angle += angle;
 	player->x_cam = cos(player->angle);
@@ -49,23 +54,23 @@ void process_movement(t_data *data)
 {
 	if (data->keys[KEY_W])
 	{
-		data->player->x -= cos(data->player->angle) * 0.2;
-		data->player->y += sin(data->player->angle) * 0.2;
+		data->player->x += cos(data->player->angle) * 0.1;
+		data->player->y += sin(data->player->angle) * 0.1;
 	}
 	if (data->keys[KEY_S])
 	{
-		data->player->x += cos(data->player->angle) * 0.2;
-		data->player->y -= sin(data->player->angle) * 0.2;
+		data->player->x -= cos(data->player->angle) * 0.1;
+		data->player->y -= sin(data->player->angle) * 0.1;
 	}
 	if (data->keys[KEY_A])
 	{
-		data->player->x -= cos(data->player->angle + M_PI / 2) * 0.2;
-		data->player->y -= sin(data->player->angle + M_PI / 2) * 0.2;
+		data->player->x += cos(data->player->angle + M_PI / 2) * 0.1;
+		data->player->y -= sin(data->player->angle + M_PI / 2) * 0.1;
 	}
 	if (data->keys[KEY_D])
-	{
-		data->player->x += cos(data->player->angle + M_PI / 2) * 0.2;
-		data->player->y -= sin(data->player->angle + M_PI / 2) * 0.2;
+	{;
+		data->player->x += cos(data->player->angle + M_PI / 2) * 0.1;
+		data->player->y -= sin(data->player->angle + M_PI / 2) * 0.1;
 	}
 	if (data->keys[KEY_LEFT])
 		rotate_player(data->player, -ROT_SPEED);
@@ -75,10 +80,11 @@ void process_movement(t_data *data)
 int	render_game(t_data *data)
 {
 	ft_memset(data->address, 0, data->win_width * data->win_height * (data->bits_p_pix / 8));
-	process_movement(data);
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	draw_player(data);
+	// shoot_lines(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	process_movement(data);
 	return (0);
 }

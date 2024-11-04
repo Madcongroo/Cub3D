@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/01 15:16:10 by bproton          ###   ########.fr       */
+/*   Updated: 2024/11/04 16:12:49 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 void	set_direction(t_data *data, char c)
 {
 	if (c == 'N')
-		data->player->angle = 6.28318530718;
+		data->player->angle = 3 * M_PI / 2;
 	else if (c == 'S')
-		data->player->angle = 180 * M_PI / 180;
+		data->player->angle = M_PI / 2;
 	else if (c == 'E')
-		data->player->angle = -90;
+		data->player->angle = 0.00;
 	else
-		data->player->angle = 90;
+		data->player->angle = M_PI;
 }
 
 /*fonction to check if the map is surrounded by walls
