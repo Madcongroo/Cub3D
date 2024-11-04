@@ -51,20 +51,19 @@ typedef enum e_keys
 	KEY_RIGHT = 65363
 }	t_keys;
 
-
 typedef struct s_player
 {
 	float		x;
 	float		y;
-	int		old_x;
-	int		old_y;
-	float	x_cam;
-	float	y_cam;
-	int		speed;
-	int		plan_x;
-	int		plan_y;
-	float	angle;
-	int key_pressed[4];
+	int			old_x;
+	int			old_y;
+	float		x_cam;
+	float		y_cam;
+	int			speed;
+	int			plan_x;
+	int			plan_y;
+	float		angle;
+	int			key_pressed[6];
 }	t_player;
 
 typedef struct s_rgb
