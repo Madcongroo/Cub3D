@@ -38,7 +38,12 @@ void	draw_player(t_data *data)
 	}
 }
 
-void rotate_player(t_player *player, float angle)
+// void	shoot_lines(t_data *data)
+// {
+
+// }
+
+void	rotate_player(t_player *player, float angle)
 {
 	player->angle += angle;
 	if (player->angle < 0)
@@ -86,10 +91,11 @@ void process_movement(t_data *data)
 int	render_game(t_data *data)
 {
 	ft_memset(data->address, 0, data->win_width * data->win_height * (data->bits_p_pix / 8));
-	process_movement(data);
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	draw_player(data);
+	// shoot_lines(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	process_movement(data);
 	return (0);
 }
