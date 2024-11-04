@@ -60,8 +60,6 @@ void	set_direction(t_data *data, char c)
 		data->player->angle = M_PI;
 	else
 		data->player->angle = 0;
-	data->player->x_cam = cos(data->player->angle);
-    data->player->y_cam = sin(data->player->angle);
 }
 
 /*fonction to check if the map is surrounded by walls

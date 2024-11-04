@@ -59,12 +59,12 @@ void process_movement(t_data *data)
 	float new_x;
 	float new_y;
 
+	new_x = data->player->x;
+	new_y = data->player->y;
  	if (data->keys[KEY_LEFT])
 		rotate_player(data->player, -ROT_SPEED);
 	if (data->keys[KEY_RIGHT])
 		rotate_player(data->player, ROT_SPEED);
-	new_x = data->player->x;
-	new_y = data->player->y;
 	if (data->keys[KEY_W])
 	{
 		new_x += cos(data->player->angle) * 0.2;
@@ -94,8 +94,7 @@ int	render_game(t_data *data)
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	draw_player(data);
-	// shoot_lines(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	process_movement(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }
