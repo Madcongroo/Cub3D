@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/13 15:34:16 by tom              ###   ########.fr       */
+/*   Updated: 2024/11/21 10:34:29 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	set_direction(t_data *data, char c)
 	else if (c == 'S')
 		data->player->angle = M_PI / 2;
 	else if (c == 'E')
+		data->player->angle = 0;
+	else
 		data->player->angle = M_PI;
 	else
 		data->player->angle = 0;
