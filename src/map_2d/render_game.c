@@ -38,10 +38,10 @@ void	draw_player(t_data *data)
 	}
 }
 
-// void	shoot_lines(t_data *data)
-// {
+void	draw_lines(t_data *data)
+{
 
-// }
+}
 
 void	rotate_player(t_player *player, float angle)
 {
@@ -94,6 +94,7 @@ int	render_game(t_data *data)
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	draw_player(data);
+	draw_lines(data);
 	process_movement(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
