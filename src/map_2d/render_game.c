@@ -40,7 +40,12 @@ void	draw_player(t_data *data)
 
 void	draw_lines(t_data *data)
 {
+	float	start_line_x;
+	float	start_line_y;
 
+	start_line_x = data->player->x;
+	start_line_y = data->player->y;
+	
 }
 
 void	rotate_player(t_player *player, float angle)

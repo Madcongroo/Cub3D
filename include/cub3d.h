@@ -62,6 +62,9 @@ typedef struct s_player
 	int			speed;
 	int			plan_x;
 	int			plan_y;
+	float		vec_dir;
+	float		vec_pos;
+	float		vec_plane;
 	float		angle;
 	int			key_pressed[6];
 }	t_player;
