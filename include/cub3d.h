@@ -39,6 +39,7 @@ HEADER
 # define SQUARE_SIZE 32
 # define PLAYER_SIZE 16
 # define ROT_SPEED 0.05
+# define PLANE_LENGHT 0.66f
 
 typedef enum e_keys
 {

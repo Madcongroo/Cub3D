@@ -62,8 +62,8 @@ void	set_direction(t_data *data, char c)
 		data->player->angle = 0;
 	data->player->x_cam = cos(data->player->angle);
 	data->player->y_cam = sin(data->player->angle);
-	data->player->plan_x = -0.66f * data->player->y_cam;
-	data->player->plan_y = 0.66f * data->player->x_cam;
+	data->player->plan_x = -PLANE_LENGHT * data->player->y_cam;
+	data->player->plan_y = PLANE_LENGHT * data->player->x_cam;
 	/* TEMPORAIRE */
 	// Imprimer les valeurs des vecteurs (avec %f qui attend un float/double)
     printf("Angle : %.2f radians\n", data->player->angle);

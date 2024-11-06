@@ -52,8 +52,8 @@ void	rotate_player(t_player *player, float angle)
 		player->angle -= 2 * M_PI;
 	player->x_cam = cos(player->angle);
 	player->y_cam = sin(player->angle);
-	player->plan_x = -0.66f * player->y_cam;
-	player->plan_y = 0.66f * player->x_cam;
+	player->plan_x = -PLANE_LENGHT * player->y_cam;
+	player->plan_y = PLANE_LENGHT * player->x_cam;
 	/* TEMPORAIRE */
 	 // Imprimer les valeurs pour vérifier la mise à jour des vecteurs
     printf("Angle : %.2f radians\n", player->angle);
