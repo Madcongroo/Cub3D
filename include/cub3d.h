@@ -60,8 +60,8 @@ typedef struct s_player
 	float		x_cam;
 	float		y_cam;
 	int			speed;
-	int			plan_x;
-	int			plan_y;
+	float			plan_x;
+	float			plan_y;
 	float		angle;
 	int			key_pressed[6];
 }	t_player;
