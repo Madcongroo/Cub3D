@@ -38,14 +38,87 @@ void	draw_player(t_data *data)
 	}
 }
 
-void	draw_lines(t_data *data)
+void draw_line(t_data *data, int dir_x, int dir_y)
 {
-	float	start_line_x;
-	float	start_line_y;
+    // Position de départ (joueur) en pixels
+    float start_x = data->player->x * SQUARE_SIZE;
+    float start_y = data->player->y * SQUARE_SIZE;
 
-	start_line_x = data->player->x;
-	start_line_y = data->player->y;
-	
+    // Position d’arrivée (mur) en pixels
+    float end_x = dir_x * SQUARE_SIZE;
+    float end_y = dir_y * SQUARE_SIZE;
+
+    // Calcul de la différence entre les coordonnées de début et de fin
+    float delta_x = end_x - start_x;
+    float delta_y = end_y - start_y;
+
+    // Calcul du nombre d’étapes basé sur la plus grande distance
+    int steps = fmax(fabs(delta_x), fabs(delta_y));
+
+    // Calcul des incréments en x et y par étape
+    float x_inc = delta_x / steps;
+    float y_inc = delta_y / steps;
+
+    // Position courante pour le dessin
+    float current_x = start_x;
+    float current_y = start_y;
+
+    // Boucle pour dessiner le trait point par point
+    for (int i = 0; i < steps; i++) {
+        my_pixel_put(data, (int)current_x, (int)current_y, BLUE);
+        current_x += x_inc;
+        current_y += y_inc;
+    }
+}
+
+
+
+void	dda_algorithm(t_data *data)
+{
+	int		dir_x;
+	int		dir_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	int		step_x;
+	int		step_y;
+
+	if (cos(data->player->angle) > 0)
+		step_x = 1;
+	else
+		step_x = -1;
+	if (sin(data->player->angle) > 0)
+		step_y = 1;
+	else
+		step_y = -1;
+	dir_x = data->player->x;
+	dir_y = data->player->y;
+	data->player->dir_x = cos(data->player->angle);
+	data->player->dir_y = sin(data->player->angle);
+	data->player->delta_x = fabs(1 / cos(data->player->angle));
+	data->player->delta_y = fabs(1 / sin(data->player->angle));
+	if (step_x == 1)
+		side_dist_x = (dir_x + 1 - data->player->x) * data->player->delta_x;
+	else
+		side_dist_x = (data->player->x - dir_x) * data->player->delta_x;
+	if (step_y == 1)
+		side_dist_y = (dir_y + 1 - data->player->y) * data->player->delta_y;
+	else
+		side_dist_y = (data->player->y - dir_y) * data->player->delta_y;
+	while (data->map->map_array[dir_y][dir_x] != '1')
+	{
+		if (side_dist_x < side_dist_y)
+		{
+			side_dist_x += data->player->delta_x;
+			dir_x += step_x;
+		}
+		else
+		{
+			side_dist_y += data->player->delta_y;
+			dir_y += step_y;
+		}
+	}
+	draw_line(data, dir_x, dir_y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img, data->player->x, data->player->y);
 }
 
 void	rotate_player(t_player *player, float angle)
@@ -99,7 +172,7 @@ int	render_game(t_data *data)
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	draw_player(data);
-	draw_lines(data);
+	dda_algorithm(data);
 	process_movement(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);

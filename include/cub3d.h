@@ -36,6 +36,7 @@ HEADER
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
 # define RED 0xFF0000
+# define BLUE 0x00008B
 # define SQUARE_SIZE 32
 # define PLAYER_SIZE 16
 # define ROT_SPEED 0.05
@@ -62,9 +63,11 @@ typedef struct s_player
 	int			speed;
 	int			plan_x;
 	int			plan_y;
-	float		vec_dir;
-	float		vec_pos;
-	float		vec_plane;
+	float		dir_x;
+	float		dir_y;
+	float		delta_x;
+	float		delta_y;
+	float		ray_len;
 	float		angle;
 	int			key_pressed[6];
 }	t_player;
