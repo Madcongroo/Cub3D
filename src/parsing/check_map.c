@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/05 09:19:10 by proton           ###   ########.fr       */
+/*   Updated: 2024/11/12 15:06:45 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,24 @@ void	set_direction(t_data *data, char c)
 		data->player->angle = 0;
 	else
 		data->player->angle = M_PI;
+	else
+		data->player->angle = 0;
+	data->player->x_cam = cos(data->player->angle);
+	data->player->y_cam = sin(data->player->angle);
+	data->player->plan_x = -PLANE_LENGHT * data->player->y_cam;
+	data->player->plan_y = PLANE_LENGHT * data->player->x_cam;
+	/* TEMPORAIRE */
+	// Imprimer les valeurs des vecteurs (avec %f qui attend un float/double)
+    printf("Angle : %.2f radians\n", data->player->angle);
+    printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", data->player->x_cam, data->player->y_cam);
+    printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", data->player->plan_x, data->player->plan_y);
+
+    // Calculer et imprimer la longueur des vecteurs
+    float dir_length = sqrtf(data->player->x_cam * data->player->x_cam + data->player->y_cam * data->player->y_cam);
+    float plane_length = sqrtf(data->player->plan_x * data->player->plan_x + data->player->plan_y * data->player->plan_y);
+
+    printf("Longueur du vecteur de direction : %.2f\n", dir_length);
+    printf("Longueur du vecteur du plan de la caméra : %.2f\n", plane_length);
 }
 
 /*fonction to check if the map is surrounded by walls
@@ -84,7 +102,9 @@ static int	is_map_wall_surrounded(t_data *data, char **map)
 					return (-1);
 			}
 			if (is_player(map[i][j]))
+			{
 				set_direction(data, map[i][j]);
+			}
 		}
 	}
 	return (0);

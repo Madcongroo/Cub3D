@@ -40,6 +40,7 @@ HEADER
 # define SQUARE_SIZE 32
 # define PLAYER_SIZE 16
 # define ROT_SPEED 0.05
+# define PLANE_LENGHT 0.66f
 
 typedef enum e_keys
 {
@@ -61,8 +62,8 @@ typedef struct s_player
 	float		x_cam;
 	float		y_cam;
 	int			speed;
-	int			plan_x;
-	int			plan_y;
+	float			plan_x;
+	float			plan_y;
 	float		dir_x;
 	float		dir_y;
 	float		delta_x;
