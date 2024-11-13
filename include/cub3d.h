@@ -33,28 +33,38 @@ HEADER
 # include "../mlx/mlx.h"
 
 # define WHITE 0xFFFFFF
+# define ORANGE 0xF99a0B
 # define BLACK 0x000000
-# define SQUARE_SIZE 64
+# define RED 0xFF0000
+# define SQUARE_SIZE 32
+# define PLAYER_SIZE 16
+# define ROT_SPEED 0.05
+# define PLANE_LENGHT 0.66f
 
-typedef enum s_player_pos
+typedef enum e_keys
 {
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-}	t_player_pos;
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_ESC = 65307,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363
+}	t_keys;
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	old_x;
-	int	old_y;
-	int	x_cam;
-	int	y_cam;
-	int	speed;
-	int	plan_x;
-	int	plan_y;
+	float		x;
+	float		y;
+	int			old_x;
+	int			old_y;
+	float		x_cam;
+	float		y_cam;
+	int			speed;
+	float		plan_x;
+	float		plan_y;
+	float		angle;
+	int			key_pressed[6];
 }	t_player;
 
 typedef struct s_rgb
@@ -98,7 +108,13 @@ typedef struct s_data
 	void		*win;
 	void		*text;
 	void		*mlx;
+	void		*img;
+	char		*address;
+	int			bits_p_pix;
+	int			line_len;
+	int			endian;
 	int			win_width;
+	int			keys[65536];
 	int			win_height;
 }	t_data;
 
@@ -119,6 +135,9 @@ int		ft_free_array(char **array);
 // src/start_parsing.c
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
+
+/*re alloc map*/
+int		re_alloc_map(t_data *data);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
@@ -150,20 +169,39 @@ char	*skip_space(char *str);
 char	*jump_space(char *str);
 int		error_msg(char *error_msg);
 int		good_char(char c);
+int		should_it_be_checked(t_data *data, char **map, int y, int x);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
+void	loop_square_size(t_data *data, int x, int y, int color);
+void	my_pixel_put(t_data *data, int x, int y, int color);
+void	map_img_output(t_data *data, char **map, int turn);
 
 // src/map_2d/games_loop.c
 void	games_loop(t_data *data);
 int		close_window(t_data *data);
-void	draw_grid(t_data*data, t_map *map);
 void	draw_square(t_data *data, int x, int y, int color);
+
+// src/map_2d/draw_grid.c
+void	draw_grid(t_data *data);
+void	draw_vertical_line(t_data *data, int x, int y, int length);
+void	draw_horizontal_line(t_data *data, int x, int y, int length);
+
+// src/map_2d/render_games.c
+int		render_game(t_data *data);
+void	draw_player(t_data *data);
+void	process_movement(t_data *data);
+void	rotate_player(t_player *player, float angle);
+
+// src/map_2d/key.c
+void	key_w_and_key_s(t_data *data, float *new_x, float *new_y);
+void	key_a_and_key_d(t_data *data, float *new_x, float *new_y);
 
 // src/map_2d/utils_2d.c
 int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
-void	draw_vertical_line(t_data *data, int x, int y_start, int length);
-void	draw_horizontal_line(t_data *data, int x_start, int y, int length);
+int		is_player(char c);
+int		handle_keypress_on(int keycode, t_data *data);
+int		handle_keypress_off(int keycode, t_data *data);
 
 #endif

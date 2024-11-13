@@ -16,20 +16,87 @@
 
 #include "../../include/cub3d.h"
 
-// Fonction principale de la gestion graphique 2D
-int	start_map_2d(t_data *data)
+void	my_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
+	*(unsigned int *)(dst) = color;
+}
+
+void	loop_square_size(t_data *data, int x, int y, int color)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while (j < SQUARE_SIZE)
+	{
+		i = 0;
+		while (i < SQUARE_SIZE)
+		{
+			my_pixel_put(data, x * SQUARE_SIZE + j, y * SQUARE_SIZE + i, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	map_img_output(t_data *data, char **map, int turn)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	x = 0;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (turn == 1)
+			{
+				if (map[y][x] == '0' || is_player(map[y][x]))
+					loop_square_size(data, x, y, WHITE);
+			}
+			else
+			{
+				if (map[y][x] == '1')
+					loop_square_size(data, x, y, ORANGE);
+			}
+		}
+	}
+	draw_grid(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
+}
+
+int	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (error_msg("Error\nMlx init crashed\n"));
-	data->win_width = 2176;
-	data->win_height = 896;
+	calculate_map_dimensions(data->map);
+	data->win_width = (data->map->width * SQUARE_SIZE + SQUARE_SIZE);
+	data->win_height = (data->map->height * SQUARE_SIZE + SQUARE_SIZE);
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height,
 			"cub3D");
+	data->img = mlx_new_image(data->mlx, data->win_width, data->win_height);
+	data->player->y_cam = data->player->y;
+	data->player->x_cam = data->player->x;
+	data->address = mlx_get_data_addr(data->img, &data->bits_p_pix,
+			&data->line_len, &data->endian);
 	if (!data->win)
 		return (error_msg("Error\nMlx win crashed\n"));
-	calculate_map_dimensions(data->map);
-	draw_grid(data, data->map);
+	map_img_output(data, data->map->map_array, 1);
+	map_img_output(data, data->map->map_array, 0);
+	return (0);
+}
+
+// Fonction principale de la gestion graphique 2D
+int	start_map_2d(t_data *data)
+{
+	if (init_mlx(data) == -1)
+		return (-1);
 	games_loop(data);
 	return (0);
 }
