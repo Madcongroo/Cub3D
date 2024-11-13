@@ -79,6 +79,7 @@ int	render_game(t_data *data)
 		*(data->bits_p_pix / 8));
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
+	mini_map(data);
 	draw_player(data);
 	process_movement(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
