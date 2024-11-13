@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/10/16 15:23:59 by bproton          ###   ########.fr       */
+/*   Updated: 2024/11/13 16:51:57 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int	init_struct(t_data *data)
 		return (-1);
 	data->raycast = init_raycast_struct();
 	if (!data->raycast)
+		return (-1);
+	data->mini_map = malloc(sizeof(t_mini_map));
+	if (!data->mini_map)
 		return (-1);
 	data->map = init_map_struct();
 	if (!data->map->ceilling_color || !data->map->floor_color || !data->map)

@@ -36,6 +36,8 @@ HEADER
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
 # define RED 0xFF0000
+# define GRAY 0xD3D3D3
+# define BLUE 0x0000FF
 # define SQUARE_SIZE 32
 # define PLAYER_SIZE 16
 # define ROT_SPEED 0.05
@@ -51,6 +53,16 @@ typedef enum e_keys
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363
 }	t_keys;
+
+typedef struct s_mini_map
+{
+	int	mini_size;
+	int	offset_x;
+	int	offset_y;
+	int	color;
+	int	player_x;
+	int	player_y;
+}	t_mini_map;
 
 typedef struct s_player
 {
@@ -105,6 +117,7 @@ typedef struct s_data
 	t_player	*player;
 	t_map		*map;
 	t_raycast	*raycast;
+	t_mini_map	*mini_map;
 	void		*win;
 	void		*text;
 	void		*mlx;
@@ -203,5 +216,11 @@ void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
 int		handle_keypress_on(int keycode, t_data *data);
 int		handle_keypress_off(int keycode, t_data *data);
+
+// src/bonus/mini_map.c
+void	init_mini_map(t_data *data, t_mini_map *mini_map);
+void	mini_map(t_data *data);
+void	draw_mini_map(t_data *data, int x, int y);
+void	draw_player_in_mini_map(t_data *data);
 
 #endif

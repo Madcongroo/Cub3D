@@ -61,6 +61,8 @@ int	free_all(t_data *data)
 			free (data->raycast);
 		if (data->text)
 			free (data->text);
+		if (data->mini_map)
+			free (data->mini_map);
 	}
 	return (1);
 }
