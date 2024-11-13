@@ -53,18 +53,23 @@ void	calculate_map_dimensions(t_map *map)
 	map->height = height;
 	map->width = max_width + 1;
 }
+
 // touche presser
-int handle_keypress_on(int keycode, t_data *data)
+int	handle_keypress_on(int keycode, t_data *data)
 {
-    if (keycode >= 0 && keycode < 65536)
-        data->keys[keycode] = 1; // Enregistrer l'état de la touche pressée
-    return (0);
+	if (keycode == KEY_ESC)
+	{
+		close_window(data);
+	}
+	if (keycode >= 0 && keycode < 65536)
+		data->keys[keycode] = 1;
+	return (0);
 }
 
 // touche relacher
-int handle_keypress_off(int keycode, t_data *data)
+int	handle_keypress_off(int keycode, t_data *data)
 {
-    if (keycode >= 0 && keycode < 65536)
-        data->keys[keycode] = 0; // Enregistrer l'état de la touche relâchée
-    return (0);
+	if (keycode >= 0 && keycode < 65536)
+		data->keys[keycode] = 0;
+	return (0);
 }

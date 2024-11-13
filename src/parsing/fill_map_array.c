@@ -17,8 +17,8 @@
 // Fonction pour trouver le début de la carte
 int	get_map_start(char **map)
 {
-	int	i;
-	char *trimmed_line;
+	int		i;
+	char	*trimmed_line;
 
 	i = 0;
 	while (map[i])
@@ -86,7 +86,6 @@ char	*ft_strncpy(char *dst, const char *src, size_t size)
 	return (dst);
 }
 
-
 // Fonction pour copier chaque ligne de la map dans map_array
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 {
@@ -107,8 +106,8 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 		if (!data->map->map_array[j])
 			return ;
 		data->map->map_array[j] = ft_strncpy(data->map->map_array[j], map[i], width + 2);
-			if (!data->map->map_array[j])
-				return ;
+		if (!data->map->map_array[j])
+			return ;
 		i++;
 		j++;
 	}

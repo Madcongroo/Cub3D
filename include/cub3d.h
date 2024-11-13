@@ -61,8 +61,8 @@ typedef struct s_player
 	float		x_cam;
 	float		y_cam;
 	int			speed;
-	float			plan_x;
-	float			plan_y;
+	float		plan_x;
+	float		plan_y;
 	float		angle;
 	int			key_pressed[6];
 }	t_player;
@@ -177,7 +177,6 @@ void	loop_square_size(t_data *data, int x, int y, int color);
 void	my_pixel_put(t_data *data, int x, int y, int color);
 void	map_img_output(t_data *data, char **map, int turn);
 
-
 // src/map_2d/games_loop.c
 void	games_loop(t_data *data);
 int		close_window(t_data *data);
@@ -191,16 +190,18 @@ void	draw_horizontal_line(t_data *data, int x, int y, int length);
 // src/map_2d/render_games.c
 int		render_game(t_data *data);
 void	draw_player(t_data *data);
-void process_movement(t_data *data);
-void rotate_player(t_player *player, float angle);
+void	process_movement(t_data *data);
+void	rotate_player(t_player *player, float angle);
+
+// src/map_2d/key.c
+void	key_w_and_key_s(t_data *data, float *new_x, float *new_y);
+void	key_a_and_key_d(t_data *data, float *new_x, float *new_y);
 
 // src/map_2d/utils_2d.c
 int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
-int handle_keypress_on(int keycode, t_data *data);
-int handle_keypress_off(int keycode, t_data *data);
-
-
+int		handle_keypress_on(int keycode, t_data *data);
+int		handle_keypress_off(int keycode, t_data *data);
 
 #endif
