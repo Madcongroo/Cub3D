@@ -209,13 +209,14 @@ void	rotate_player(t_player *player, float angle);
 // src/map_2d/key.c
 void	key_w_and_key_s(t_data *data, float *new_x, float *new_y);
 void	key_a_and_key_d(t_data *data, float *new_x, float *new_y);
+int		handle_keypress_on(int keycode, t_data *data);
+int		handle_keypress_off(int keycode, t_data *data);
 
 // src/map_2d/utils_2d.c
 int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
-int		handle_keypress_on(int keycode, t_data *data);
-int		handle_keypress_off(int keycode, t_data *data);
+void	initialize_keys(int keys[], int size);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);

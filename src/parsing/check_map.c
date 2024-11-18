@@ -66,16 +66,16 @@ void	set_direction(t_data *data, char c)
 	data->player->plan_y = PLANE_LENGHT * data->player->x_cam;
 	/* TEMPORAIRE */
 	// Imprimer les valeurs des vecteurs (avec %f qui attend un float/double)
-    printf("Angle : %.2f radians\n", data->player->angle);
-    printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", data->player->x_cam, data->player->y_cam);
-    printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", data->player->plan_x, data->player->plan_y);
+    //printf("Angle : %.2f radians\n", data->player->angle);
+    //printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", data->player->x_cam, data->player->y_cam);
+    //printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", data->player->plan_x, data->player->plan_y);
 
     // Calculer et imprimer la longueur des vecteurs
-    float dir_length = sqrtf(data->player->x_cam * data->player->x_cam + data->player->y_cam * data->player->y_cam);
-    float plane_length = sqrtf(data->player->plan_x * data->player->plan_x + data->player->plan_y * data->player->plan_y);
+    //float dir_length = sqrtf(data->player->x_cam * data->player->x_cam + data->player->y_cam * data->player->y_cam);
+    //float plane_length = sqrtf(data->player->plan_x * data->player->plan_x + data->player->plan_y * data->player->plan_y);
 
-    printf("Longueur du vecteur de direction : %.2f\n", dir_length);
-    printf("Longueur du vecteur du plan de la caméra : %.2f\n", plane_length);
+    //printf("Longueur du vecteur de direction : %.2f\n", dir_length);
+    //printf("Longueur du vecteur du plan de la caméra : %.2f\n", plane_length);
 }
 
 /*fonction to check if the map is surrounded by walls

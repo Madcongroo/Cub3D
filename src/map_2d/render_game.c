@@ -51,9 +51,9 @@ void	rotate_player(t_player *player, float angle)
 	player->plan_y = PLANE_LENGHT * player->x_cam;
 	/* TEMPORAIRE */
 	// Imprimer les valeurs pour vérifier la mise à jour des vecteurs
-    printf("Angle : %.2f radians\n", player->angle);
-    printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
-    printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
+    //printf("Angle : %.2f radians\n", player->angle);
+    //printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
+    //printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
 }
 
 void	process_movement(t_data *data)
@@ -64,9 +64,15 @@ void	process_movement(t_data *data)
 	new_x = data->player->x;
 	new_y = data->player->y;
 	if (data->keys[KEY_LEFT])
+	{
+		printf("Rotation vers la gauche...\n");
 		rotate_player(data->player, -ROT_SPEED);
+	}
 	if (data->keys[KEY_RIGHT])
+	{
+		printf("Rotation vers la droite\n");
 		rotate_player(data->player, ROT_SPEED);
+	}
 	key_w_and_key_s(data, &new_x, &new_y);
 	key_a_and_key_d(data, &new_x, &new_y);
 	data->player->x = new_x;

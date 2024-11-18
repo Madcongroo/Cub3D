@@ -54,22 +54,14 @@ void	calculate_map_dimensions(t_map *map)
 	map->width = max_width + 1;
 }
 
-// touche presser
-int	handle_keypress_on(int keycode, t_data *data)
+void	initialize_keys(int keys[], int size)
 {
-	if (keycode == KEY_ESC)
-	{
-		close_window(data);
-	}
-	if (keycode >= 0 && keycode < 65536)
-		data->keys[keycode] = 1;
-	return (0);
-}
+	int	i;
 
-// touche relacher
-int	handle_keypress_off(int keycode, t_data *data)
-{
-	if (keycode >= 0 && keycode < 65536)
-		data->keys[keycode] = 0;
-	return (0);
+	i = 0;
+	while (i < size)
+	{
+		keys[i] = 0;
+		i++;
+	}
 }
