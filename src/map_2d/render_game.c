@@ -38,86 +38,81 @@ void	draw_player(t_data *data)
 	}
 }
 
-void draw_line(t_data *data, int dir_x, int dir_y)
+void draw_line(t_data *data, float dir_x, float dir_y)
 {
-    // Position de départ (joueur) en pixels
-    float start_x = data->player->x * SQUARE_SIZE;
-    float start_y = data->player->y * SQUARE_SIZE;
+	float start_x = data->player->x * SQUARE_SIZE;
+	float start_y = data->player->y * SQUARE_SIZE;
+	float end_x = dir_x * SQUARE_SIZE;
+	float end_y = dir_y * SQUARE_SIZE;
+	float delta_x = end_x - start_x;
+	float delta_y = end_y - start_y;
+	int steps = fmax(fabs(delta_x), fabs(delta_y));
+	float x_inc = delta_x / steps;
+	float y_inc = delta_y / steps;
+	float current_x = start_x;
+	float current_y = start_y;
 
-    // Position d’arrivée (mur) en pixels
-    float end_x = dir_x * SQUARE_SIZE;
-    float end_y = dir_y * SQUARE_SIZE;
-
-    // Calcul de la différence entre les coordonnées de début et de fin
-    float delta_x = end_x - start_x;
-    float delta_y = end_y - start_y;
-
-    // Calcul du nombre d’étapes basé sur la plus grande distance
-    int steps = fmax(fabs(delta_x), fabs(delta_y));
-
-    // Calcul des incréments en x et y par étape
-    float x_inc = delta_x / steps;
-    float y_inc = delta_y / steps;
-
-    // Position courante pour le dessin
-    float current_x = start_x;
-    float current_y = start_y;
-
-    // Boucle pour dessiner le trait point par point
-    for (int i = 0; i < steps; i++) {
-        my_pixel_put(data, (int)current_x, (int)current_y, BLUE);
-        current_x += x_inc;
-        current_y += y_inc;
-    }
+	for (int i = 0; i < steps; i++)
+	{
+		my_pixel_put(data, (int)current_x, (int)current_y, BLUE);
+		current_x += x_inc;
+		current_y += y_inc;
+	}
 }
-
-
 
 void	dda_algorithm(t_data *data)
 {
-	int		dir_x;
-	int		dir_y;
-	float	side_dist_x;
-	float	side_dist_y;
-	int		step_x;
-	int		step_y;
+	int dir_x, dir_y;;
+	float ray_x, ray_y;
+	float side_dist_x, side_dist_y;
+	int step_x, step_y;
 
-	if (cos(data->player->angle) > 0)
-		step_x = 1;
-	else
-		step_x = -1;
-	if (sin(data->player->angle) > 0)
-		step_y = 1;
-	else
-		step_y = -1;
-	dir_x = data->player->x;
-	dir_y = data->player->y;
+	ray_x = data->player->x;
+	ray_y = data->player->y;
+	dir_x = (int)ray_x;
+	dir_y = (int)ray_y;
 	data->player->dir_x = cos(data->player->angle);
 	data->player->dir_y = sin(data->player->angle);
-	data->player->delta_x = fabs(1 / cos(data->player->angle));
-	data->player->delta_y = fabs(1 / sin(data->player->angle));
-	if (step_x == 1)
-		side_dist_x = (dir_x + 1 - data->player->x) * data->player->delta_x;
+	data->player->delta_x = fabs(1 / data->player->dir_x);
+	data->player->delta_y = fabs(1 / data->player->dir_y);
+	if (data->player->dir_x > 0)
+	{
+		step_x = 1;
+		side_dist_x = (dir_x + 1.0 - ray_x) * data->player->delta_x;
+	}
 	else
-		side_dist_x = (data->player->x - dir_x) * data->player->delta_x;
-	if (step_y == 1)
-		side_dist_y = (dir_y + 1 - data->player->y) * data->player->delta_y;
+	{
+		step_x = -1;
+		side_dist_x = (ray_x - dir_x) * data->player->delta_x;
+	}
+
+	if (data->player->dir_y > 0)
+	{
+		step_y = 1;
+		side_dist_y = (dir_y + 1.0 - ray_y) * data->player->delta_y;
+	}
 	else
-		side_dist_y = (data->player->y - dir_y) * data->player->delta_y;
+	{
+		step_y = -1;
+		side_dist_y = (ray_y - dir_y) * data->player->delta_y;
+	}
 	while (data->map->map_array[dir_y][dir_x] != '1')
 	{
 		if (side_dist_x < side_dist_y)
 		{
 			side_dist_x += data->player->delta_x;
 			dir_x += step_x;
+			ray_x += step_x * data->player->delta_x;
 		}
 		else
 		{
 			side_dist_y += data->player->delta_y;
 			dir_y += step_y;
+			ray_y += step_y * data->player->delta_y;
 		}
 	}
-	draw_line(data, dir_x, dir_y);
+	//pour dessiner la ligne du joueur au mur
+	draw_line(data, ray_x, ray_y);
 	// mlx_put_image_to_window(data->mlx, data->win, data->img, data->player->x, data->player->y);
 }
 
@@ -134,9 +129,9 @@ void	rotate_player(t_player *player, float angle)
 	player->plan_y = PLANE_LENGHT * player->x_cam;
 	/* TEMPORAIRE */
 	 // Imprimer les valeurs pour vérifier la mise à jour des vecteurs
-    printf("Angle : %.2f radians\n", player->angle);
-    printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
-    printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
+	// printf("Angle : %.2f radians\n", player->angle);
+	// printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
+	// printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
 
 }
 
@@ -153,23 +148,23 @@ void process_movement(t_data *data)
 		rotate_player(data->player, ROT_SPEED);
 	if (data->keys[KEY_W])
 	{
-		new_x += cos(data->player->angle) * 0.2;
-		new_y += sin(data->player->angle) * 0.2;
+		new_x += cos(data->player->angle) * 0.1;
+		new_y += sin(data->player->angle) * 0.1;
 	}
 	if (data->keys[KEY_S])
 	{
-		new_x -= cos(data->player->angle) * 0.2;
-		new_y -= sin(data->player->angle) * 0.2;
+		new_x -= cos(data->player->angle) * 0.1;
+		new_y -= sin(data->player->angle) * 0.1;
 	}
 	if (data->keys[KEY_A])
 	{
-		new_x -= cos(data->player->angle + M_PI / 2) * 0.2;
-		new_y -= sin(data->player->angle + M_PI / 2) * 0.2;
+		new_x -= cos(data->player->angle + M_PI / 2) * 0.1;
+		new_y -= sin(data->player->angle + M_PI / 2) * 0.1;
 	}
 	if (data->keys[KEY_D])
 	{
-		new_x += cos(data->player->angle + M_PI / 2) * 0.2;
-		new_y += sin(data->player->angle + M_PI / 2) * 0.2;
+		new_x += cos(data->player->angle + M_PI / 2) * 0.1;
+		new_y += sin(data->player->angle + M_PI / 2) * 0.1;
 	}
 	data->player->x = new_x;
 	data->player->y = new_y;

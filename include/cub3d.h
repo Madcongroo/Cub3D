@@ -62,8 +62,8 @@ typedef struct s_player
 	float		x_cam;
 	float		y_cam;
 	int			speed;
-	float			plan_x;
-	float			plan_y;
+	float		plan_x;
+	float		plan_y;
 	float		dir_x;
 	float		dir_y;
 	float		delta_x;
