@@ -64,15 +64,9 @@ void	process_movement(t_data *data)
 	new_x = data->player->x;
 	new_y = data->player->y;
 	if (data->keys[KEY_LEFT])
-	{
-		printf("Rotation vers la gauche...\n");
 		rotate_player(data->player, -ROT_SPEED);
-	}
 	if (data->keys[KEY_RIGHT])
-	{
-		printf("Rotation vers la droite\n");
 		rotate_player(data->player, ROT_SPEED);
-	}
 	key_w_and_key_s(data, &new_x, &new_y);
 	key_a_and_key_d(data, &new_x, &new_y);
 	data->player->x = new_x;
