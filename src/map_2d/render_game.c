@@ -77,6 +77,7 @@ int	render_game(t_data *data)
 {
 	ft_memset(data->address, 0, data->win_width * data->win_height
 		*(data->bits_p_pix / 8));
+	raycast_ray(data);
 	map_img_output(data, data->map->map_array, 0);
 	map_img_output(data, data->map->map_array, 1);
 	mini_map(data);

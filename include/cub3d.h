@@ -103,11 +103,10 @@ typedef struct s_map
 typedef struct s_raycast
 {
 	bool	touch_wall;
-	double	dist_x;
-	double	dist_y;
-	int		result;
-	double	side_dist_x;
-	double	side_dist_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
 	int		step_x;
 	int		step_y;
 }	t_raycast;
@@ -217,6 +216,9 @@ int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
 void	initialize_keys(int keys[], int size);
+
+// src/raycasting/raycast.c
+void raycast_ray(t_data *data);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);
