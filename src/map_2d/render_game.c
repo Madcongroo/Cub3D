@@ -51,9 +51,9 @@ void	rotate_player(t_player *player, float angle)
 	player->plan_y = PLANE_LENGHT * player->x_cam;
 	/* TEMPORAIRE */
 	// Imprimer les valeurs pour vérifier la mise à jour des vecteurs
-    printf("Angle : %.2f radians\n", player->angle);
-    printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
-    printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
+    //printf("Angle : %.2f radians\n", player->angle);
+    //printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
+    //printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
 }
 
 void	process_movement(t_data *data)

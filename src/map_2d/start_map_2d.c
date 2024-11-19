@@ -97,6 +97,7 @@ int	start_map_2d(t_data *data)
 {
 	if (init_mlx(data) == -1)
 		return (-1);
+	initialize_keys(data->keys, 65536);
 	games_loop(data);
 	return (0);
 }

@@ -44,12 +44,20 @@ void	key_a_and_key_d(t_data *data, float *new_x, float *new_y)
 	}
 }
 
-int	handle_keypress_esc(int keycode, t_data *data)
+// touche presser
+int	handle_keypress_on(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
-	{
 		close_window(data);
-		return (0);
-	}
-	return (1);
+	if (keycode >= 0 && keycode < 65536)
+		data->keys[keycode] = 1;
+	return (0);
+}
+
+// touche relacher
+int	handle_keypress_off(int keycode, t_data *data)
+{
+	if (keycode >= 0 && keycode < 65536)
+		data->keys[keycode] = 0;
+	return (0);
 }
