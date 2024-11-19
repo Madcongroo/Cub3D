@@ -207,6 +207,4 @@ int		is_player(char c);
 int handle_keypress_on(int keycode, t_data *data);
 int handle_keypress_off(int keycode, t_data *data);
 
-
-
 #endif
