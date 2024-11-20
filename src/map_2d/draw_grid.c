@@ -27,7 +27,7 @@ void	draw_grid(t_data *data)
 		y = 0;
 		while (y <= data->map->height)
 		{
-			draw_vertical_line(data, x, y, SQUARE_SIZE);
+			//draw_vertical_line(data, x, y, SQUARE_SIZE);
 			y++;
 		}
 		x++;
@@ -38,7 +38,7 @@ void	draw_grid(t_data *data)
 		x = 0;
 		while (x <= data->map->width)
 		{
-			draw_horizontal_line(data, x, y, SQUARE_SIZE);
+			//draw_horizontal_line(data, x, y, SQUARE_SIZE);
 			x++;
 		}
 		y++;

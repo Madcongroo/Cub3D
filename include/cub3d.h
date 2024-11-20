@@ -36,6 +36,7 @@ HEADER
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
 # define RED 0xFF0000
+# define RED_RUSH 0x880000
 # define GRAY 0xD3D3D3
 # define BLUE 0x0000FF
 # define SQUARE_SIZE 32
@@ -102,14 +103,20 @@ typedef struct s_map
 
 typedef struct s_raycast
 {
-	bool	touch_wall;
-	float	delta_dist_x;
-	float	delta_dist_y;
-	float	side_dist_x;
-	float	side_dist_y;
-	int		step_x;
-	int		step_y;
-}	t_raycast;
+    bool    touch_wall;
+    float   delta_dist_x;
+    float   delta_dist_y;
+    float   side_dist_x;
+    float   side_dist_y;
+    int     step_x;
+    int     step_y;
+    float   perp_wall_dist;
+    float   ray_dir_x;
+    float   ray_dir_y;
+    int     map_x;
+    int     map_y;
+    int     side;
+}   t_raycast;
 
 typedef struct s_data
 {
