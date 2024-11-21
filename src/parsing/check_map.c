@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/21 10:34:29 by proton           ###   ########.fr       */
+/*   Updated: 2024/11/21 10:37:34 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	set_direction(t_data *data, char c)
 		data->player->angle = 0;
 	else
 		data->player->angle = M_PI;
-	else
-		data->player->angle = 0;
 	data->player->x_cam = cos(data->player->angle);
 	data->player->y_cam = sin(data->player->angle);
 	data->player->plan_x = -PLANE_LENGHT * data->player->y_cam;
