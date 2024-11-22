@@ -170,6 +170,10 @@ void	color_floor(t_data *data, char **map);
 void	color_ceiling(t_data *data, char **map);
 int		check_color_number(t_data *data);
 
+// src/parsing/check_map.c
+void	set_direction(t_data *data, char c);
+int	is_map_wall_surrounded(t_data *data, char **map);
+
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height);

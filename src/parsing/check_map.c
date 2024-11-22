@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/13 15:34:16 by tom              ###   ########.fr       */
+/*   Updated: 2024/11/22 15:13:41 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	set_direction(t_data *data, char c)
 		if the pos +/- is a whitespace or nothing returns -1*/
 /*fonction qui cherche un '0', regarded si pos + 1/-1
 	si la pos +/- est un whitespace ou rien retourn -1*/
-static int	is_map_wall_surrounded(t_data *data, char **map)
+int	is_map_wall_surrounded(t_data *data, char **map)
 {
 	int	i;
 	int	j;
