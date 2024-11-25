@@ -65,6 +65,13 @@ typedef struct s_mini_map
 	int	player_y;
 }	t_mini_map;
 
+typedef struct s_wall
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+}	t_wall;
+
 typedef struct s_player
 {
 	float		x;
@@ -103,20 +110,20 @@ typedef struct s_map
 
 typedef struct s_raycast
 {
-    bool    touch_wall;
-    float   delta_dist_x;
-    float   delta_dist_y;
-    float   side_dist_x;
-    float   side_dist_y;
-    int     step_x;
-    int     step_y;
-    float   perp_wall_dist;
-    float   ray_dir_x;
-    float   ray_dir_y;
-    int     map_x;
-    int     map_y;
-    int     side;
-}   t_raycast;
+	bool	touch_wall;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	int		step_x;
+	int		step_y;
+	float	perp_wall_dist;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	int		side;
+}	t_raycast;
 
 typedef struct s_data
 {
@@ -172,7 +179,7 @@ int		check_color_number(t_data *data);
 
 // src/parsing/check_map.c
 void	set_direction(t_data *data, char c);
-int	is_map_wall_surrounded(t_data *data, char **map);
+int		is_map_wall_surrounded(t_data *data, char **map);
 
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
@@ -229,7 +236,15 @@ int		is_player(char c);
 void	initialize_keys(int keys[], int size);
 
 // src/raycasting/raycast.c
-void raycast_ray(t_data *data);
+void	raycast_ray(t_data *data);
+void	init_ray(t_raycast *ray);
+
+// src/raycasting/play_3d
+void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
+void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
+void	algo_dda(t_data *data, t_raycast *ray);
+void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
+void	draw_wall(t_data *data, int x, t_wall *wall, int color);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);
