@@ -15,6 +15,7 @@
 */
 
 #include "../../include/cub3d.h"
+
 void init_ray(t_raycast *ray)
 {
 	ray->touch_wall = false;
