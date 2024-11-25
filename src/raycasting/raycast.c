@@ -33,6 +33,42 @@ void	init_ray(t_raycast *ray)
 	ray->side = 0;
 }
 
+void	draw_ceilling(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->win_height / 2)
+	{
+		x = 0;
+		while (x < data->win_width)
+		{
+			my_pixel_put_rgb(data, x, y, data->map->ceilling_color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_floor(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = data->win_height / 2;
+	while (y < data->win_height)
+	{
+		x = 0;
+		while (x < data->win_width)
+		{
+			my_pixel_put_rgb(data, x, y, data->map->floor_color);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	raycast_ray(t_data *data)
 {
 	int			x;
@@ -40,6 +76,8 @@ void	raycast_ray(t_data *data)
 	t_wall		wall;
 	int			color;
 
+	draw_ceilling(data);
+	draw_floor(data);
 	x = 0;
 	while (x < data->win_width)
 	{

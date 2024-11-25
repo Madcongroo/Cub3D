@@ -238,6 +238,8 @@ void	initialize_keys(int keys[], int size);
 // src/raycasting/raycast.c
 void	raycast_ray(t_data *data);
 void	init_ray(t_raycast *ray);
+void	draw_ceilling(t_data *data);
+void	draw_floor(t_data *data);
 
 // src/raycasting/play_3d
 void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
@@ -245,6 +247,9 @@ void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
 void	algo_dda(t_data *data, t_raycast *ray);
 void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
 void	draw_wall(t_data *data, int x, t_wall *wall, int color);
+
+// src/raycasting/utils_rat.c
+void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);
