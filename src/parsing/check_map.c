@@ -83,7 +83,7 @@ void	set_direction(t_data *data, char c)
 		if the pos +/- is a whitespace or nothing returns -1*/
 /*fonction qui cherche un '0', regarded si pos + 1/-1
 	si la pos +/- est un whitespace ou rien retourn -1*/
-static int	is_map_wall_surrounded(t_data *data, char **map)
+int	is_map_wall_surrounded(t_data *data, char **map)
 {
 	int	i;
 	int	j;
