@@ -106,6 +106,11 @@ int	start_map_2d(t_data *data)
 	if (init_mlx(data) == -1)
 		return (-1);
 	initialize_keys(data->keys, 65536);
+	if (init_textures(data) == -1)
+		{
+			free_all(data);
+			exit (EXIT_FAILURE);
+		}
 	games_loop(data);
 	return (0);
 }

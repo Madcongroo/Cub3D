@@ -110,17 +110,12 @@ void raycast_ray(t_data *data)
 			draw_end = data->win_height - 1;
 		int color;
 		int y = draw_start;
-		if (init_textures(data, data->map->textures) == -1);
-		{
-			free_all(data);
-			exit (EXIT_FAILURE);
-		}
 		while (y < draw_end)
 		{
 			if (ray.side == 0)
-				color = get_good_pixel(data, data->map->textures->no_text);
+				color = get_right_pixel(data, x, y, NORTH);
 			else
-				color = get_good_pixel(data, data->map->textures->ea_text);
+				color = get_right_pixel(data, x, y, SOUTH);
 			my_pixel_put(data, x, y, color);
 			y++;
 		}

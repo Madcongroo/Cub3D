@@ -98,13 +98,9 @@ typedef struct s_rgb
 typedef struct s_textures
 {
 	void	*no_text;
-	char	*no_addr;
 	void	*so_text;
-	char	*so_addr;
 	void	*ea_text;
-	char	*ea_addr;
 	void	*we_text;
-	char	*we_addr;
 }	t_textures;
 
 typedef struct s_map
@@ -247,6 +243,10 @@ void	initialize_keys(int keys[], int size);
 
 // src/raycasting/raycast.c
 void raycast_ray(t_data *data);
+
+// src/raycasting/textures.c
+int	init_textures(t_data *data);
+int	get_right_pixel(t_data *data, t_texture_type direction, int x, int y);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);
