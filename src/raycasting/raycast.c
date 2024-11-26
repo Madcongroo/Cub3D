@@ -74,7 +74,6 @@ void	raycast_ray(t_data *data)
 	int			x;
 	t_raycast	ray;
 	t_wall		wall;
-	int			color;
 
 	draw_ceilling(data);
 	draw_floor(data);
@@ -85,11 +84,11 @@ void	raycast_ray(t_data *data)
 		calculate_steps_and_sides(data, &ray);
 		algo_dda(data, &ray);
 		calculate_projection(data, &ray, &wall);
-		if (ray.side == 0)
-			color = RED;
-		else
-			color = RED_RUSH;
-		draw_wall(data, x, &wall, color);
+		// if (ray.side == 0)
+		// 	color = get_right_pixel(data, NORTH, x, y);
+		// else
+		// 	color = RED_RUSH;
+		draw_wall(data, x, &wall, ray.side);
 		x++;
 	}
 }

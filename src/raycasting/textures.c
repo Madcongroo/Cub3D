@@ -23,6 +23,8 @@ int	get_right_pixel(t_data *data, t_texture_type direction, int x, int y)
 	int		endian;
 	int		color;
 
+	if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
+		return (-1);
 	if (direction == NORTH)
 	{
 		addr = mlx_get_data_addr(data->map->textures->no_text,
