@@ -55,6 +55,14 @@ typedef enum e_keys
 	KEY_RIGHT = 65363
 }	t_keys;
 
+typedef enum e_texture_type
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_texture_type;
+
 typedef struct s_mini_map
 {
 	int	mini_size;
@@ -87,18 +95,31 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
+typedef struct s_textures
+{
+	void	*no_text;
+	char	*no_addr;
+	void	*so_text;
+	char	*so_addr;
+	void	*ea_text;
+	char	*ea_addr;
+	void	*we_text;
+	char	*we_addr;
+}	t_textures;
+
 typedef struct s_map
 {
-	char	**map_array;
-	int		width;
-	int		height;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	t_rgb	*floor_color;
-	t_rgb	*ceilling_color;
-	int		fd;
+	char		**map_array;
+	int			width;
+	int			height;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	t_textures	*textures;
+	t_rgb		*floor_color;
+	t_rgb		*ceilling_color;
+	int			fd;
 }	t_map;
 
 typedef struct s_raycast

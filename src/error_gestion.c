@@ -45,6 +45,8 @@ static void	free_struct_map(t_map *map)
 		free (map->ceilling_color);
 	if (map->floor_color)
 		free (map->floor_color);
+	if (map->textures)
+		free (map->textures);
 	if (map)
 		free (map);
 }

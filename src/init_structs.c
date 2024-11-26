@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/11/13 16:51:57 by tom              ###   ########.fr       */
+/*   Updated: 2024/11/22 12:05:33 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ static t_rgb	*get_rgb_struct(void)
 
 static t_map	*init_map_struct(void)
 {
-	t_map	*map;
+	t_map		*map;
+	t_textures	*text;
 	
 	map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (NULL);
+	text = ft_calloc(1, sizeof(t_textures));
+	if (!text)
+		return (NULL);
+	map->textures = text;
 	map->ceilling_color = get_rgb_struct();
 	if (!map->ceilling_color)
 		return (NULL);
@@ -71,7 +76,8 @@ int	init_struct(t_data *data)
 	if (!data->mini_map)
 		return (-1);
 	data->map = init_map_struct();
-	if (!data->map->ceilling_color || !data->map->floor_color || !data->map)
+	if (!data->map->ceilling_color || !data->map->floor_color || !data->map
+		|| !data->map->textures)
 		return (-1);
 	data->text = NULL;
 	data->win = NULL;
