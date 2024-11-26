@@ -41,6 +41,8 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/map_2d/utils_2d.c \
 									$(SRC_DIR)/map_2d/key.c \
 									$(SRC_DIR)/raycasting/raycast.c \
+									$(SRC_DIR)/raycasting/play_3d.c \
+									$(SRC_DIR)/raycasting/utils_ray.c \
 									$(SRC_DIR)/raycasting/textures.c \
 									$(SRC_DIR)/bonus/mini_map.c
 

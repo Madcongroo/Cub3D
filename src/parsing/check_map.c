@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/21 10:37:34 by proton           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:13:48 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	set_direction(t_data *data, char c)
 		if the pos +/- is a whitespace or nothing returns -1*/
 /*fonction qui cherche un '0', regarded si pos + 1/-1
 	si la pos +/- est un whitespace ou rien retourn -1*/
-static int	is_map_wall_surrounded(t_data *data, char **map)
+int	is_map_wall_surrounded(t_data *data, char **map)
 {
 	int	i;
 	int	j;

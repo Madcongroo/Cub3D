@@ -33,7 +33,7 @@ void	draw_mini_map(t_data *data, int x, int y)
 {
 	int	i;
 	int	j;
-	int color;
+	int	color;
 
 	color = data->mini_map->color;
 	i = 0;
@@ -43,8 +43,10 @@ void	draw_mini_map(t_data *data, int x, int y)
 		while (j < data->mini_map->mini_size)
 		{
 			my_pixel_put(data,
-					data->mini_map->offset_x + x * data->mini_map->mini_size + i,
-					data->mini_map->offset_y + y * data->mini_map->mini_size + j,
+					data->mini_map->offset_x + x * data->mini_map->mini_size
+					+ i,
+					data->mini_map->offset_y + y * data->mini_map->mini_size
+					+ j,
 					color);
 			j++;
 		}
