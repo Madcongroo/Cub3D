@@ -85,11 +85,15 @@ void	raycast_ray(t_data *data)
 		calculate_steps_and_sides(data, &ray);
 		algo_dda(data, &ray);
 		calculate_projection(data, &ray, &wall);
-		if (ray.side == 0)
-			text = 0;
-		else
+		if (ray.side == 0 && ray.ray_dir_x > 0)
 			text = 2;
-		draw_wall(data, x, &wall, &data->textures[text]);
+		else if (ray.side == 0 && ray.ray_dir_x < 0)
+			text = 3;
+		else if (ray.side == 1 && ray.ray_dir_y > 0)
+			text = 1;
+		else
+			text = 0;
+		draw_wall(data, x, &wall, &data->textures[text], &ray);
 		x++;
 	}
 }

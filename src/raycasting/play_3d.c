@@ -92,18 +92,38 @@ void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall)
 	wall->draw_end = wall->line_height / 2 + data->win_height / 2;
 	if (wall->draw_end >= data->win_height)
 		wall->draw_end = data->win_height - 1;
+
+	if (ray->side == 0)
+		wall->wall_x = data->player->y + ray->perp_wall_dist * ray->ray_dir_y;
+	else
+		wall->wall_x = data->player->x + ray->perp_wall_dist * ray->ray_dir_x;
+	wall->wall_x -= floor(wall->wall_x);
 }
 
-void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text)
+void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *ray)
 {
-	int	y;
+	int		y;
+	int		tex_x;
+	int		tex_y;
+	float	step;
+	float	tex_pos;
+
+	tex_x = (int)(wall->wall_x * (float)text->width);
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = text->width - tex_x - 1;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = text->width - tex_x - 1;
+
+	step = 1.0 * text->height / wall->line_height;
+	tex_pos = (wall->draw_start - data->win_height / 2 + wall->line_height / 2) * step;
 
 	y = wall->draw_start;
-	printf("%d\n", x);
-	printf("%d\n", y);
 	while (y < wall->draw_end)
 	{
-		my_pixel_put(data, x, y, get_color_pixel(data, text, x, y));
+		tex_y = (int)tex_pos & (text->height - 1);
+		tex_pos += step;
+		my_pixel_put(data, x, y, get_color_pixel(data, text, tex_x, tex_y));
 		y++;
 	}
 }
+

@@ -70,6 +70,7 @@ typedef struct s_wall
 	int	line_height;
 	int	draw_start;
 	int	draw_end;
+	float	wall_x;
 }	t_wall;
 
 typedef struct s_player
@@ -258,7 +259,7 @@ void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
 void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
 void	algo_dda(t_data *data, t_raycast *ray);
 void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
-void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text);
+void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *ray);
 
 // src/raycasting/utils_rat.c
 void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
