@@ -106,7 +106,7 @@ int	start_map_2d(t_data *data)
 	if (init_mlx(data) == -1)
 		return (-1);
 	initialize_keys(data->keys, 65536);
-    if (is_map_wall_surrounded(data, data->map->map_array) == -1)
+	if (is_map_wall_surrounded(data, data->map->map_array) == -1)
 		return (-1);
 	render_game(data);
 	games_loop(data);

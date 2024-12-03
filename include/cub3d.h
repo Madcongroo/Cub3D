@@ -251,6 +251,9 @@ void	draw_wall(t_data *data, int x, t_wall *wall, int color);
 // src/raycasting/utils_rat.c
 void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
 
+// src/raycasting/touch_wall.c
+int		control_touch_wall(t_data *data, float new_x, float new_y);
+
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);
 void	mini_map(t_data *data);
