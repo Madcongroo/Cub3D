@@ -15,59 +15,35 @@
 
 #include "cub3d.h"
 
-int	get_right_pixel(t_data *data, t_texture_type direction, int x, int y)
+int	get_color_pixel(t_data *data, t_textures *text, int x, int y)
 {
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		color;
+	char	*dst;
+	(void)data;
 
-	if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
+	dst = text->addr + (y * text->line_len + x * (text->bits_p_pix / 8));
+	return (*(int*)dst);
+}
+
+int	init_text_helper(t_data *data, t_textures *text, char *path)
+{
+	text->img = mlx_xpm_file_to_image(data->mlx, path, &text->width, &text->height);
+	if (!text->img)
 		return (-1);
-	if (direction == NORTH)
-	{
-		addr = mlx_get_data_addr(data->map->textures->no_text,
-			&bits_per_pixel, &line_length, &endian);
-		color = (y * line_length + x * (bits_per_pixel / 8));
-	}
-	else if (direction == SOUTH)
-	{
-		addr = mlx_get_data_addr(data->map->textures->so_text,
-			&bits_per_pixel, &line_length, &endian);
-		color = (y * line_length + x * (bits_per_pixel / 8));
-	}
-	else if (direction == EAST)
-	{
-		addr = mlx_get_data_addr(data->map->textures->ea_text,
-			&bits_per_pixel, &line_length, &endian);
-		color = (y * line_length + x * (bits_per_pixel / 8));
-	}
-	else
-	{
-		addr = mlx_get_data_addr(data->map->textures->we_text,
-			&bits_per_pixel, &line_length, &endian);
-		color = (y * line_length + x * (bits_per_pixel / 8));
-	}
-	return *(int *)(addr + color);
+	text->addr = mlx_get_data_addr(text->img, &text->bits_p_pix, &text->line_len, &text->endian);
+	if (!text->addr)
+		return (-1);
+	return (0);
 }
 
 int	init_textures(t_data *data)
 {
-	int	height;
-	int	width;
-
-	data->map->textures->no_text = mlx_xpm_file_to_image(data->mlx, data->map->no, &width, &height);
-	if (!data->map->textures->no_text)
+	if (init_text_helper(data, &data->textures[0], data->map->no) == -1)
 		return (-1);
-	data->map->textures->so_text = mlx_xpm_file_to_image(data->mlx, data->map->so, &width, &height);
-	if (!data->map->textures->so_text)
+	if (init_text_helper(data, &data->textures[1], data->map->so) == -1)
 		return (-1);
-	data->map->textures->ea_text = mlx_xpm_file_to_image(data->mlx, data->map->ea, &width, &height);
-	if (!data->map->textures->ea_text)
+	if (init_text_helper(data, &data->textures[2], data->map->ea) == -1)
 		return (-1);
-	data->map->textures->we_text = mlx_xpm_file_to_image(data->mlx, data->map->we, &width, &height);
-	if (!data->map->textures->we_text)
+	if (init_text_helper(data, &data->textures[3], data->map->we) == -1)
 		return (-1);
 	return (0);
 }

@@ -15,6 +15,23 @@ HEADER
 
 #include "../include/cub3d.h"
 
+int	free_textures(t_textures *text)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (text[i].addr)
+			free (text[i].addr);
+		if (text[i].img)
+			free (text[i].img);
+		free (&text[i]);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_free_array(char **array)
 {
 	int	i;
@@ -45,8 +62,6 @@ static void	free_struct_map(t_map *map)
 		free (map->ceilling_color);
 	if (map->floor_color)
 		free (map->floor_color);
-	if (map->textures)
-		free (map->textures);
 	if (map)
 		free (map);
 }
@@ -57,6 +72,8 @@ int	free_all(t_data *data)
 	{
 		if (data->player)
 			free (data->player);
+		if (data->textures)
+			free_textures(data->textures);
 		if (data->map)
 			free_struct_map(data->map);
 		if (data->raycast)

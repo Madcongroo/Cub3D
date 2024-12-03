@@ -94,25 +94,16 @@ void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall)
 		wall->draw_end = data->win_height - 1;
 }
 
-void	draw_wall(t_data *data, int x, t_wall *wall, int side)
+void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text)
 {
 	int	y;
-	int	color;
 
 	y = wall->draw_start;
+	printf("%d\n", x);
+	printf("%d\n", y);
 	while (y < wall->draw_end)
 	{
-		if (side == 0)
-			color = get_right_pixel(data, NORTH, x, y);
-		else
-			color = get_right_pixel(data, SOUTH, x, y);
-		if (color == -1)
-		{
-			free_all(data);
-			exit (EXIT_FAILURE);
-		}
-		printf("color code is %d\n", color);
-		my_pixel_put(data, x, y, color);
+		my_pixel_put(data, x, y, get_color_pixel(data, text, x, y));
 		y++;
 	}
 }

@@ -55,14 +55,6 @@ typedef enum e_keys
 	KEY_RIGHT = 65363
 }	t_keys;
 
-typedef enum e_texture_type
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-}	t_texture_type;
-
 typedef struct s_mini_map
 {
 	int	mini_size;
@@ -104,10 +96,13 @@ typedef struct s_rgb
 
 typedef struct s_textures
 {
-	void	*no_text;
-	void	*so_text;
-	void	*ea_text;
-	void	*we_text;
+	char	*addr;
+	void	*img;
+	int		endian;
+	int		line_len;
+	int		bits_p_pix;
+	int		width;
+	int		height;
 }	t_textures;
 
 typedef struct s_map
@@ -119,7 +114,6 @@ typedef struct s_map
 	char		*so;
 	char		*we;
 	char		*ea;
-	t_textures	*textures;
 	t_rgb		*floor_color;
 	t_rgb		*ceilling_color;
 	int			fd;
@@ -148,6 +142,7 @@ typedef struct s_data
 	t_map		*map;
 	t_raycast	*raycast;
 	t_mini_map	*mini_map;
+	t_textures	*textures;
 	void		*win;
 	void		*text;
 	void		*mlx;
@@ -263,14 +258,14 @@ void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
 void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
 void	algo_dda(t_data *data, t_raycast *ray);
 void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
-void	draw_wall(t_data *data, int x, t_wall *wall, int color);
+void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text);
 
 // src/raycasting/utils_rat.c
 void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
 
 // src/raycasting/textures.c
 int	init_textures(t_data *data);
-int	get_right_pixel(t_data *data, t_texture_type direction, int x, int y);
+int	get_color_pixel(t_data *data, t_textures *text, int x, int y);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);

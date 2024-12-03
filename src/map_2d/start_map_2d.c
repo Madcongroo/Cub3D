@@ -109,10 +109,10 @@ int	start_map_2d(t_data *data)
     if (is_map_wall_surrounded(data, data->map->map_array) == -1)
 		return (-1);
 	if (init_textures(data) == -1)
-		{
-			free_all(data);
-			exit (EXIT_FAILURE);
-		}
+	{
+		free_all(data);
+		exit (EXIT_FAILURE);
+	}
 	render_game(data);
 	games_loop(data);
 	return (0);
