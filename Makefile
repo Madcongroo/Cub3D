@@ -44,6 +44,7 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/raycasting/play_3d.c \
 									$(SRC_DIR)/raycasting/utils_ray.c \
 									$(SRC_DIR)/raycasting/textures.c \
+									$(SRC_DIR)/raycasting/touch_wall.c \
 									$(SRC_DIR)/bonus/mini_map.c
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
