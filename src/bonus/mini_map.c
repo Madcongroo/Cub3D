@@ -23,7 +23,7 @@ void	init_mini_map(t_data *data, t_mini_map *mini_map)
 
 	mini_map->mini_size = 10;
 	// largeur_mini_map = 180;
-	mini_map->offset_x = 1080 + 540;
+	mini_map->offset_x = 10;
 	mini_map->offset_y = 10;
 	mini_map->color = GRAY;
 	mini_map->player_x = 0;
@@ -87,11 +87,11 @@ void	mini_map(t_data *data)
 	int	x;
 
 	init_mini_map(data, data->mini_map);
-	y = 0;
-	while (y < data->map->height)
+	y = data->player->y - 5;
+	while (y < (y + 11))
 	{
-		x = 0;
-		while (x < data->map->width)
+		x = data->player->x - 5;
+		while (x < (x + 11))
 		{
 			if (data->map->map_array[y][x] == '1')
 				data->mini_map->color = BLUE;
