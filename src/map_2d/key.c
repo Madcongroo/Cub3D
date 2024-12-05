@@ -25,13 +25,13 @@ void	key_w_and_key_s(t_data *data, float *new_x, float *new_y)
 	proposed_y = *new_y;
 	if (data->keys[KEY_W])
 	{
-		proposed_x += cos(data->player->angle) * 0.03;
-		proposed_y += sin(data->player->angle) * 0.03;
+		proposed_x += cos(data->player->angle) / SQUARE_SIZE;
+		proposed_y += sin(data->player->angle) / SQUARE_SIZE;
 	}
 	if (data->keys[KEY_S])
 	{
-		proposed_x -= cos(data->player->angle) * 0.03;
-		proposed_y -= sin(data->player->angle) * 0.03;
+		proposed_x -= cos(data->player->angle) / SQUARE_SIZE;
+		proposed_y -= sin(data->player->angle) / SQUARE_SIZE;
 	}
 	if (control_touch_wall(data, proposed_x, *new_y) == 0)
 		*new_x = proposed_x;
@@ -48,13 +48,13 @@ void	key_a_and_key_d(t_data *data, float *new_x, float *new_y)
 	proposed_y = *new_y;
 	if (data->keys[KEY_A])
 	{
-		proposed_x -= cos(data->player->angle + M_PI / 2) * 0.03;
-		proposed_y -= sin(data->player->angle + M_PI / 2) * 0.03;
+		proposed_x -= cos(data->player->angle + M_PI / 2) / SQUARE_SIZE;
+		proposed_y -= sin(data->player->angle + M_PI / 2) / SQUARE_SIZE;
 	}
 	if (data->keys[KEY_D])
 	{
-		proposed_x += cos(data->player->angle + M_PI / 2) * 0.03;
-		proposed_y += sin(data->player->angle + M_PI / 2) * 0.03;
+		proposed_x += cos(data->player->angle + M_PI / 2) / SQUARE_SIZE;
+		proposed_y += sin(data->player->angle + M_PI / 2) / SQUARE_SIZE;
 	}
 	if (control_touch_wall(data, proposed_x, *new_y) == 0)
 		*new_x = proposed_x;
