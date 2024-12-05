@@ -49,11 +49,6 @@ void	rotate_player(t_player *player, float angle)
 	player->y_cam = sin(player->angle);
 	player->plan_x = -PLANE_LENGHT * player->y_cam;
 	player->plan_y = PLANE_LENGHT * player->x_cam;
-	/* TEMPORAIRE */
-	// Imprimer les valeurs pour vérifier la mise à jour des vecteurs
-    //printf("Angle : %.2f radians\n", player->angle);
-    //printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", player->x_cam, player->y_cam);
-    //printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", player->plan_x, player->plan_y);
 }
 
 void	process_movement(t_data *data)
@@ -78,10 +73,7 @@ int	render_game(t_data *data)
 	ft_memset(data->address, 0, data->win_width * data->win_height
 		*(data->bits_p_pix / 8));
 	raycast_ray(data);
-	//map_img_output(data, data->map->map_array, 0);
-	//map_img_output(data, data->map->map_array, 1);
 	mini_map(data);
-	//draw_player(data);
 	process_movement(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);

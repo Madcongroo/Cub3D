@@ -18,11 +18,12 @@
 
 void	init_mini_map(t_data *data, t_mini_map *mini_map)
 {
-	int	largeur_mini_map;
+	// int	largeur_mini_map;
+	(void)data;
 
 	mini_map->mini_size = 10;
-	largeur_mini_map = mini_map->mini_size * data->map->width;
-	mini_map->offset_x = data->win_width - largeur_mini_map - 10;
+	// largeur_mini_map = 180;
+	mini_map->offset_x = 1080 + 540;
 	mini_map->offset_y = 10;
 	mini_map->color = GRAY;
 	mini_map->player_x = 0;
