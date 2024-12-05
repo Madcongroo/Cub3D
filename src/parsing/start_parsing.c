@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:13:56 by proton            #+#    #+#             */
-/*   Updated: 2024/12/05 11:14:01 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:15:14 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static char	**split_buff(char *buf)
 		error_msg("Error\nNew buffer error\n");
 		return (NULL);
 	}
+	
 	map_array = ft_split(new_buf, '\n');
 	if (!map_array)
 	{
@@ -116,10 +117,10 @@ static char	**read_map(char *file)
 		error_msg("Error\nOpen error\n");
 		return (NULL);
 	}
-	buf = (char *)ft_calloc(2000, sizeof(char));
+	buf = (char *)ft_calloc(15000, sizeof(char));
 	if (!buf)
 		return (NULL);
-	check = read(fd, buf, 2000);
+	check = read(fd, buf, 15000);
 	if (check < 0)
 	{
 		free (buf);
