@@ -18,30 +18,48 @@
 
 void	key_w_and_key_s(t_data *data, float *new_x, float *new_y)
 {
+	float	proposed_x;
+	float	proposed_y;
+
+	proposed_x = *new_x;
+	proposed_y = *new_y;
 	if (data->keys[KEY_W])
 	{
-		*new_x += cos(data->player->angle) * 0.2;
-		*new_y += sin(data->player->angle) * 0.2;
+		proposed_x += cos(data->player->angle) * 0.03;
+		proposed_y += sin(data->player->angle) * 0.03;
 	}
 	if (data->keys[KEY_S])
 	{
-		*new_x -= cos(data->player->angle) * 0.2;
-		*new_y -= sin(data->player->angle) * 0.2;
+		proposed_x -= cos(data->player->angle) * 0.03;
+		proposed_y -= sin(data->player->angle) * 0.03;
 	}
+	if (control_touch_wall(data, proposed_x, *new_y) == 0)
+		*new_x = proposed_x;
+	if (control_touch_wall(data, *new_x, proposed_y) == 0)
+		*new_y = proposed_y;
 }
 
 void	key_a_and_key_d(t_data *data, float *new_x, float *new_y)
 {
+	float	proposed_x;
+	float	proposed_y;
+
+	proposed_x = *new_x;
+	proposed_y = *new_y;
 	if (data->keys[KEY_A])
 	{
-		*new_x -= cos(data->player->angle + M_PI / 2) * 0.2;
-		*new_y -= sin(data->player->angle + M_PI / 2) * 0.2;
+		proposed_x -= cos(data->player->angle + M_PI / 2) * 0.03;
+		proposed_y -= sin(data->player->angle + M_PI / 2) * 0.03;
 	}
 	if (data->keys[KEY_D])
 	{
-		*new_x += cos(data->player->angle + M_PI / 2) * 0.2;
-		*new_y += sin(data->player->angle + M_PI / 2) * 0.2;
+		proposed_x += cos(data->player->angle + M_PI / 2) * 0.03;
+		proposed_y += sin(data->player->angle + M_PI / 2) * 0.03;
 	}
+	if (control_touch_wall(data, proposed_x, *new_y) == 0)
+		*new_x = proposed_x;
+	if (control_touch_wall(data, *new_x, proposed_y) == 0)
+		*new_y = proposed_y;
 }
 
 // touche presser

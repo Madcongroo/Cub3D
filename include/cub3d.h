@@ -36,6 +36,7 @@ HEADER
 # define ORANGE 0xF99a0B
 # define BLACK 0x000000
 # define RED 0xFF0000
+# define RED_RUSH 0x880000
 # define GRAY 0xD3D3D3
 # define BLUE 0x0000FF
 # define SQUARE_SIZE 32
@@ -64,6 +65,14 @@ typedef struct s_mini_map
 	int	player_y;
 }	t_mini_map;
 
+typedef struct s_wall
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	float	wall_x;
+}	t_wall;
+
 typedef struct s_player
 {
 	float		x;
@@ -86,30 +95,46 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-typedef struct s_map
+typedef struct s_textures
 {
-	char	**map_array;
+	char	*addr;
+	void	*img;
+	int		endian;
+	int		line_len;
+	int		bits_p_pix;
 	int		width;
 	int		height;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	t_rgb	*floor_color;
-	t_rgb	*ceilling_color;
-	int		fd;
+}	t_textures;
+
+typedef struct s_map
+{
+	char		**map_array;
+	int			width;
+	int			height;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	t_rgb		*floor_color;
+	t_rgb		*ceilling_color;
+	int			fd;
 }	t_map;
 
 typedef struct s_raycast
 {
 	bool	touch_wall;
-	double	dist_x;
-	double	dist_y;
-	int		result;
-	double	side_dist_x;
-	double	side_dist_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
 	int		step_x;
 	int		step_y;
+	float	perp_wall_dist;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	int		side;
 }	t_raycast;
 
 typedef struct s_data
@@ -118,11 +143,13 @@ typedef struct s_data
 	t_map		*map;
 	t_raycast	*raycast;
 	t_mini_map	*mini_map;
+	t_textures	*textures;
 	void		*win;
 	void		*text;
 	void		*mlx;
 	void		*img;
 	char		*address;
+	int			which_texture;
 	int			bits_p_pix;
 	int			line_len;
 	int			endian;
@@ -144,13 +171,11 @@ typedef struct s_check
 // src/error_gestion.c
 int		free_all(t_data *data);
 int		ft_free_array(char **array);
+int		error_msg(char *error_msg);
 
 // src/start_parsing.c
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
-
-/*re alloc map*/
-int		re_alloc_map(t_data *data);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
@@ -162,7 +187,11 @@ int		texturs_paths_no_so(t_data *data, char **map);
 int		texturs_paths_we_ea(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
 void	color_ceiling(t_data *data, char **map);
-int		check_color_number(t_data *data);
+
+// src/parsing/check_map.c
+int		check_map(t_data *data, char **map);
+int		is_map_wall_surrounded(t_data *data, char **map);
+int		should_it_be_checked(t_data *data, char **map, int y, int x);
 
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
@@ -179,10 +208,16 @@ int		init_struct(t_data *data);
 // src/parsing/utils.c
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
-char	*jump_space(char *str);
-int		error_msg(char *error_msg);
 int		good_char(char c);
-int		should_it_be_checked(t_data *data, char **map, int y, int x);
+char	*ft_strndup(const char *s, size_t n);
+char	*ft_strncpy(char *dst, const char *src, size_t size);
+
+// src/parsing/parsing_utils2
+void	set_direction(t_data *data, char c);
+int		check_line(char *buf);
+int		control_line(char *buf, int *map_mark, int *text_mark);
+int		check_file_name(char *file);
+int		check_color_number(t_data *data);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);
@@ -217,6 +252,29 @@ int		get_real_line(char *line);
 void	calculate_map_dimensions(t_map *map);
 int		is_player(char c);
 void	initialize_keys(int keys[], int size);
+
+// src/raycasting/raycast.c
+void	raycast_ray(t_data *data);
+void	init_ray(t_raycast *ray);
+void	draw_ceilling(t_data *data);
+void	draw_floor(t_data *data);
+
+// src/raycasting/play_3d
+void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
+void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
+void	algo_dda(t_data *data, t_raycast *ray);
+void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
+void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *ray);
+
+// src/raycasting/utils_rat.c
+void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
+
+// src/raycasting/textures.c
+int	init_textures(t_data *data);
+int	get_color_pixel(t_data *data, t_textures *text, int x, int y);
+
+// src/raycasting/touch_wall.c
+int		control_touch_wall(t_data *data, float new_x, float new_y);
 
 // src/bonus/mini_map.c
 void	init_mini_map(t_data *data, t_mini_map *mini_map);

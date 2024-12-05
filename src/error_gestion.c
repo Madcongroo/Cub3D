@@ -15,6 +15,22 @@ HEADER
 
 #include "../include/cub3d.h"
 
+int	error_msg(char *error_msg)
+{
+	ft_putstr_fd(error_msg, 2);
+	return (-1);
+}
+
+static int	free_textures(t_data *data)
+{
+	if (data->textures->addr)
+		free (data->textures->addr);
+	if (data->textures->img)
+		free (data->textures->img);
+	free (data->textures);
+	return (0);
+}
+
 int	ft_free_array(char **array)
 {
 	int	i;
@@ -55,6 +71,8 @@ int	free_all(t_data *data)
 	{
 		if (data->player)
 			free (data->player);
+		if (data->textures)
+			free_textures(data);
 		if (data->map)
 			free_struct_map(data->map);
 		if (data->raycast)
@@ -66,4 +84,3 @@ int	free_all(t_data *data)
 	}
 	return (1);
 }
-

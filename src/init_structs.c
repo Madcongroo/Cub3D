@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/11/13 16:51:57 by tom              ###   ########.fr       */
+/*   Updated: 2024/12/05 11:30:53 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ static t_player	*init_player_struct(void)
 
 	new_player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!new_player)
-		return NULL;
+		return (NULL);
 	return (new_player);
 }
 
 static t_raycast	*init_raycast_struct(void)
 {
 	t_raycast	*raycast;
-	
+
 	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
 	if (!raycast)
 		return (NULL);
 	return (raycast);
-
 }
 
 static t_rgb	*get_rgb_struct(void)
@@ -45,8 +44,8 @@ static t_rgb	*get_rgb_struct(void)
 
 static t_map	*init_map_struct(void)
 {
-	t_map	*map;
-	
+	t_map		*map;
+
 	map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -66,6 +65,9 @@ int	init_struct(t_data *data)
 		return (-1);
 	data->raycast = init_raycast_struct();
 	if (!data->raycast)
+		return (-1);
+	data->textures = ft_calloc(4, sizeof(t_textures));
+	if (!data->textures)
 		return (-1);
 	data->mini_map = malloc(sizeof(t_mini_map));
 	if (!data->mini_map)

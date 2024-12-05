@@ -16,14 +16,50 @@
 
 #include "../../include/cub3d.h"
 
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	if (!s || !n)
+		return (NULL);
+	str = malloc(sizeof(char) * (n + 1));
+	if (!str)
+		return (NULL);
+	while (n)
+	{
+		str[i] = s[i];
+		i++;
+		n--;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strncpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dst || !src)
+		return (NULL);
+	if (size < 2)
+		return (NULL);
+	while (src[i] && i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
 int	good_char(char c)
 {
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0'
 		&& c != '1' && !ft_is_whitespace(c))
-		{
-			printf("%c\n", c);
 		return (1);
-		}
 	return (0);
 }
 
@@ -58,17 +94,4 @@ char	*skip_space(char *str)
 	while (*str && ft_is_whitespace(*str))
 		str++;
 	return (str);
-}
-
-char	*jump_space(char *str)
-{
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	return (str);
-}
-
-int	error_msg(char *error_msg)
-{
-	ft_putstr_fd(error_msg, 2);
-	return (-1);
 }

@@ -15,22 +15,6 @@
 */
 #include "../../include/cub3d.h"
 
-/* fonction principal pour appeler les fonctions
-qui remplisse la structure map */
-int	parse_all(t_data *data, char **map)
-{
-	if (texturs_paths_no_so(data, map) != 0)
-		return (-1);
-	if (texturs_paths_we_ea(data, map) != 0)
-		return (-1);
-	color_floor(data, map);
-	color_ceiling(data, map);
-	if (fill_map_array(data, map) != 0)
-		return (-1);
-	// print_map_info(data->map);
-	return (0);
-}
-
 // Fonction pour trouver le chemin des textures et 
 // les mettre dans la structure t_map
 int	texturs_paths_no_so(t_data *data, char **map)
@@ -103,7 +87,8 @@ void	color_floor(t_data *data, char **map)
 		}
 		i++;
 	}
-	if ((check_colors = check_color_number(data)) != 0)
+	check_colors = check_color_number(data);
+	if (check_colors != 0)
 		return ;
 }
 
@@ -129,21 +114,22 @@ void	color_ceiling(t_data *data, char **map)
 		}
 		i++;
 	}
-	if ((check_colors = check_color_number(data)) != 0)
+	check_colors = check_color_number(data);
+	if (check_colors != 0)
 		return ;
-
 }
-/* Fonction qui check les chiffre recu depuis le fichier*/
-int	check_color_number(t_data *data)
+
+/* fonction principal pour appeler les fonctions
+qui remplisse la structure map */
+int	parse_all(t_data *data, char **map)
 {
-	if (data->map->floor_color->r < 0 || data->map->floor_color->r > 255
-		|| data->map->floor_color->g < 0 || data->map->floor_color->g > 255
-		|| data->map->floor_color->b < 0 || data->map->floor_color->b > 255)
+	if (texturs_paths_no_so(data, map) != 0)
 		return (-1);
-	if (data->map->ceilling_color->r < 0 || data->map->ceilling_color->r > 255
-		|| data->map->ceilling_color->g < 0 || data->map->ceilling_color->g > 255
-		|| data->map->ceilling_color->b < 0 || data->map->ceilling_color->b > 255)
+	if (texturs_paths_we_ea(data, map) != 0)
+		return (-1);
+	color_floor(data, map);
+	color_ceiling(data, map);
+	if (fill_map_array(data, map) != 0)
 		return (-1);
 	return (0);
 }
-
