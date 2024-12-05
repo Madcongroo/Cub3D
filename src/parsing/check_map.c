@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/11/26 15:13:48 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/05 10:48:16 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
-	if (y == 0 || y == data->map->height || x == 0
+	if (y == 0 || y == data->map->height - 1 || x == 0
 		|| x == data->map->width)
 		return (1);
 	else if (!map[y + 1][x] || !map[y][x - 1] || !map[y - 1][x]
@@ -50,34 +50,6 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 	return (0);
 }
 
-void	set_direction(t_data *data, char c)
-{
-	if (c == 'N')
-		data->player->angle = 3 * M_PI / 2;
-	else if (c == 'S')
-		data->player->angle = M_PI / 2;
-	else if (c == 'E')
-		data->player->angle = 0;
-	else
-		data->player->angle = M_PI;
-	data->player->x_cam = cos(data->player->angle);
-	data->player->y_cam = sin(data->player->angle);
-	data->player->plan_x = -PLANE_LENGHT * data->player->y_cam;
-	data->player->plan_y = PLANE_LENGHT * data->player->x_cam;
-	/* TEMPORAIRE */
-	// Imprimer les valeurs des vecteurs (avec %f qui attend un float/double)
-    //printf("Angle : %.2f radians\n", data->player->angle);
-    //printf("Vecteur de direction : (x_cam : %.2f, y_cam : %.2f)\n", data->player->x_cam, data->player->y_cam);
-    //printf("Vecteur du plan de la caméra : (plan_x : %.2f, plan_y : %.2f)\n", data->player->plan_x, data->player->plan_y);
-
-    // Calculer et imprimer la longueur des vecteurs
-    //float dir_length = sqrtf(data->player->x_cam * data->player->x_cam + data->player->y_cam * data->player->y_cam);
-    //float plane_length = sqrtf(data->player->plan_x * data->player->plan_x + data->player->plan_y * data->player->plan_y);
-
-    //printf("Longueur du vecteur de direction : %.2f\n", dir_length);
-    //printf("Longueur du vecteur du plan de la caméra : %.2f\n", plane_length);
-}
-
 /*fonction to check if the map is surrounded by walls
 	each time the pos is '0', checks all pos + 1/ -1.
 		if the pos +/- is a whitespace or nothing returns -1*/
@@ -100,9 +72,7 @@ int	is_map_wall_surrounded(t_data *data, char **map)
 					return (-1);
 			}
 			if (is_player(map[i][j]))
-			{
 				set_direction(data, map[i][j]);
-			}
 		}
 	}
 	return (0);

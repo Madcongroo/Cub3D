@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:14:06 by proton            #+#    #+#             */
-/*   Updated: 2024/11/01 09:33:02 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/05 11:13:31 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	check_basics(char **array)
 				return (ft_free_array(array));
 		}
 		if (check_char(array[i], &check) == -1)
-			return (error_msg("Error\nUnknown caracter or wrong texture path\n"));
+			return (error_msg("Error\nUnknown char or wrong texture path\n"));
 		stop_trim--;
 	}
 	if (check.n != 1 || check.s != 1 || check.e != 1

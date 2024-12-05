@@ -1,51 +1,16 @@
-/*
-HEADER
-
-
-
-
-
-
-
-
-
-
-HEADER
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/05 11:13:56 by proton            #+#    #+#             */
+/*   Updated: 2024/12/05 11:14:01 by proton           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-/*checks each line to differentiate which line 
-	is for the entries or the map*/
-/*check toutes les lignes une par une pour differencier les entree
-	de la map*/
-static int	check_line(char *buf)
-{
-	int	i;
-
-	i = -1;
-	while (buf[++i] != '\n' && buf[i])
-	{
-		if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'E'
-			|| buf[i] == 'W' || buf[i] == 'C' || buf[i] == 'F')
-			return (1);
-		else if (buf[i] == '0' || buf[i] == '1')
-			return (2);
-	}
-	return (0);
-}
-
-int	control_line(char *buf, int *map_mark, int *text_mark)
-{
-	int			ret_value;
-
-	ret_value = check_line(buf);
-	if (ret_value == 1)
-		*text_mark += 1;
-	else if (ret_value == 2)
-		*map_mark += 1;
-	return (ret_value);
-}
 
 /*reads the buffer and checks if the map is at the end of the file*/
 /*lis le buffer et regarde si la map est a la fin du fichier*/
@@ -75,27 +40,6 @@ static int	check_buffer(char *buf)
 	if (map_mark < 1 || text_mark != 6)
 		return (error_msg("Error\nMap not found or too much arguments\n"));
 	return (0);
-}
-
-char	*ft_strndup(const char *s, size_t n)
-{
-	size_t		i;
-	char	*str;
-
-	i = 0;
-	if (!s || !n)
-		return (NULL);
-	str = malloc(sizeof(char) * (n + 1));
-	if (!str)
-		return (NULL);
-	while (n)
-	{
-		str[i] = s[i];
-		i++;
-		n--;
-	}
-	str[i] = '\0';
-	return (str);
 }
 
 /*cuts the buffer if the map is separated by only \n*/
@@ -185,26 +129,6 @@ static char	**read_map(char *file)
 	else if (check == 0)
 		buf[check] = '\0';
 	return (split_buff(buf));
-}
-
-int	check_file_name(char *file)
-{
-	int	i;
-
-	i = -1;
-	if (file[0] == '.')
-		return (-1);
-	while (file[++i])
-	{
-		if (file[i] == '.')
-			break ;
-	}
-	if (file[i] == '.')
-	{
-		if (ft_strcmp(file + i, ".cub") == 0)
-			return (0);
-	}
-	return (-1);
 }
 
 int	start_parsing(t_data *data, char *file)

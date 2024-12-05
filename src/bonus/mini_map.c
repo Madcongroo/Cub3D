@@ -43,11 +43,11 @@ void	draw_mini_map(t_data *data, int x, int y)
 		while (j < data->mini_map->mini_size)
 		{
 			my_pixel_put(data,
-					data->mini_map->offset_x + x * data->mini_map->mini_size
-					+ i,
-					data->mini_map->offset_y + y * data->mini_map->mini_size
-					+ j,
-					color);
+				data->mini_map->offset_x + x * data->mini_map->mini_size
+				+ i,
+				data->mini_map->offset_y + y * data->mini_map->mini_size
+				+ j,
+				color);
 			j++;
 		}
 		i++;
@@ -62,10 +62,10 @@ void	draw_player_in_mini_map(t_data *data)
 	int	i;
 	int	j;
 
-	mini_player_x = data->mini_map->offset_x + (int)(data->player->x *
-					data->mini_map->mini_size);
-	mini_player_y = data->mini_map->offset_y + (int)(data->player->y *
-					data->mini_map->mini_size);
+	mini_player_x = data->mini_map->offset_x + (int)(data->player->x
+			* data->mini_map->mini_size);
+	mini_player_y = data->mini_map->offset_y + (int)(data->player->y
+			* data->mini_map->mini_size);
 	size = 8;
 	i = -size / 2;
 	while (i <= size / 2)

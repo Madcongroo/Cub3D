@@ -1,7 +1,7 @@
-N img/north.xpm
-SO img/south.xpm
-WE img/west.xpm
-EA img/east.xpm
+NO maps/NO_texture.xpm
+SO maps/SO_texture.xpm
+WE maps/WE_texture.xpm
+EA maps/EA_texture.xpm
 
 F 220,100,0
 C 225,30,0

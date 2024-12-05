@@ -149,6 +149,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*img;
 	char		*address;
+	int			which_texture;
 	int			bits_p_pix;
 	int			line_len;
 	int			endian;
@@ -170,13 +171,11 @@ typedef struct s_check
 // src/error_gestion.c
 int		free_all(t_data *data);
 int		ft_free_array(char **array);
+int		error_msg(char *error_msg);
 
 // src/start_parsing.c
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
-
-/*re alloc map*/
-int		re_alloc_map(t_data *data);
 
 /*temporaire pour les tests comme afficher la map etc*/
 void	display_array(char **map);
@@ -188,11 +187,11 @@ int		texturs_paths_no_so(t_data *data, char **map);
 int		texturs_paths_we_ea(t_data *data, char **map);
 void	color_floor(t_data *data, char **map);
 void	color_ceiling(t_data *data, char **map);
-int		check_color_number(t_data *data);
 
 // src/parsing/check_map.c
-void	set_direction(t_data *data, char c);
+int		check_map(t_data *data, char **map);
 int		is_map_wall_surrounded(t_data *data, char **map);
+int		should_it_be_checked(t_data *data, char **map, int y, int x);
 
 // src/parsing/fill_map_array.c
 int		fill_map_array(t_data *data, char **map);
@@ -209,10 +208,16 @@ int		init_struct(t_data *data);
 // src/parsing/utils.c
 char	*remove_sup_space(char *str);
 char	*skip_space(char *str);
-char	*jump_space(char *str);
-int		error_msg(char *error_msg);
 int		good_char(char c);
-int		should_it_be_checked(t_data *data, char **map, int y, int x);
+char	*ft_strndup(const char *s, size_t n);
+char	*ft_strncpy(char *dst, const char *src, size_t size);
+
+// src/parsing/parsing_utils2
+void	set_direction(t_data *data, char c);
+int		check_line(char *buf);
+int		control_line(char *buf, int *map_mark, int *text_mark);
+int		check_file_name(char *file);
+int		check_color_number(t_data *data);
 
 // src/map_2d/start_map_2d
 int		start_map_2d(t_data *data);

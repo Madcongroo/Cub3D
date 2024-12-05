@@ -32,8 +32,8 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(PARSIG_DIR)/fill_map_array.c \
 									$(PARSIG_DIR)/check_basics.c \
 									$(PARSIG_DIR)/parsing_utils.c \
+									$(PARSIG_DIR)/parsing_utils_2.c \
 									$(PARSIG_DIR)/check_map.c \
-									$(PARSIG_DIR)/re_alloc_map.c \
 									$(SRC_DIR)/map_2d/start_map_2d.c \
 									$(SRC_DIR)/map_2d/games_loop.c \
 									$(SRC_DIR)/map_2d/draw_grid.c \

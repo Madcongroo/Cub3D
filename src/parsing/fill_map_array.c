@@ -23,7 +23,7 @@ int	get_map_start(char **map)
 	i = 0;
 	while (map[i])
 	{
-		trimmed_line = jump_space(map[i]);
+		trimmed_line = skip_space(map[i]);
 		if (ft_isdigit(trimmed_line[0]))
 			return (i);
 		i++;
@@ -68,24 +68,6 @@ int	get_max_width(char **map, int map_start)
 	return (width);
 }
 
-char	*ft_strncpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst || !src)
-		return (NULL);
-	if (size < 2)
-		return (NULL);
-	while (src[i] && i < size)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
 // Fonction pour copier chaque ligne de la map dans map_array
 void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 {
@@ -105,7 +87,8 @@ void	copy_map_array(t_data *data, char **map, int map_start, int map_height)
 		data->map->map_array[j] = ft_calloc(width + 2, sizeof(char));
 		if (!data->map->map_array[j])
 			return ;
-		data->map->map_array[j] = ft_strncpy(data->map->map_array[j], map[i], width + 2);
+		data->map->map_array[j] = ft_strncpy(data->map->map_array[j],
+				map[i], width + 2);
 		if (!data->map->map_array[j])
 			return ;
 		i++;

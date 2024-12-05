@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:35:03 by proton            #+#    #+#             */
-/*   Updated: 2024/12/03 14:51:10 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/05 11:30:53 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ static t_player	*init_player_struct(void)
 
 	new_player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!new_player)
-		return NULL;
+		return (NULL);
 	return (new_player);
 }
 
 static t_raycast	*init_raycast_struct(void)
 {
 	t_raycast	*raycast;
-	
+
 	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
 	if (!raycast)
 		return (NULL);
 	return (raycast);
-
 }
 
 static t_rgb	*get_rgb_struct(void)
@@ -46,7 +45,7 @@ static t_rgb	*get_rgb_struct(void)
 static t_map	*init_map_struct(void)
 {
 	t_map		*map;
-	
+
 	map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (NULL);

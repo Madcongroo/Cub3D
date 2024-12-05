@@ -11,7 +11,7 @@ HEADER
 
 
 HEADER
-*/
+
 
 #include "cub3d.h"
 
@@ -43,7 +43,8 @@ void	print_map_info(t_map *map)
 		map->floor_color->g, 
 		map->floor_color->b);
 
-	printf("Ceiling color: R=%d, G=%d, B=%d\n", map->ceilling_color->r, map->ceilling_color->g, map->ceilling_color->b);
+	printf("Ceiling color: R=%d, G=%d, B=%d\n",
+		map->ceilling_color->r, map->ceilling_color->g, map->ceilling_color->b);
 	// Affichage de la carte (map_array)
 	if (map->map_array)
 	{
@@ -57,4 +58,4 @@ void	print_map_info(t_map *map)
 	{
 		printf("Map not set\n");
 	}
-}
+}*/
