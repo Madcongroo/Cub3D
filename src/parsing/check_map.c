@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/12/06 10:44:11 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/06 13:55:17 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int	check_map(t_data *data, char **map)
 					return (error_msg("Error\nPlayer outside the map\n"));
 				if (data->player->y && data->player->x)
 					return (error_msg("Error\nMore than 1 player\n"));
-				data->player->y = i;
-				data->player->x = j;
+				data->player->y = i + 0.5;
+				data->player->x = j + 0.5;
 			}
 		}
 	}
