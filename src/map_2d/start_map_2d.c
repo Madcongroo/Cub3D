@@ -18,19 +18,11 @@
 
 void my_pixel_put(t_data *data, int x, int y, int color)
 {
-    // Vérifier que les coordonnées sont dans les limites de l'image
-    if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
-    {
-        return; // Ne rien faire si les coordonnées sont hors limites
-    }
-
-    // Calculer l'adresse du pixel
-    char *dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
-    
-    // Écrire la couleur à l'adresse calculée
-    *(unsigned int *)(dst) = color;
+	if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
+		return ;
+	char *dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
+	*(unsigned int *)(dst) = color;
 }
-
 
 void	loop_square_size(t_data *data, int x, int y, int color)
 {
@@ -74,7 +66,6 @@ void	map_img_output(t_data *data, char **map, int turn)
 			}
 		}
 	}
-	//draw_grid(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
 }
 

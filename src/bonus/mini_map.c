@@ -59,8 +59,8 @@ void	draw_player_in_mini_map(t_data *data)
 	int	i;
 	int	j;
 
-	mini_player_x = 28 * data->mini_map->mini_size / 2;
-	mini_player_y = 22 * data->mini_map->mini_size / 2;
+	mini_player_x = 27 * data->mini_map->mini_size / 2;
+	mini_player_y = 21 * data->mini_map->mini_size / 2;
 	size = 8;
 	i = -size / 2;
 	while (i <= size / 2)
@@ -95,7 +95,8 @@ void	mini_map(t_data *data)
 				data->mini_map->color = BLUE;
 			else if (ft_is_whitespace(data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13]))
 				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '0')
+			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '0'
+				|| is_player(data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13]))
 				data->mini_map->color = GRAY;
 			draw_mini_map(data, x, y);
 			x++;
