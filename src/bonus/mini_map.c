@@ -87,11 +87,15 @@ void	mini_map(t_data *data)
 		x = 1;
 		while (x < 27)
 		{
-			if (data->map->map_array[y + (int)data->player->y][x + (int)data->player->x] == '1')
-				data->mini_map->color = BLUE;
-			else if (ft_is_whitespace(data->map->map_array[y + (int)data->player->y][x + (int)data->player->x]))
+			if ((y + (int)data->player->y - 10 < 0) || (x + (int)data->player->x - 13) < 0)
 				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + (int)data->player->y][x + (int)data->player->x] == '0')
+			else if ((y + (int)data->player->y - 10) > data->map->height || x + (int)data->player->x - 13 > data->map->width)
+				data->mini_map->color = BLACK;
+			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '1')
+				data->mini_map->color = BLUE;
+			else if (ft_is_whitespace(data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13]))
+				data->mini_map->color = BLACK;
+			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '0')
 				data->mini_map->color = GRAY;
 			draw_mini_map(data, x, y);
 			x++;
