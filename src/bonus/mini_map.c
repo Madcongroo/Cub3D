@@ -1,28 +1,27 @@
-/*
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 16:52:19 by proton            #+#    #+#             */
+/*   Updated: 2024/12/06 16:53:41 by proton           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
-
-
-
-
-
-
-
-
-
-
-
-*/
 
 #include "../../include/cub3d.h"
 
-void	init_mini_map(t_data *data, t_mini_map *mini_map)
+static void	init_mini_map(t_data *data, t_mini_map *mini_map)
 {
 	// int	largeur_mini_map;
 	(void)data;
 
 	mini_map->mini_size = 10;
-	// largeur_mini_map = 180;
+	mini_map->mini_width = 27;
+	mini_map->mini_height = 21;
 	mini_map->offset_x = 1;
 	mini_map->offset_y = 1;
 	mini_map->color = GRAY;
@@ -30,7 +29,7 @@ void	init_mini_map(t_data *data, t_mini_map *mini_map)
 	mini_map->player_y = 0;
 }
 
-void	draw_mini_map(t_data *data, int x, int y)
+static void	draw_mini_map(t_data *data, int x, int y)
 {
 	int	i;
 	int	j;
@@ -51,7 +50,7 @@ void	draw_mini_map(t_data *data, int x, int y)
 	}
 }
 
-void	draw_player_in_mini_map(t_data *data)
+static void	draw_player_in_mini_map(t_data *data, t_mini_map *mini_map)
 {
 	int	mini_player_x;
 	int	mini_player_y;
@@ -59,8 +58,8 @@ void	draw_player_in_mini_map(t_data *data)
 	int	i;
 	int	j;
 
-	mini_player_x = 27 * data->mini_map->mini_size / 2;
-	mini_player_y = 21 * data->mini_map->mini_size / 2;
+	mini_player_x = mini_map->mini_width * data->mini_map->mini_size / 2;
+	mini_player_y = mini_map->mini_height * data->mini_map->mini_size / 2;
 	size = 8;
 	i = -size / 2;
 	while (i <= size / 2)
@@ -82,10 +81,10 @@ void	mini_map(t_data *data)
 
 	init_mini_map(data, data->mini_map);
 	y = 1;
-	while (y < 21)
+	while (y < data->mini_map->mini_height)
 	{
 		x = 1;
-		while (x < 27)
+		while (x < data->mini_map->mini_width)
 		{
 			if ((y + (int)data->player->y - 10 < 0) || (x + (int)data->player->x - 13) < 0)
 				data->mini_map->color = BLACK;
@@ -103,5 +102,5 @@ void	mini_map(t_data *data)
 		}
 		y++;
 	}
-	draw_player_in_mini_map(data);
+	draw_player_in_mini_map(data, data->mini_map);
 }

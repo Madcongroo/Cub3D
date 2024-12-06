@@ -57,6 +57,8 @@ typedef enum e_keys
 
 typedef struct s_mini_map
 {
+	int	mini_width;
+	int	mini_height;
 	int	mini_size;
 	int	offset_x;
 	int	offset_y;
@@ -277,9 +279,6 @@ int	get_color_pixel(t_data *data, t_textures *text, int x, int y);
 int		control_touch_wall(t_data *data, float new_x, float new_y);
 
 // src/bonus/mini_map.c
-void	init_mini_map(t_data *data, t_mini_map *mini_map);
 void	mini_map(t_data *data);
-void	draw_mini_map(t_data *data, int x, int y);
-void	draw_player_in_mini_map(t_data *data);
 
 #endif
