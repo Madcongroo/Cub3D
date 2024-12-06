@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:16:39 by proton            #+#    #+#             */
-/*   Updated: 2024/12/05 14:37:54 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:44:11 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,10 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
 	if (y == 0 || y == data->map->height - 1 || x == 0
 		|| x == data->map->width)
-		{
-			puts("in first condition");
 			return (1);
-		}
 	else if (!map[y + 1][x] || !map[y][x - 1] || !map[y - 1][x]
 		|| !map[y][x + 1])
-		{
-			puts("in second condition");
-			if (!map[y + 1][x])
-				puts("in map[y + 1][x]");
-			else if (!map[y][x - 1])
-				puts("in map[y][x - 1]");
-			else if (!map[y - 1][x])
-				puts("in map[y - 1][x]");
-			else if (!map[y][x + 1])
-				puts("in map[y][x + 1]");
 			return (1);
-		}
 	return (0);
 }
 
@@ -41,10 +27,7 @@ int	should_it_be_checked(t_data *data, char **map, int y, int x)
 {
 	
 	if (check_edge_cases(data, map, y, x) == 1)
-	{
-		puts("in edge cases");
 		return (1);
-	}
 	if (map[y][x + 1])
 	{
 		if (ft_is_whitespace(map[y][x + 1]))
@@ -87,11 +70,7 @@ int	is_map_wall_surrounded(t_data *data, char **map)
 			if (map[i][j] == '0')
 			{
 				if (should_it_be_checked(data, map, i, j))
-				{
-					printf("y = %d, x = %d\n", i, j);
-					printf("char is %c\n", map[i][j]);
 					return (-1);
-				}
 			}
 			if (is_player(map[i][j]))
 				set_direction(data, map[i][j]);

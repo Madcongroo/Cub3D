@@ -23,8 +23,8 @@ void	init_mini_map(t_data *data, t_mini_map *mini_map)
 
 	mini_map->mini_size = 10;
 	// largeur_mini_map = 180;
-	mini_map->offset_x = 10;
-	mini_map->offset_y = 10;
+	mini_map->offset_x = 1;
+	mini_map->offset_y = 1;
 	mini_map->color = GRAY;
 	mini_map->player_x = 0;
 	mini_map->player_y = 0;
@@ -43,12 +43,8 @@ void	draw_mini_map(t_data *data, int x, int y)
 		j = 0;
 		while (j < data->mini_map->mini_size)
 		{
-			my_pixel_put(data,
-				data->mini_map->offset_x + x * data->mini_map->mini_size
-				+ i,
-				data->mini_map->offset_y + y * data->mini_map->mini_size
-				+ j,
-				color);
+			my_pixel_put(data, x * data->mini_map->mini_size + i,
+				y * data->mini_map->mini_size + j, color);
 			j++;
 		}
 		i++;
@@ -87,13 +83,13 @@ void	mini_map(t_data *data)
 	int	x;
 
 	init_mini_map(data, data->mini_map);
-	y = data->player->y - 5;
-	while (y < (y + 11))
+	y = 1;
+	while (y < 21)
 	{
-		x = data->player->x - 5;
-		while (x < (x + 11))
+		x = 1;
+		while (x < 27)
 		{
-			if (data->map->map_array[y][x] == '1')
+			if (data->map->map_array[y][x] == '1' || ft_is_whitespace(data->map->map_array[y][x]))
 				data->mini_map->color = BLUE;
 			else if (data->map->map_array[y][x] == '0')
 				data->mini_map->color = GRAY;
