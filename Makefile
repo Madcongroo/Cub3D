@@ -20,13 +20,13 @@ CFLAGS							=	-Wall -Wextra -Werror
 SRC_DIR							=	src
 INCLUDE_DIR						=	include
 LIBFT_DIR						=	libft
-GNL_DIR							=	gnl
 OBJ_DIR							=	obj
 MLX_DIR							=	mlx
 MLX_ICLUDES						=	/usr/include
 PARSIG_DIR						=	$(SRC_DIR)/parsing
 MAP_2D							=	$(SRC_DIR)/map_2d
 RAYCASTING						=	$(SRC_DIR)/raycasting
+GNL_DIR							=	$(SRC_DIR)/gnl
 
 SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/test_utils.c \
@@ -38,6 +38,8 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(PARSIG_DIR)/parsing_utils_2.c \
 									$(PARSIG_DIR)/check_map.c \
 									$(PARSIG_DIR)/count_file_caracters.c \
+									$(GNL_DIR)/get_next_line_utils.c \
+									$(GNL_DIR)/get_next_line.c \
 									$(MAP_2D)/start_map_2d.c \
 									$(MAP_2D)/games_loop.c \
 									$(MAP_2D)/draw_grid.c \
@@ -52,7 +54,6 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/bonus/mini_map.c
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-OBJS							:=	$(OBJS:$(GNL_DIR)/%/c=$(OBJ_DIR)/%.o)
 LIBFT							=	$(LIBFT_DIR)/libft.a
 
 LDFLAGS							=	-L$(LIBFT_DIR)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:59:39 by bproton           #+#    #+#             */
-/*   Updated: 2024/12/09 11:11:43 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/09 15:22:13 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../include/cub3d.h"
 
 char	*transfer_after_n(char *remind)
 {
@@ -121,20 +121,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	newline = transfer_to_n(remind);
+	printf("%s", newline);
 	remind = transfer_after_n(remind);
 	return (newline);
 }
-/*int main(void)
-{
-	int fd;
-	char *line;
-	char path[] = "exemple.txt";
-
-	fd = open(path, O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-}*/

@@ -30,7 +30,6 @@ HEADER
 # include <stdlib.h>
 # include <ctype.h>
 # include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
 # include "../mlx/mlx.h"
 
 # define WHITE 0xFFFFFF
@@ -44,6 +43,7 @@ HEADER
 # define PLAYER_SIZE 16
 # define ROT_SPEED 0.05
 # define PLANE_LENGHT 0.66f
+# define BUFFER_SIZE 10
 
 typedef enum e_keys
 {
@@ -204,6 +204,17 @@ int		get_map_height(char **map, int map_start);
 
 /*tous les checks entries de la map*/
 int		check_map(t_data *data, char **map);
+
+// src/gnl
+char	*get_next_line(int fd);
+char	*read_function(char *remind, int fd);
+char	*ft_duporjoin(char *remind, char *buffer);
+char	*ft_strjoin(const char *s1, const char *s2);
+size_t	ft_strlen(const char *str);
+int		check_if_n(char *remind);
+char	*copy_whats_left(char *remind);
+char	*transfer_to_n(char *remind);
+char	*ft_strdup(const char *s);
 
 // src/parsing/count_file_caracters.c
 int		count_file_chars(char *file);
