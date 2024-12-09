@@ -62,7 +62,7 @@ void	key_a_and_key_d(t_data *data, float *new_x, float *new_y)
 		*new_y = proposed_y;
 }
 
-// touche presser
+// touche pressee
 int	handle_keypress_on(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
@@ -72,7 +72,7 @@ int	handle_keypress_on(int keycode, t_data *data)
 	return (0);
 }
 
-// touche relacher
+// touche relachee
 int	handle_keypress_off(int keycode, t_data *data)
 {
 	if (keycode >= 0 && keycode < 65536)

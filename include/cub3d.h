@@ -30,6 +30,7 @@ HEADER
 # include <stdlib.h>
 # include <ctype.h>
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include "../mlx/mlx.h"
 
 # define WHITE 0xFFFFFF
@@ -203,6 +204,9 @@ int		get_map_height(char **map, int map_start);
 
 /*tous les checks entries de la map*/
 int		check_map(t_data *data, char **map);
+
+// src/parsing/count_file_caracters.c
+int		count_file_chars(char *file);
 
 /*init les structs*/
 int		init_struct(t_data *data);

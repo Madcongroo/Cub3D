@@ -20,10 +20,13 @@ CFLAGS							=	-Wall -Wextra -Werror
 SRC_DIR							=	src
 INCLUDE_DIR						=	include
 LIBFT_DIR						=	libft
+GNL_DIR							=	gnl
 OBJ_DIR							=	obj
 MLX_DIR							=	mlx
 MLX_ICLUDES						=	/usr/include
 PARSIG_DIR						=	$(SRC_DIR)/parsing
+MAP_2D							=	$(SRC_DIR)/map_2d
+RAYCASTING						=	$(SRC_DIR)/raycasting
 
 SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(SRC_DIR)/test_utils.c \
@@ -34,24 +37,27 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(PARSIG_DIR)/parsing_utils.c \
 									$(PARSIG_DIR)/parsing_utils_2.c \
 									$(PARSIG_DIR)/check_map.c \
-									$(SRC_DIR)/map_2d/start_map_2d.c \
-									$(SRC_DIR)/map_2d/games_loop.c \
-									$(SRC_DIR)/map_2d/draw_grid.c \
-									$(SRC_DIR)/map_2d/render_game.c \
-									$(SRC_DIR)/map_2d/utils_2d.c \
-									$(SRC_DIR)/map_2d/key.c \
-									$(SRC_DIR)/raycasting/raycast.c \
-									$(SRC_DIR)/raycasting/play_3d.c \
-									$(SRC_DIR)/raycasting/utils_ray.c \
-									$(SRC_DIR)/raycasting/textures.c \
-									$(SRC_DIR)/raycasting/touch_wall.c \
+									$(PARSIG_DIR)/count_file_caracters.c \
+									$(MAP_2D)/start_map_2d.c \
+									$(MAP_2D)/games_loop.c \
+									$(MAP_2D)/draw_grid.c \
+									$(MAP_2D)/render_game.c \
+									$(MAP_2D)/utils_2d.c \
+									$(MAP_2D)/key.c \
+									$(RAYCASTING)/raycast.c \
+									$(RAYCASTING)/play_3d.c \
+									$(RAYCASTING)/utils_ray.c \
+									$(RAYCASTING)/textures.c \
+									$(RAYCASTING)/touch_wall.c \
 									$(SRC_DIR)/bonus/mini_map.c
 
 OBJS							=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS							:=	$(OBJS:$(GNL_DIR)/%/c=$(OBJ_DIR)/%.o)
 LIBFT							=	$(LIBFT_DIR)/libft.a
+
 LDFLAGS							=	-L$(LIBFT_DIR)
 INCLUDES						=	-I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
-									-I$(MLX_ICLUDES)
+									-I$(MLX_ICLUDES) -I$(GNL_DIR)
 
 # Default target
 all: $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:13:56 by proton            #+#    #+#             */
-/*   Updated: 2024/12/05 15:15:14 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/09 11:11:39 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,19 @@ static char	**read_map(char *file)
 	int		fd;
 	int		check;
 	char	*buf;
+	int		file_len;
 
+	file_len = count_file_chars(file);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		error_msg("Error\nOpen error\n");
 		return (NULL);
 	}
-	buf = (char *)ft_calloc(15000, sizeof(char));
+	buf = (char *)ft_calloc(file_len, sizeof(char));
 	if (!buf)
 		return (NULL);
-	check = read(fd, buf, 15000);
+	check = read(fd, buf, file_len);
 	if (check < 0)
 	{
 		free (buf);

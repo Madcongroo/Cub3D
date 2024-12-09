@@ -13,7 +13,7 @@
 
 */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 int	get_color_pixel(t_data *data, t_textures *text, int x, int y)
 {
