@@ -181,10 +181,6 @@ int		error_msg(char *error_msg);
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
 
-/*temporaire pour les tests comme afficher la map etc*/
-void	display_array(char **map);
-void	print_map_info(t_map *map);
-
 // src/parsing/texturs_map
 int		parse_all(t_data *data, char **map);
 int		texturs_paths_no_so(t_data *data, char **map);
@@ -248,11 +244,6 @@ void	games_loop(t_data *data);
 int		close_window(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 
-// src/map_2d/draw_grid.c
-void	draw_grid(t_data *data);
-void	draw_vertical_line(t_data *data, int x, int y, int length);
-void	draw_horizontal_line(t_data *data, int x, int y, int length);
-
 // src/map_2d/render_games.c
 int		render_game(t_data *data);
 void	draw_player(t_data *data);
@@ -289,12 +280,13 @@ void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
 
 // src/raycasting/textures.c
 int		init_textures(t_data *data);
-int		get_color_pixel(t_data *data, t_textures *text, int x, int y);
+int		get_color_pixel(t_textures *text, int x, int y);
 
 // src/raycasting/touch_wall.c
 int		control_touch_wall(t_data *data, float new_x, float new_y);
 
 // src/bonus/mini_map.c
 void	mini_map(t_data *data);
+void	set_mini_map_color(t_data *data, int map_x, int map_y);
 
 #endif
