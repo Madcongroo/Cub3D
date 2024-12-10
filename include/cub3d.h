@@ -70,9 +70,9 @@ typedef struct s_mini_map
 
 typedef struct s_wall
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	float	wall_x;
 }	t_wall;
 
@@ -138,6 +138,7 @@ typedef struct s_raycast
 	int		map_x;
 	int		map_y;
 	int		side;
+	t_wall	wall;
 }	t_raycast;
 
 typedef struct s_data
@@ -280,15 +281,15 @@ void	draw_floor(t_data *data);
 void	init_ray_and_cam(t_data *data, t_raycast *ray, int x);
 void	calculate_steps_and_sides(t_data *data, t_raycast *ray);
 void	algo_dda(t_data *data, t_raycast *ray);
-void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall);
-void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *ray);
+void	calculate_projection(t_data *data, t_raycast *ray);
+void	draw_wall(t_data *data, int x, t_textures *text, t_raycast *ray);
 
 // src/raycasting/utils_rat.c
 void	my_pixel_put_rgb(t_data *data, int x, int y, t_rgb *color);
 
 // src/raycasting/textures.c
-int	init_textures(t_data *data);
-int	get_color_pixel(t_data *data, t_textures *text, int x, int y);
+int		init_textures(t_data *data);
+int		get_color_pixel(t_data *data, t_textures *text, int x, int y);
 
 // src/raycasting/touch_wall.c
 int		control_touch_wall(t_data *data, float new_x, float new_y);

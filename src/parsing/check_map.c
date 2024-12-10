@@ -16,16 +16,15 @@ static int	check_edge_cases(t_data *data, char **map, int y, int x)
 {
 	if (y == 0 || y == data->map->height - 1 || x == 0
 		|| x == data->map->width)
-			return (1);
+		return (1);
 	else if (!map[y + 1][x] || !map[y][x - 1] || !map[y - 1][x]
 		|| !map[y][x + 1])
-			return (1);
+		return (1);
 	return (0);
 }
 
 int	should_it_be_checked(t_data *data, char **map, int y, int x)
 {
-	
 	if (check_edge_cases(data, map, y, x) == 1)
 		return (1);
 	if (map[y][x + 1])

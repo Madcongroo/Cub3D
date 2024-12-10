@@ -77,7 +77,7 @@ void	algo_dda(t_data *data, t_raycast *ray)
 	}
 }
 
-void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall)
+void	calculate_projection(t_data *data, t_raycast *ray)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->map_x - data->player->x
@@ -85,22 +85,23 @@ void	calculate_projection(t_data *data, t_raycast *ray, t_wall *wall)
 	else
 		ray->perp_wall_dist = (ray->map_y - data->player->y
 				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
-	wall->line_height = (int)(data->win_height / ray->perp_wall_dist);
-	wall->draw_start = -(wall->line_height) / 2 + data->win_height / 2;
-	if (wall->draw_start < 0)
-		wall->draw_start = 0;
-	wall->draw_end = wall->line_height / 2 + data->win_height / 2;
-	if (wall->draw_end >= data->win_height)
-		wall->draw_end = data->win_height - 1;
-
+	ray->wall.line_height = (int)(data->win_height / ray->perp_wall_dist);
+	ray->wall.draw_start = -(ray->wall.line_height) / 2 + data->win_height / 2;
+	if (ray->wall.draw_start < 0)
+		ray->wall.draw_start = 0;
+	ray->wall.draw_end = ray->wall.line_height / 2 + data->win_height / 2;
+	if (ray->wall.draw_end >= data->win_height)
+		ray->wall.draw_end = data->win_height - 1;
 	if (ray->side == 0)
-		wall->wall_x = data->player->y + ray->perp_wall_dist * ray->ray_dir_y;
+		ray->wall.wall_x = data->player->y + ray->perp_wall_dist
+			* ray->ray_dir_y;
 	else
-		wall->wall_x = data->player->x + ray->perp_wall_dist * ray->ray_dir_x;
-	wall->wall_x -= floor(wall->wall_x);
+		ray->wall.wall_x = data->player->x + ray->perp_wall_dist
+			* ray->ray_dir_x;
+	ray->wall.wall_x -= floor(ray->wall.wall_x);
 }
 
-void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *ray)
+void	draw_wall(t_data *data, int x, t_textures *text, t_raycast *ray)
 {
 	int		y;
 	int		tex_x;
@@ -108,17 +109,16 @@ void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *r
 	float	step;
 	float	tex_pos;
 
-	tex_x = (int)(wall->wall_x * (float)text->width);
+	tex_x = (int)(ray->wall.wall_x * (float)text->width);
 	if (ray->side == 0 && ray->ray_dir_x > 0)
 		tex_x = text->width - tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		tex_x = text->width - tex_x - 1;
-
-	step = 1.0 * text->height / wall->line_height;
-	tex_pos = (wall->draw_start - data->win_height / 2 + wall->line_height / 2) * step;
-
-	y = wall->draw_start;
-	while (y < wall->draw_end)
+	step = 1.0 * text->height / ray->wall.line_height;
+	tex_pos = (ray->wall.draw_start - data->win_height / 2
+			+ ray->wall.line_height / 2) * step;
+	y = ray->wall.draw_start;
+	while (y < ray->wall.draw_end)
 	{
 		tex_y = (int)tex_pos & (text->height - 1);
 		tex_pos += step;
@@ -126,4 +126,3 @@ void	draw_wall(t_data *data, int x, t_wall *wall, t_textures *text, t_raycast *r
 		y++;
 	}
 }
-

@@ -73,7 +73,6 @@ void	raycast_ray(t_data *data)
 {
 	int			x;
 	t_raycast	ray;
-	t_wall		wall;
 	int			text;
 
 	draw_ceilling(data);
@@ -84,7 +83,7 @@ void	raycast_ray(t_data *data)
 		init_ray_and_cam(data, &ray, x);
 		calculate_steps_and_sides(data, &ray);
 		algo_dda(data, &ray);
-		calculate_projection(data, &ray, &wall);
+		calculate_projection(data, &ray);
 		if (ray.side == 0 && ray.ray_dir_x > 0)
 			text = 2;
 		else if (ray.side == 0 && ray.ray_dir_x < 0)
@@ -93,7 +92,7 @@ void	raycast_ray(t_data *data)
 			text = 1;
 		else
 			text = 0;
-		draw_wall(data, x, &wall, &data->textures[text], &ray);
+		draw_wall(data, x, &data->textures[text], &ray);
 		x++;
 	}
 }
