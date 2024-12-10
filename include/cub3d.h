@@ -181,10 +181,6 @@ int		error_msg(char *error_msg);
 int		check_basics(char **array);
 int		start_parsing(t_data *data, char *file);
 
-/*temporaire pour les tests comme afficher la map etc*/
-void	display_array(char **map);
-void	print_map_info(t_map *map);
-
 // src/parsing/texturs_map
 int		parse_all(t_data *data, char **map);
 int		texturs_paths_no_so(t_data *data, char **map);

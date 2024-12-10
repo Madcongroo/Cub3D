@@ -1,7 +1,7 @@
-NO   maps/NO_texture.xpm
-SO maps/SO_texture.xpm
-EA maps/EA_texture.xpm
-WE maps/WE_texture.xpm
+NO   textures/NO_texture.xpm
+SO textures/SO_texture.xpm
+EA textures/EA_texture.xpm
+WE textures/WE_texture.xpm
 
 C 40, 24, 120
 F 1, 50, 32

@@ -14,7 +14,7 @@
 # HEADER
 #
 
-NAME 							=	cub3d
+NAME 							=	cub3D
 CC 								=	gcc
 CFLAGS							=	-Wall -Wextra -Werror
 SRC_DIR							=	src
@@ -29,7 +29,6 @@ RAYCASTING						=	$(SRC_DIR)/raycasting
 GNL_DIR							=	$(SRC_DIR)/gnl
 
 SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
-									$(SRC_DIR)/test_utils.c \
 									$(PARSIG_DIR)/start_parsing.c \
 									$(PARSIG_DIR)/textures_map.c \
 									$(PARSIG_DIR)/fill_map_array.c \

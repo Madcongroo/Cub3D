@@ -23,10 +23,6 @@ int	error_msg(char *error_msg)
 
 static int	free_textures(t_data *data)
 {
-	if (data->textures->addr)
-		free (data->textures->addr);
-	if (data->textures->img)
-		free (data->textures->img);
 	free (data->textures);
 	return (0);
 }
