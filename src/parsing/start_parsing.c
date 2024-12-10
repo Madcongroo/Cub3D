@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:13:56 by proton            #+#    #+#             */
-/*   Updated: 2024/12/09 14:48:14 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:57:15 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ static char	**split_buff(char *buf)
 		error_msg("Error\nNew buffer error\n");
 		return (NULL);
 	}
-	
 	map_array = ft_split(new_buf, '\n');
 	if (!map_array)
 	{
@@ -113,28 +112,23 @@ static char	**read_map(char *file)
 	int		file_len;
 
 	file_len = count_file_chars(file);
-	printf("%d\n", file_len);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		error_msg("Error\nOpen error\n");
 		return (NULL);
 	}
-	puts("3");
-	buf = (char *)ft_calloc(file_len, sizeof(char));
+	buf = (char *)ft_calloc(file_len + 1, sizeof(char));
 	if (!buf)
 		return (NULL);
-	puts("2");
 	check = read(fd, buf, file_len);
-	puts("1");
 	if (check < 0)
 	{
 		free (buf);
 		error_msg("Error\nRead error\n");
 		return (NULL);
 	}
-	else if (check == 0)
-		buf[check] = '\0';
+	buf[check] = '\0';
 	return (split_buff(buf));
 }
 

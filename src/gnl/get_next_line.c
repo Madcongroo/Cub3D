@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:59:39 by bproton           #+#    #+#             */
-/*   Updated: 2024/12/09 15:22:13 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:47:44 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	newline = transfer_to_n(remind);
-	printf("%s", newline);
 	remind = transfer_after_n(remind);
 	return (newline);
 }

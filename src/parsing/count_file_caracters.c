@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_file_caracters.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
+/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:41:24 by proton            #+#    #+#             */
-/*   Updated: 2024/12/09 15:25:19 by bproton          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:48:03 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	count_file_chars(char *file)
 		line = get_next_line(fd);
 		if (!line)
 			check = 0;
-		// if (line)
-		// 	printf("%s", line);
 		if (line)
 			len += ft_strlen(line);
 		if (line)

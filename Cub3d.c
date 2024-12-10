@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	if (init_struct(&data) == -1)
 		return (free_all(&data));
 	if (start_parsing(&data, argv[1]) == -1)
-		return (free_all(&data));
+		return (free_all(&data));	
 	if (start_map_2d(&data) == -1)
 		return (free_all(&data));
 	free_all(&data);
