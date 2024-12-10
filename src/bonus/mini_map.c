@@ -6,7 +6,7 @@
 /*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:52:19 by proton            #+#    #+#             */
-/*   Updated: 2024/12/06 16:53:41 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/10 11:32:27 by proton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,58 @@ void	mini_map(t_data *data)
 {
 	int	y;
 	int	x;
+	int	map_y;
+	int	map_x;
 
 	init_mini_map(data, data->mini_map);
 	y = 1;
 	while (y < data->mini_map->mini_height)
 	{
+		puts("start y section");
 		x = 1;
 		while (x < data->mini_map->mini_width)
 		{
-			if ((y + (int)data->player->y - 10 < 0) || (x + (int)data->player->x - 13) < 0)
+			puts("start loop x section");
+			map_y = (int)data->player->y - 10;
+			puts("loop before player x");
+			map_x = (int)data->player->x - 13;
+			puts("in loop before first check");
+			printf("y = %d, x = %d\n", y + map_y, x + map_x);
+			if ((y + map_y) < 0 || (x + map_x) < 0)
+			{
+				puts("in check x_y < 0");
 				data->mini_map->color = BLACK;
-			else if ((y + (int)data->player->y - 10) > data->map->height || x + (int)data->player->x - 13 > data->map->width)
+			}
+			else if ((y + map_y) > data->map->height || (x + map_x) > data->map->width)
+			{
+				puts("in check x_y height, width");
 				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '1')
+			}
+			else if (data->map->map_array[y + map_y][x + map_x] == '1')
+			{
+				puts("in check wall");
 				data->mini_map->color = BLUE;
-			else if (ft_is_whitespace(data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13]))
+			}
+			else if (ft_is_whitespace(data->map->map_array[y + map_y][x + map_x]))
+			{
+				puts("in check whitespace");
 				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13] == '0'
-				|| is_player(data->map->map_array[y + (int)data->player->y - 10][x + (int)data->player->x - 13]))
+			}
+			else if (data->map->map_array[y + map_y][x + map_x] == '0'
+				|| is_player(data->map->map_array[y + map_y][x + map_x]))
+				{
+					puts("in check floor or player");						
 				data->mini_map->color = GRAY;
+				}
+			puts("loop x section before draw map");
 			draw_mini_map(data, x, y);
+			puts("loop x section after draw map");
 			x++;
 		}
+		puts("end y section");
 		y++;
 	}
+	puts("before draw player");
 	draw_player_in_mini_map(data, data->mini_map);
+	puts("after draw player");
 }
