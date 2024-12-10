@@ -16,11 +16,13 @@
 
 #include "../../include/cub3d.h"
 
-void my_pixel_put(t_data *data, int x, int y, int color)
+void	my_pixel_put(t_data *data, int x, int y, int color)
 {
+	char	*dst;
+
 	if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
 		return ;
-	char *dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
+	*dst = data->address + (y * data->line_len + x * (data->bits_p_pix / 8));
 	*(unsigned int *)(dst) = color;
 }
 

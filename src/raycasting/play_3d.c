@@ -122,7 +122,7 @@ void	draw_wall(t_data *data, int x, t_textures *text, t_raycast *ray)
 	{
 		tex_y = (int)tex_pos & (text->height - 1);
 		tex_pos += step;
-		my_pixel_put(data, x, y, get_color_pixel(data, text, tex_x, tex_y));
+		my_pixel_put(data, x, y, get_color_pixel(text, tex_x, tex_y));
 		y++;
 	}
 }

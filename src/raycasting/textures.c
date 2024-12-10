@@ -15,21 +15,22 @@
 
 #include "../../include/cub3d.h"
 
-int	get_color_pixel(t_data *data, t_textures *text, int x, int y)
+int	get_color_pixel(t_textures *text, int x, int y)
 {
 	char	*dst;
-	(void)data;
 
 	dst = text->addr + (y * text->line_len + x * (text->bits_p_pix / 8));
-	return (*(int*)dst);
+	return (*(int *)dst);
 }
 
 int	init_text_helper(t_data *data, t_textures *text, char *path)
 {
-	text->img = mlx_xpm_file_to_image(data->mlx, path, &text->width, &text->height);
+	text->img = mlx_xpm_file_to_image(data->mlx, path, &text->width,
+			&text->height);
 	if (!text->img)
 		return (-1);
-	text->addr = mlx_get_data_addr(text->img, &text->bits_p_pix, &text->line_len, &text->endian);
+	text->addr = mlx_get_data_addr(text->img, &text->bits_p_pix,
+			&text->line_len, &text->endian);
 	if (!text->addr)
 		return (-1);
 	return (0);

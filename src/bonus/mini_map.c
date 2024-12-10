@@ -10,15 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/cub3d.h"
 
-static void	init_mini_map(t_data *data, t_mini_map *mini_map)
+static void	init_mini_map(t_mini_map *mini_map)
 {
-	// int	largeur_mini_map;
-	(void)data;
-
 	mini_map->mini_size = 10;
 	mini_map->mini_width = 27;
 	mini_map->mini_height = 21;
@@ -74,6 +69,21 @@ static void	draw_player_in_mini_map(t_data *data, t_mini_map *mini_map)
 	}
 }
 
+void	set_mini_map_color(t_data *data, int map_x, int map_y)
+{
+	if (map_y < 0 || map_x < 0)
+		data->mini_map->color = BLACK;
+	else if (map_y > data->map->height - 1 || map_x > data->map->width)
+		data->mini_map->color = BLACK;
+	else if (data->map->map_array[map_y][map_x] == '1')
+		data->mini_map->color = BLUE;
+	else if (ft_is_whitespace(data->map->map_array[map_y][map_x]))
+		data->mini_map->color = BLACK;
+	else if (data->map->map_array[map_y][map_x] == '0'
+		|| is_player(data->map->map_array[map_y][map_x]))
+		data->mini_map->color = GRAY;
+}
+
 void	mini_map(t_data *data)
 {
 	int	y;
@@ -81,26 +91,16 @@ void	mini_map(t_data *data)
 	int	map_y;
 	int	map_x;
 
-	init_mini_map(data, data->mini_map);
+	init_mini_map(data->mini_map);
 	y = 1;
 	while (y < data->mini_map->mini_height)
 	{
 		x = 1;
 		while (x < data->mini_map->mini_width)
 		{
-			map_y = (int)data->player->y - 10;
-			map_x = (int)data->player->x - 13;
-			if ((y + map_y) < 0 || (x + map_x) < 0)
-				data->mini_map->color = BLACK;
-			else if ((y + map_y) > data->map->height - 1 || (x + map_x) > data->map->width)
-				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + map_y][x + map_x] == '1')
-				data->mini_map->color = BLUE;
-			else if (ft_is_whitespace(data->map->map_array[y + map_y][x + map_x]))
-				data->mini_map->color = BLACK;
-			else if (data->map->map_array[y + map_y][x + map_x] == '0'
-				|| is_player(data->map->map_array[y + map_y][x + map_x]))
-				data->mini_map->color = GRAY;
+			map_y = (int)data->player->y - 10 + y;
+			map_x = (int)data->player->x - 13 + x;
+			set_mini_map_color(data, map_x, map_y);
 			draw_mini_map(data, x, y);
 			x++;
 		}

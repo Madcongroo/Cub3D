@@ -41,7 +41,6 @@ SRCS							=	Cub3d.c $(SRC_DIR)/error_gestion.c $(SRC_DIR)/init_structs.c \
 									$(GNL_DIR)/get_next_line.c \
 									$(MAP_2D)/start_map_2d.c \
 									$(MAP_2D)/games_loop.c \
-									$(MAP_2D)/draw_grid.c \
 									$(MAP_2D)/render_game.c \
 									$(MAP_2D)/utils_2d.c \
 									$(MAP_2D)/key.c \
