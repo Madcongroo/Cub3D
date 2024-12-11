@@ -18,7 +18,16 @@
 
 int	close_window(t_data *data)
 {
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->textures[0].img);
+	mlx_destroy_image(data->mlx, data->textures[1].img);
+	mlx_destroy_image(data->mlx, data->textures[2].img);
+	mlx_destroy_image(data->mlx, data->textures[3].img);
+	mlx_destroy_display(data->mlx);
+	free (data->mlx);
+	free_all(data);
 	exit(0);
 	return (0);
 }

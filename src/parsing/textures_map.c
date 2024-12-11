@@ -66,11 +66,10 @@ int	texturs_paths_we_ea(t_data *data, char **map)
 }
 
 // Fonction pour mettre les valeur rgb du sol a color_floor
-void	color_floor(t_data *data, char **map)
+int	color_floor(t_data *data, char **map)
 {
 	int		i;
 	char	**rgb_value;
-	int		check_colors;
 
 	i = 0;
 	while (map[i])
@@ -79,7 +78,9 @@ void	color_floor(t_data *data, char **map)
 		{
 			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
-				return ;
+				return (-1);
+			if (check_rgb_values(rgb_value) == -1)
+				return (ft_free_array(rgb_value));
 			data->map->floor_color->r = ft_atoi(rgb_value[0]);
 			data->map->floor_color->g = ft_atoi(rgb_value[1]);
 			data->map->floor_color->b = ft_atoi(rgb_value[2]);
@@ -87,17 +88,16 @@ void	color_floor(t_data *data, char **map)
 		}
 		i++;
 	}
-	check_colors = check_color_number(data);
-	if (check_colors != 0)
-		return ;
+	if (check_color_number(data) == -1)
+		return (error_msg("Error\nNumber too high or too low\n"));
+	return (0);
 }
 
 // Fonction pour mettre les valeur rgb du sol a ceiling_floor
-void	color_ceiling(t_data *data, char **map)
+int	color_ceiling(t_data *data, char **map)
 {
 	int		i;
 	char	**rgb_value;
-	int		check_colors;
 
 	i = 0;
 	while (map[i])
@@ -106,7 +106,9 @@ void	color_ceiling(t_data *data, char **map)
 		{
 			rgb_value = ft_split(map[i] + 2, ',');
 			if (!rgb_value)
-				return ;
+				return (-1);
+			if (check_rgb_values(rgb_value) == -1)
+				return (ft_free_array(rgb_value));
 			data->map->ceilling_color->r = ft_atoi(rgb_value[0]);
 			data->map->ceilling_color->g = ft_atoi(rgb_value[1]);
 			data->map->ceilling_color->b = ft_atoi(rgb_value[2]);
@@ -114,9 +116,9 @@ void	color_ceiling(t_data *data, char **map)
 		}
 		i++;
 	}
-	check_colors = check_color_number(data);
-	if (check_colors != 0)
-		return ;
+	if (check_color_number(data) == -1)
+		return (error_msg("Error\nNumber too high or too low\n"));
+	return (0);
 }
 
 /* fonction principal pour appeler les fonctions
@@ -127,8 +129,10 @@ int	parse_all(t_data *data, char **map)
 		return (-1);
 	if (texturs_paths_we_ea(data, map) != 0)
 		return (-1);
-	color_floor(data, map);
-	color_ceiling(data, map);
+	if (color_floor(data, map) == -1)
+		return (-1);
+	if (color_ceiling(data, map) == -1)
+		return (-1);
 	if (fill_map_array(data, map) != 0)
 		return (-1);
 	return (0);

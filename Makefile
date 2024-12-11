@@ -14,7 +14,7 @@
 # HEADER
 #
 
-NAME 							=	cub3d
+NAME 							=	cub3D
 CC 								=	gcc
 CFLAGS							=	-Wall -Wextra -Werror
 SRC_DIR							=	src

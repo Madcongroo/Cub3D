@@ -185,8 +185,8 @@ int		start_parsing(t_data *data, char *file);
 int		parse_all(t_data *data, char **map);
 int		texturs_paths_no_so(t_data *data, char **map);
 int		texturs_paths_we_ea(t_data *data, char **map);
-void	color_floor(t_data *data, char **map);
-void	color_ceiling(t_data *data, char **map);
+int		color_floor(t_data *data, char **map);
+int		color_ceiling(t_data *data, char **map);
 
 // src/parsing/check_map.c
 int		check_map(t_data *data, char **map);
@@ -215,6 +215,9 @@ char	*ft_strdup(const char *s);
 
 // src/parsing/count_file_caracters.c
 int		count_file_chars(char *file);
+size_t	find_end(const char *s, const char *set);
+int		check_rgb_trimmed(char *value);
+int		check_rgb_values(char **values);
 
 /*init les structs*/
 int		init_struct(t_data *data);
