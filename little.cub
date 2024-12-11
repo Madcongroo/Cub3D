@@ -1,7 +1,7 @@
 NO   textures/NO_texture.xpm
-SO              textures/SO_texture.xpm
-                      EA textures/EA_texture.xpm
-WE         textures/WE_texture.xpm
+SO   textures/SO_texture.xpm
+EA   textures/EA_texture.xpm
+WE   textures/WE_texture.xpm
 
 C 254, 112, 12
 F 151, 101, 201
