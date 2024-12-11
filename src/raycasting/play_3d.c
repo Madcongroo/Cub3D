@@ -91,7 +91,7 @@ void	calculate_projection(t_data *data, t_raycast *ray)
 		ray->wall.draw_start = 0;
 	ray->wall.draw_end = ray->wall.line_height / 2 + data->win_height / 2;
 	if (ray->wall.draw_end >= data->win_height)
-		ray->wall.draw_end = data->win_height - 1;
+		ray->wall.draw_end = data->win_height;
 	if (ray->side == 0)
 		ray->wall.wall_x = data->player->y + ray->perp_wall_dist
 			* ray->ray_dir_y;
