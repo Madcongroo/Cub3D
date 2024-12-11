@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proton <proton@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bproton <bproton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:17:50 by bproton           #+#    #+#             */
-/*   Updated: 2024/10/11 18:30:52 by proton           ###   ########.fr       */
+/*   Updated: 2024/12/11 15:23:19 by bproton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_isinset(char c, const char *set)
 	return (0);
 }
 
-static	size_t	ft_findstart(const char *s, const char *set)
+size_t	ft_findstart(const char *s, const char *set)
 {
 	size_t	i;
 
@@ -36,7 +36,7 @@ static	size_t	ft_findstart(const char *s, const char *set)
 	return (i);
 }
 
-static	size_t	ft_findend(const char *s, const char *set)
+size_t	ft_findend(const char *s, const char *set)
 {
 	size_t	i;
 	size_t	j;
